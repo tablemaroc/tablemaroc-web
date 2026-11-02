@@ -31,7 +31,7 @@ echo "--- A2. segunda vez: Nada pendiente"; bash "$HERE/apply.sh" --seed | tail 
 echo "--- A3. datos de referencia: esperado 4 tipos, 12 regiones, 1 ciudad, todo en borrador"
 $P -d a -At -c "select (select count(*) from place_types) || ' tipos, ' || (select count(*) from regions) || ' regiones, ' || (select count(*) from cities) || ' ciudad, publicados: ' || (select count(*) from regions where status <> 'borrador') + (select count(*) from cities where status <> 'borrador')"
 echo "--- A4. un archivo ya aplicado que cambia: ERROR esperado"
-$P -d a -c "update platemaroc_meta.applied_files set sha256 = 'x' where file like '%0001_tipos.sql'"
+$P -d a -c "update tablemaroc_meta.applied_files set sha256 = 'x' where file like '%0001_tipos.sql'"
 bash "$HERE/apply.sh" --seed 2>&1 | tail -1 || true
 echo "--- A5. simulación en BD vacía: lista pendientes y no aplica nada"
 $P -d postgres -c "create database b"

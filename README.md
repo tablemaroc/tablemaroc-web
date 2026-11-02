@@ -1,6 +1,6 @@
-# Platemaroc
+# Tablemaroc
 
-Directorio y guía gastronómica de Marruecos. Dominio: https://platemaroc.com
+Directorio y guía gastronómica de Marruecos. Dominio: https://tablemaroc.com
 
 Estado: **web construida, sin publicar.** Fases 0 a 6 hechas y Fase 7 preparada en el repositorio. Ya existen plantillas en `/es/`, `/en/` y `/fr/`, panel con dos pasos, reseñas moderadas, menú digital, Quality Gate, buscador, identidad visual «Té a la menta» y modo sin conexión.
 
@@ -46,7 +46,7 @@ Requisitos: Node.js 26 (versión de `.nvmrc`; mínimo 22.18) y Git. Las claves v
 ## Estructura
 
 ```
-platemaroc.com/
+tablemaroc.com/
 ├── codigo/
 │   ├── backend/            api, auth, reviews, admin-moderation, integrations (google-places, google-business, google-maps)
 │   ├── frontend/           app, components, maps, i18n, admin-panel

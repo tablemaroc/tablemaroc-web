@@ -9,7 +9,7 @@ Preparar respuestas de calidad a las reseñas de usuarios, para que el titular l
 - Lee `reglas-generales.md`.
 - Lee el Documento Maestro y la Matriz de autoridad.
 - Las respuestas se preparan en nombre del local solo dentro del flujo autorizado por el titular.
-- Si el titular avisa de que un local ha retirado su autorización, las respuestas de ese local se preparan como "Respuesta de Platemaroc".
+- Si el titular avisa de que un local ha retirado su autorización, las respuestas de ese local se preparan como "Respuesta de Tablemaroc".
 
 ## Pasos
 1. Obtén las reseñas aprobadas que aún no tienen respuesta, de la más reciente a la más antigua.

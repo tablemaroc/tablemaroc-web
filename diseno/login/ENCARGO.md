@@ -1,6 +1,6 @@
 # Encargo para Claude Design · Login
 
-**Proyecto:** Platemaroc, guía de restaurantes de Marruecos para turistas europeos (es · en · fr; el español es el idioma base).
+**Proyecto:** Tablemaroc, guía de restaurantes de Marruecos para turistas europeos (es · en · fr; el español es el idioma base).
 **Autoridad:** `docs/01-documento-maestro-operacion.md` (§18) y `docs/16-encargo-claude-design.md` (reglas generales).
 **Bocetos adjuntos:** tres carpetas, cada una con `movil/` (900 × 2000 px) y `ordenador/` (1280 × 760 px). Son esquemas de
 estructura en grises con datos ficticios: diseña el aspecto final respetando la estructura, los textos y el orden de los elementos.
@@ -8,7 +8,7 @@ estructura en grises con datos ficticios: diseña el aspecto final respetando la
 | Carpeta | Para quién | Pantallas |
 |---|---|---|
 | `usuarios/` | Turistas que usan la web | 9 |
-| `administrador/` | Administración de Platemaroc | 3 |
+| `administrador/` | Administración de Tablemaroc | 3 |
 | `propietario/` | Propietarios y empleados de los restaurantes | 5 |
 
 **Total: 17 pantallas × 2 (móvil y ordenador) = 34 imágenes.**
@@ -56,7 +56,7 @@ Sin cabecera ni barra de la web. Fondo neutro y tarjeta centrada. Solo cuentas a
 
 | # | Archivo | Pantalla | Contenido |
 |---|---|---|---|
-| 01 | `01-acceso` | Acceso | «Platemaroc · Administración», **solo dos opciones**: «Continuar con Google» y «Continuar con huella o cara». Nota: con Google se pide después el código de la app; con huella o cara no |
+| 01 | `01-acceso` | Acceso | «Tablemaroc · Administración», **solo dos opciones**: «Continuar con Google» y «Continuar con huella o cara». Nota: con Google se pide después el código de la app; con huella o cara no |
 | 02 | `02-codigo-app` | Segundo paso | «Has entrado con Google como …», campo «Código de la app» (6 cifras), «Entrar», «‹ Otras opciones» |
 | 03 | `03-no-autorizado` | Acceso no autorizado | La cuenta no tiene acceso a la administración; botón «Ir al panel de locales» y «‹ Probar con otra cuenta» |
 
@@ -69,7 +69,7 @@ reconoce el rol (el empleado solo verá las reservas de su local).
 
 | # | Archivo | Pantalla | Contenido |
 |---|---|---|---|
-| 01 | `01-acceso` | Acceso | «Platemaroc · Panel de locales», los 3 botones, nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos» |
+| 01 | `01-acceso` | Acceso | «Tablemaroc · Panel de locales», los 3 botones, nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos» |
 | 02 | `02-continuar-con-email` | Continuar con email | Igual que la de usuarios, en el estilo del panel |
 | 03 | `03-continuar-con-google` | Continuar con Google | Igual que la de usuarios, en el estilo del panel |
 | 04 | `04-continuar-con-huella-o-cara` | Continuar con huella o cara | Igual que la de usuarios, en el estilo del panel |

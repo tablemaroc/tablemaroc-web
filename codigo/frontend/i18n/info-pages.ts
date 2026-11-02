@@ -17,21 +17,21 @@ interface Page { title: string; blocks: Block[] }
 export const INFO_PAGES: Record<InfoSlug, Record<Locale, Page>> = {
   'sobre-nosotros': {
     es: { title: 'Sobre nosotros', blocks: [
-      'Platemaroc es una guía gastronómica de Marruecos: restaurantes, cafés y teterías, comida callejera, mercados y zocos, platos típicos y guías por ciudad.',
+      'Tablemaroc es una guía gastronómica de Marruecos: restaurantes, cafés y teterías, comida callejera, mercados y zocos, platos típicos y guías por ciudad.',
       'Está disponible en español, inglés y francés, y pensada para consultarse desde el móvil, incluso con mala cobertura.',
       { h: 'Cómo trabajamos' },
       'Los precios se muestran solo en dírhams marroquíes (MAD). Si no tenemos un dato comprobado, no lo inventamos: lo indicamos como pendiente.',
       'La publicidad, los enlaces de afiliado o los destacados de pago nunca cambian las puntuaciones, la moderación de reseñas ni el orden de los resultados. Si algo es patrocinado, se indica de forma visible.',
     ] },
     en: { title: 'About us', blocks: [
-      'Platemaroc is a food guide to Morocco: restaurants, cafés and tea rooms, street food, markets and souks, typical dishes and city guides.',
+      'Tablemaroc is a food guide to Morocco: restaurants, cafés and tea rooms, street food, markets and souks, typical dishes and city guides.',
       'It is available in Spanish, English and French, and designed to be used on your phone, even with poor coverage.',
       { h: 'How we work' },
       'Prices are shown only in Moroccan dirhams (MAD). If we do not have a verified detail, we do not make it up: we mark it as pending.',
       'Advertising, affiliate links and paid placements never change ratings, review moderation or the order of results. Anything sponsored is clearly labelled.',
     ] },
     fr: { title: 'À propos', blocks: [
-      'Platemaroc est un guide gastronomique du Maroc : restaurants, cafés et salons de thé, cuisine de rue, marchés et souks, plats typiques et guides par ville.',
+      'Tablemaroc est un guide gastronomique du Maroc : restaurants, cafés et salons de thé, cuisine de rue, marchés et souks, plats typiques et guides par ville.',
       'Il est disponible en espagnol, en anglais et en français, et conçu pour le téléphone, même avec une mauvaise couverture.',
       { h: 'Notre façon de travailler' },
       'Les prix sont affichés uniquement en dirhams marocains (MAD). Si une information n’est pas vérifiée, nous ne l’inventons pas : nous l’indiquons comme en attente.',
@@ -141,19 +141,19 @@ export const INFO_PAGES: Record<InfoSlug, Record<Locale, Page>> = {
   },
   'aviso-legal': {
     es: { title: 'Aviso legal', blocks: [
-      'Platemaroc.com es una guía gastronómica editada por una persona física residente en Marruecos. Los datos completos del responsable se publicarán aquí antes del lanzamiento.',
+      'Tablemaroc.com es una guía gastronómica editada por una persona física residente en Marruecos. Los datos completos del responsable se publicarán aquí antes del lanzamiento.',
       'Puedes contactar con el responsable desde la página de Contacto.',
       { h: 'Exactitud de la información' },
       'Procuramos verificar los datos, pero horarios, precios y disponibilidad pueden cambiar. Confírmalos con el establecimiento antes de ir.',
     ] },
     en: { title: 'Legal notice', blocks: [
-      'Platemaroc.com is a food guide published by an individual resident in Morocco. The full details of the person responsible will be published here before launch.',
+      'Tablemaroc.com is a food guide published by an individual resident in Morocco. The full details of the person responsible will be published here before launch.',
       'You can reach the person responsible through the Contact page.',
       { h: 'Accuracy of information' },
       'We try to verify details, but opening hours, prices and availability may change. Please confirm them with the place before you go.',
     ] },
     fr: { title: 'Mentions légales', blocks: [
-      'Platemaroc.com est un guide gastronomique édité par une personne physique résidant au Maroc. Les coordonnées complètes du responsable seront publiées ici avant le lancement.',
+      'Tablemaroc.com est un guide gastronomique édité par une personne physique résidant au Maroc. Les coordonnées complètes du responsable seront publiées ici avant le lancement.',
       'Vous pouvez contacter le responsable depuis la page Contact.',
       { h: 'Exactitude des informations' },
       'Nous nous efforçons de vérifier les informations, mais les horaires, les prix et la disponibilité peuvent changer. Confirmez-les auprès de l’établissement avant de vous y rendre.',
@@ -161,7 +161,7 @@ export const INFO_PAGES: Record<InfoSlug, Record<Locale, Page>> = {
   },
   condiciones: {
     es: { title: 'Condiciones de uso', blocks: [
-      'Al usar Platemaroc aceptas estas condiciones.',
+      'Al usar Tablemaroc aceptas estas condiciones.',
       { h: 'Uso de la web' },
       'La web es de consulta gratuita. No la uses para fines ilegales ni para publicar contenido engañoso.',
       { h: 'Tu contenido' },
@@ -170,7 +170,7 @@ export const INFO_PAGES: Record<InfoSlug, Record<Locale, Page>> = {
       'La información se ofrece como orientación. Confirma horarios y precios con cada establecimiento.',
     ] },
     en: { title: 'Terms of use', blocks: [
-      'By using Platemaroc you accept these terms.',
+      'By using Tablemaroc you accept these terms.',
       { h: 'Use of the website' },
       'The website is free to consult. Do not use it for illegal purposes or to publish misleading content.',
       { h: 'Your content' },
@@ -179,7 +179,7 @@ export const INFO_PAGES: Record<InfoSlug, Record<Locale, Page>> = {
       'Information is provided as guidance. Confirm opening hours and prices with each place.',
     ] },
     fr: { title: 'Conditions d’utilisation', blocks: [
-      'En utilisant Platemaroc, vous acceptez ces conditions.',
+      'En utilisant Tablemaroc, vous acceptez ces conditions.',
       { h: 'Utilisation du site' },
       'La consultation du site est gratuite. Ne l’utilisez pas à des fins illégales ni pour publier du contenu trompeur.',
       { h: 'Votre contenu' },

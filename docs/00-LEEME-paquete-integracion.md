@@ -1,4 +1,4 @@
-# Platemaroc — paquete documental de congelación
+# Tablemaroc — paquete documental de congelación
 
 **Fecha:** 29-10-2026  
 **Estado:** candidato a congelación; requiere aprobación final del titular.
@@ -8,7 +8,7 @@
 Este paquete reúne las reglas, decisiones, órdenes, plantillas y propuestas necesarias
 para dejar una base documental única antes de continuar el desarrollo.
 
-Integrado en el repositorio `platemaroc.com` el 29-10-2026. El código que acompaña a las
+Integrado en el repositorio `tablemaroc.com` el 29-10-2026. El código que acompaña a las
 especificaciones 10, 11 y 12 es un andamiaje inicial (ver `docs/13-codigo-integrado.md`);
 no es código de aplicación completo.
 

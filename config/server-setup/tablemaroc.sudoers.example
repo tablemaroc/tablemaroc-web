@@ -1,0 +1,2 @@
+# Copiar a /etc/sudoers.d/tablemaroc (permisos 440). El usuario deploy solo puede reiniciar la web, nada más.
+deploy ALL=(root) NOPASSWD: /usr/bin/systemctl restart tablemaroc # scan-secrets-ignore

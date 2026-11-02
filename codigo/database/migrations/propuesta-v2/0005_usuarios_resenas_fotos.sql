@@ -23,7 +23,7 @@ create table review_replies (                              -- MVP: solo borrador
   id uuid primary key default gen_random_uuid(),
   review_id uuid not null unique references reviews(id) on delete cascade,
   body text not null,
-  author_kind text not null default 'platemaroc' check (author_kind in ('platemaroc', 'owner')),
+  author_kind text not null default 'tablemaroc' check (author_kind in ('tablemaroc', 'owner')),
   status reply_status not null default 'borrador',
   created_at timestamptz not null default now(), updated_at timestamptz not null default now()
 );

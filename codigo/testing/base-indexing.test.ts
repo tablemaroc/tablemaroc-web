@@ -45,14 +45,14 @@ test('menú: categoría publicada sin artículos falla', () => {
   assert.equal(evaluateQualityGate(menu).result, 'NO APTO');
 });
 test('sitemap: escapa XML, incluye hreflang y divide en índice', () => {
-  const xml = buildSitemapXml([{ url: 'https://platemaroc.com/es/a&b/', alternates: { en: 'https://platemaroc.com/en/a/' } }]);
+  const xml = buildSitemapXml([{ url: 'https://tablemaroc.com/es/a&b/', alternates: { en: 'https://tablemaroc.com/en/a/' } }]);
   assert.ok(xml.includes('a&amp;b') && xml.includes('hreflang="en"'));
   const r = buildSitemaps([{ url: 'u1' }, { url: 'u2' }, { url: 'u3' }], 2);
   assert.deepEqual(Object.keys(r.files), ['sitemap-1.xml', 'sitemap-2.xml']); assert.ok(r.index);
 });
 test('robots.txt: bloquea admin/api y declara el sitemap', () => {
   const t = buildRobotsTxt();
-  assert.ok(t.includes('Disallow: /admin') && t.includes('Sitemap: https://platemaroc.com/sitemap.xml'));
+  assert.ok(t.includes('Disallow: /admin') && t.includes('Sitemap: https://tablemaroc.com/sitemap.xml'));
 });
 
 test('duplicidad interna: detecta textos casi iguales e ignora los muy cortos', () => {

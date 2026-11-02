@@ -1,7 +1,7 @@
 import type { Locale } from '../codigo/shared/locales.ts';
 
-export const SITE_URL = 'https://platemaroc.com';
-export const SITE_NAME = 'Platemaroc';
+export const SITE_URL = 'https://tablemaroc.com';
+export const SITE_NAME = 'Tablemaroc';
 
 /** Una versión de idioma de una página. */
 export interface PageVersion {

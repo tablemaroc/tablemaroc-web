@@ -3,7 +3,7 @@
 **Fecha:** 29-10-2026 · **Estado:** propuesta técnica; requiere revisión y aprobación del titular.
 Actualización 29-10-2026: la Fase 1 ya está hecha (ver "Fase 1" al final). Lo que sigue describía el andamiaje inicial: piezas independientes que
 Claude Code debe adaptar al proyecto real, no reescribir desde cero.
-Incorpora las decisiones técnicas del paquete `platemaroc-ajustes-tecnicos-2026-10-29`, que tienen prioridad
+Incorpora las decisiones técnicas del paquete `tablemaroc-ajustes-tecnicos-2026-10-29`, que tienen prioridad
 sobre las especificaciones anteriores (ver `docs/09-matriz-de-autoridad.md`).
 
 ## PWA, mapas y precios
@@ -80,13 +80,13 @@ El titular aprueba el modelo de datos v2 (favoritos fuera del MVP; relación gu�
 |---|---|---|
 | Huecos cubiertos | `0003`, `0006`, `0009`, `0100` | `guide_neighborhoods` (+ RLS en cascada); perfil automático al registrarse (`on_auth_user_created`); las traducciones y traducciones de menú comprueban que su destino existe; fechas en categorías, artículos y traducciones del menú |
 | Datos de referencia | `codigo/database/seeders/0001_referencia.sql` | 5 tipos de lugar, 12 regiones (decreto 2-15-40 de 2015) y Tánger, todo en borrador y sin coordenadas |
-| Aplicación | `codigo/database/apply.sh` | Cada archivo una vez, en su transacción, registrado con SHA-256 en `platemaroc_meta.applied_files`; se detiene si un archivo aplicado cambia; `--dry-run` y `--seed`. `DATABASE_URL` en `.env.local` |
+| Aplicación | `codigo/database/apply.sh` | Cada archivo una vez, en su transacción, registrado con SHA-256 en `tablemaroc_meta.applied_files`; se detiene si un archivo aplicado cambia; `--dry-run` y `--seed`. `DATABASE_URL` en `.env.local` |
 | Pruebas | `codigo/database/tests/` | 27 pruebas de humo y ensayo completo de `apply.sh` (A1-A5) en PostgreSQL 16.15 con `auth` simulado |
 
 Aplicado el 29-10-2026 a Supabase (proyecto en eu-central-1, Fráncfort), con confirmación del titular: 12 archivos (9 migraciones,
 2 de RLS y 1 de datos de referencia). Verificado por la API real: un visitante no ve las regiones en borrador (0) y el servidor sí (12);
 los tipos de lugar son públicos (5); la auditoría da "permission denied"; un visitante no puede crear regiones ni reseñas (RLS 42501);
-el bucket `fotos` existe y es privado, y un visitante no lista archivos; el registro de `apply.sh` (`platemaroc_meta`) no está expuesto en la API.
+el bucket `fotos` existe y es privado, y un visitante no lista archivos; el registro de `apply.sh` (`tablemaroc_meta`) no está expuesto en la API.
 Conexión: `DATABASE_URL` del Session pooler SIN contraseña y `DATABASE_PASSWORD` aparte (la conexión directa solo es IPv6).
 Rol de administración: asignado el 29-10-2026 a la cuenta del titular (creada por él en el panel de Supabase), en `app_metadata.role`,
 con su confirmación y registrado en `audit_log`. Su perfil se creó solo al darse de alta (trigger verificado en la base real).
@@ -171,7 +171,7 @@ aprobarse la reseña o la foto, crear una foto aprobada, subir al bucket, editar
 |---|---|---|
 | Menú | `admin/[entity]/[id]/menu`, `menu-admin.ts` | Uno por lugar; categorías y artículos es/en/fr; precio solo en MAD, verificado o pendiente; publicar completo, ocultar artículos, retirar sin borrar |
 | Web pública | `supabase-source.ts` | Un precio sin verificar sale como "Precio pendiente" aunque tenga importe (docs/12) |
-| QR | `menu/qr/route.ts` (qrcode 1.5.4) | PNG por idioma, solo administración, con la URL definitiva de platemaroc.com |
+| QR | `menu/qr/route.ts` (qrcode 1.5.4) | PNG por idioma, solo administración, con la URL definitiva de tablemaroc.com |
 | Importación | `admin/importar`, `csv-import.ts`, `import-admin.ts` | Plantilla, vista previa sin guardar, errores por fila, duplicados omitidos, todo en borrador; se revalida al confirmar; auditoría con origen importacion |
 
 Verificado: tipos, pruebas unitarias, build y `menu.e2e.cjs` en el proyecto de pruebas. Avisos por email aplazados hasta tener SMTP; fotos de artículos del menú fuera de este bloque.
@@ -218,7 +218,7 @@ No probado: iPhone real, móvil y red reales, Google Maps real (CSP incluida), y
 | Variables públicas | Variables de GitHub | `NEXT_PUBLIC_*` se graban al construir |
 | robots y sitemap | `app/robots.txt`, `app/sitemap.xml` | `force-dynamic`: antes se fijaban al construir y el interruptor de indexación no habría tenido efecto |
 | Nginx | `config/server-setup/nginx.conf.example` | Subidas hasta 12 MB, límite de 10 peticiones/s por IP, renovación de certificado |
-| Permisos y copias | `platemaroc.sudoers.example`, `platemaroc-backup.*.example` | `deploy` solo puede reiniciar la web; copia diaria con `pg_dump` 17 |
+| Permisos y copias | `tablemaroc.sudoers.example`, `tablemaroc-backup.*.example` | `deploy` solo puede reiniciar la web; copia diaria con `pg_dump` 17 |
 
 Verificado en Windows: construcción sin secretos, web standalone arrancada con la indexación apagada y encendida, cabeceras de caché, tipos, pruebas y escáner sobre lo que verá GitHub.
 No probado (necesita servidor): el flujo de GitHub Actions, Nginx (`nginx -t`), el servicio systemd, la vuelta atrás y las copias. `sharp` no se ha probado en Linux: hay que subir una foto tras el primer despliegue.

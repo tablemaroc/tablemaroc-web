@@ -13,8 +13,8 @@ const { resetFactors, passMfa, syncClock } = require('./mfa-helper.cjs');
 const FRONTEND = path.join(__dirname, '../../frontend');
 const PORT = 3102;
 const BASE = `http://localhost:${PORT}`;
-const ADMIN_EMAIL = 'e2e-admin@platemaroc-e2e.test';
-const USER_EMAIL = 'e2e-user@platemaroc-e2e.test';
+const ADMIN_EMAIL = 'e2e-admin@tablemaroc-e2e.test';
+const USER_EMAIL = 'e2e-user@tablemaroc-e2e.test';
 
 function readEnv(file) {
   if (!fs.existsSync(file)) return {};
@@ -77,7 +77,7 @@ async function waitFor(url, ms = 120_000) {
     // Un usuario sin rol no ve el panel (404).
     const userCtx = await browser.newContext();
     const userPage = await signIn(userCtx, USER_EMAIL, '/admin');
-    assert.match(await userPage.title(), /404|Platemaroc/);
+    assert.match(await userPage.title(), /404|Tablemaroc/);
     assert.equal((await userPage.goto(`${BASE}/admin/lugares`)).status(), 404, 'usuario sin rol: 404');
     console.log('usuario sin rol: el panel responde 404');
 

@@ -1,8 +1,8 @@
-﻿# Copia manual de Platemaroc: base de datos y fotos, en una carpeta con fecha y hora.
-# Se lanza con doble clic en "Copia Platemaroc.cmd". No borra nada ni cambia la web: solo lee y guarda en este ordenador.
+﻿# Copia manual de Tablemaroc: base de datos y fotos, en una carpeta con fecha y hora.
+# Se lanza con doble clic en "Copia Tablemaroc.cmd". No borra nada ni cambia la web: solo lee y guarda en este ordenador.
 # Las claves se leen de codigo/frontend/.env.local y nunca se escriben en la copia. La copia NO va cifrada (config/backups/README.md).
 param(
-  [string]$Destino = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Platemaroc-Copias'),
+  [string]$Destino = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Tablemaroc-Copias'),
   [string]$EnvFile = (Join-Path $PSScriptRoot '..\..\codigo\frontend\.env.local'),
   [switch]$SinPausa  # Para probarlo sin ventana: ni abre la carpeta ni espera a Intro.
 )
@@ -11,8 +11,8 @@ $ErrorActionPreference = 'Stop'
 
 $PgDump = 'C:\Users\pc\tools\pgsql-17\pgsql\bin\pg_dump.exe'
 $Bucket = 'fotos'
-# public: contenido. auth: cuentas. storage: registro de las fotos. platemaroc_meta: migraciones aplicadas.
-$Esquemas = 'public', 'auth', 'storage', 'platemaroc_meta'
+# public: contenido. auth: cuentas. storage: registro de las fotos. tablemaroc_meta: migraciones aplicadas.
+$Esquemas = 'public', 'auth', 'storage', 'tablemaroc_meta'
 
 function Leer-Env($Ruta) {
   $valores = @{}
@@ -40,7 +40,7 @@ function Listar-Fotos($Base, $Cabeceras, $Carpeta) {
 
 try {
   Write-Host ''
-  Write-Host '=== Copia de Platemaroc ===' -ForegroundColor Green
+  Write-Host '=== Copia de Tablemaroc ===' -ForegroundColor Green
   if (-not (Test-Path -LiteralPath $PgDump)) { throw "No encuentro pg_dump 17 en $PgDump" }
   if (-not (Test-Path -LiteralPath $EnvFile)) { throw "No encuentro el archivo de claves .env.local" }
   $cfg = Leer-Env $EnvFile
@@ -54,7 +54,7 @@ try {
   $null = New-Item -ItemType Directory -Path (Join-Path $carpeta 'fotos') -Force
 
   Write-Host '1/2  Copiando la base de datos...'
-  $archivo = Join-Path $carpeta "platemaroc-base-$sello.dump"
+  $archivo = Join-Path $carpeta "tablemaroc-base-$sello.dump"
   $argumentos = @('--format=custom', '--no-owner', '--no-privileges', "--file=$archivo", "--dbname=$($cfg['DATABASE_URL'])")
   foreach ($e in $Esquemas) { $argumentos += "--schema=$e" }
   $env:PGPASSWORD = $cfg['DATABASE_PASSWORD']
@@ -83,9 +83,9 @@ try {
   }
 
   @(
-    "Copia de Platemaroc"
+    "Copia de Tablemaroc"
     "Fecha: $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-    "Base de datos: platemaroc-base-$sello.dump ($([math]::Round($tamano / 1KB)) KB)"
+    "Base de datos: tablemaroc-base-$sello.dump ($([math]::Round($tamano / 1KB)) KB)"
     "Fotos: $($fotos.Count)"
     "Sin cifrar: contiene emails y reseñas. No la compartas."
     "Para restaurar: config/backups/README.md (siempre primero en una base de pruebas)."

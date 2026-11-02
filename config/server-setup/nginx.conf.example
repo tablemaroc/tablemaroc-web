@@ -1,10 +1,10 @@
 # Plantilla. Adaptar dominios/rutas. Las cabeceras de seguridad y de caché (HSTS, CSP, sw.js...) las envía la aplicación: no duplicarlas aquí.
 # Límite por IP, además del de la aplicación (backend/auth/rate-limit.ts). Este archivo se incluye dentro del bloque http de Nginx.
-limit_req_zone $binary_remote_addr zone=platemaroc:10m rate=10r/s;
+limit_req_zone $binary_remote_addr zone=tablemaroc:10m rate=10r/s;
 
 server {
   listen 80;
-  server_name platemaroc.com www.platemaroc.com;
+  server_name tablemaroc.com www.tablemaroc.com;
 
   # Certbot renueva el certificado por aquí: esta ruta no se redirige
   location /.well-known/acme-challenge/ {
@@ -12,19 +12,19 @@ server {
   }
 
   location / {
-    return 301 https://platemaroc.com$request_uri;
+    return 301 https://tablemaroc.com$request_uri;
   }
 }
 
 server {
   listen 443 ssl http2;
-  server_name platemaroc.com www.platemaroc.com;
+  server_name tablemaroc.com www.tablemaroc.com;
 
   # Certbot crea estos archivos (config/server-setup/README.md, paso 12)
-  ssl_certificate     /etc/letsencrypt/live/platemaroc.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/platemaroc.com/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/tablemaroc.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/tablemaroc.com/privkey.pem;
 
-  if ($host = www.platemaroc.com) { return 301 https://platemaroc.com$request_uri; }
+  if ($host = www.tablemaroc.com) { return 301 https://tablemaroc.com$request_uri; }
 
   # Fotos del panel: hasta 10 MB por imagen más el margen del formulario (next.config.ts). Por defecto Nginx corta en 1 MB.
   client_max_body_size 12m;
@@ -45,7 +45,7 @@ server {
   }
 
   location / {
-    limit_req zone=platemaroc burst=40 nodelay;
+    limit_req zone=tablemaroc burst=40 nodelay;
     limit_req_status 429;
     proxy_pass http://127.0.0.1:3000;
   }

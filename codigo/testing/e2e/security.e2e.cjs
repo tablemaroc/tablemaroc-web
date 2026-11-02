@@ -9,7 +9,7 @@ const { nextCode, resetFactors, passMfa, totp, syncClock } = require('./mfa-help
 const FRONTEND = path.join(__dirname, '../../frontend');
 const PORT = 3106;
 const BASE = `http://localhost:${PORT}`;
-const ADMIN = 'e2e-admin@platemaroc-e2e.test', GONE = 'e2e-baja@platemaroc-e2e.test';
+const ADMIN = 'e2e-admin@tablemaroc-e2e.test', GONE = 'e2e-baja@tablemaroc-e2e.test';
 
 function readEnv(file) {
   if (!fs.existsSync(file)) return {};
@@ -109,7 +109,7 @@ async function waitFor(url, ms = 120_000) { for (const end = Date.now() + ms; Da
     await login.goto(`${BASE}/auth/entrar?lang=es`);
     let limited = false;
     for (let i = 0; i < 7 && !limited; i++) {
-      await login.fill('#email', `nadie${i}@platemaroc-e2e.test`);
+      await login.fill('#email', `nadie${i}@tablemaroc-e2e.test`);
       await login.locator('form').first().locator('button[type=submit]').click();
       await login.waitForTimeout(1200);
       limited = (await login.locator('form p[role=alert]').count()) > 0 && /demasiados/i.test(await login.locator('form p[role=alert]').first().textContent());

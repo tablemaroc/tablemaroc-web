@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
   assert.strictEqual(got[0], 503);
   // LRU: reiniciar, visitar r1..r20, releer r1 (la marca como reciente), visitar r21 => sale r2, no r1
   await ctx.setOffline(false);
-  await page.evaluate(() => new Promise((res) => { const r = indexedDB.deleteDatabase('platemaroc-offline'); r.onsuccess = r.onerror = r.onblocked = () => res(); }));
+  await page.evaluate(() => new Promise((res) => { const r = indexedDB.deleteDatabase('tablemaroc-offline'); r.onsuccess = r.onerror = r.onblocked = () => res(); }));
   await sleep(200);
   for (let i = 1; i <= 20; i++) await visit('r' + i);
   await visit('r1'); await visit('r21');
@@ -59,7 +59,7 @@ const server = http.createServer((req, res) => {
     for (let i = 0; i < 40; i++) { await new Promise(r => setTimeout(r, 250)); if ((await caches.keys()).every(k => k.endsWith('-v3')) && (await caches.keys()).length) break; } });
   console.log('estado SW:', await page.evaluate(async () => { const r = await navigator.serviceWorker.getRegistration(); return JSON.stringify({ active: r.active && r.active.state, waiting: r.waiting && r.waiting.state, installing: r.installing && r.installing.state }); }));
   const after = await page.evaluate(async () => ({ keys: await caches.keys(),
-    n: await new Promise((res) => { const q = indexedDB.open('platemaroc-offline', 1); q.onsuccess = () => { const g = q.result.transaction('pages').objectStore('pages').getAll(); g.onsuccess = () => res(g.result.map(r => r.version)); }; }) }));
+    n: await new Promise((res) => { const q = indexedDB.open('tablemaroc-offline', 1); q.onsuccess = () => { const g = q.result.transaction('pages').objectStore('pages').getAll(); g.onsuccess = () => res(g.result.map(r => r.version)); }; }) }));
   console.log('tras activar v3: cachés =', after.keys.join(','), '| versiones en IndexedDB =', JSON.stringify(after.n));
   assert(after.keys.every(k => !k.endsWith('-v2')), 'cachés v2 borradas');
   assert.strictEqual(after.n.filter(v => v !== 'v3').length, 0, 'copias antiguas purgadas');

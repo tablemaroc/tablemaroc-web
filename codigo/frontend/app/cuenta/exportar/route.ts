@@ -8,6 +8,6 @@ export async function GET(request: Request) {
   if (!user) return NextResponse.redirect(new URL('/auth/entrar?next=/cuenta', request.url));
   const data = await exportUserData(await supabaseForRequest(), user);
   return new Response(JSON.stringify(data, null, 2), {
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': 'attachment; filename="mis-datos-platemaroc.json"', 'Cache-Control': 'private, no-store' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': 'attachment; filename="mis-datos-tablemaroc.json"', 'Cache-Control': 'private, no-store' },
   });
 }

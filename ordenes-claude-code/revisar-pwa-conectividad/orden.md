@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Verificar que Platemaroc funciona correctamente en dispositivos móviles bajo condiciones de red variables en Marruecos.
+Verificar que Tablemaroc funciona correctamente en dispositivos móviles bajo condiciones de red variables en Marruecos.
 
 ## Antes de empezar
 

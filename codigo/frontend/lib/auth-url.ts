@@ -11,5 +11,5 @@ export async function authBaseUrl(): Promise<string> {
   const h = await headers();
   const host = h.get('host') ?? '';
   if (LOCAL_HOSTS.has(host.replace(/:\d+$/, ''))) return `http://${host}`;
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://platemaroc.com').replace(/\/$/, '');
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tablemaroc.com').replace(/\/$/, '');
 }

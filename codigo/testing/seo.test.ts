@@ -12,7 +12,7 @@ const v = (locale: 'es' | 'en' | 'fr', o: Partial<PageVersion> = {}): PageVersio
 test('canónica y hreflang solo entre versiones publicadas e indexables', () => {
   const vs = [v('es'), v('en'), v('fr', { translationPublished: false })];
   const m = buildPageMetadata(vs[0], vs);
-  assert.equal(m.alternates.canonical, 'https://platemaroc.com/es/restaurantes/cafe-hafa');
+  assert.equal(m.alternates.canonical, 'https://tablemaroc.com/es/restaurantes/cafe-hafa');
   assert.deepEqual(Object.keys(m.alternates.languages).sort(), ['en', 'es']);
   assert.equal(m.robots.index, true);
 });
@@ -28,7 +28,7 @@ test('una sola versión: sin hreflang', () => {
   assert.deepEqual(buildPageMetadata(vs[0], vs).alternates.languages, {});
 });
 test('JSON-LD no inventa datos y valoración solo con reseñas aprobadas', () => {
-  const base = { name: 'Café Hafa', url: 'https://platemaroc.com/es/restaurantes/cafe-hafa' };
+  const base = { name: 'Café Hafa', url: 'https://tablemaroc.com/es/restaurantes/cafe-hafa' };
   const a = restaurantJsonLd(base);
   for (const k of ['aggregateRating', 'geo', 'address', 'telephone', 'priceRange', 'openingHours']) assert.ok(!(k in a), k);
   assert.ok(!('aggregateRating' in restaurantJsonLd({ ...base, approvedReviews: { count: 0, average: 0 } })));
@@ -41,6 +41,6 @@ test('JSON-LD: breadcrumb y escape de </script>', () => {
 });
 
 test('canónica: sin barra final, la URL que sirve la web', () => {
-  assert.equal(pageUrl('es', '/restaurantes/x/'), 'https://platemaroc.com/es/restaurantes/x');
-  assert.equal(pageUrl('fr', ''), 'https://platemaroc.com/fr');
+  assert.equal(pageUrl('es', '/restaurantes/x/'), 'https://tablemaroc.com/es/restaurantes/x');
+  assert.equal(pageUrl('fr', ''), 'https://tablemaroc.com/fr');
 });

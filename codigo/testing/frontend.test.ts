@@ -40,8 +40,8 @@ test('textos de interfaz: mismas claves en es, en y fr, y ninguna vacía', () =>
 });
 
 test('datos demo: prohibidos en producción; sin Supabase, origen vacío', async () => {
-  assert.throws(() => contentSource({ PLATEMAROC_DEMO_DATA: '1', NODE_ENV: 'production' }), /no está permitido en producción/);
-  assert.equal(contentSource({ PLATEMAROC_DEMO_DATA: '1', NODE_ENV: 'development' }).isDemo, true);
+  assert.throws(() => contentSource({ TABLEMAROC_DEMO_DATA: '1', NODE_ENV: 'production' }), /no está permitido en producción/);
+  assert.equal(contentSource({ TABLEMAROC_DEMO_DATA: '1', NODE_ENV: 'development' }).isDemo, true);
   assert.deepEqual(await contentSource({}).listPlaces('es'), []);
 });
 

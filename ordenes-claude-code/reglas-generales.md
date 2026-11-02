@@ -1,4 +1,4 @@
-# Reglas generales para Claude Code en Platemaroc
+# Reglas generales para Claude Code en Tablemaroc
 
 Estas reglas valen para TODAS las órdenes de esta carpeta. Léelas siempre antes de ejecutar una orden.
 

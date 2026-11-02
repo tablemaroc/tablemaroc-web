@@ -1,4 +1,4 @@
-# Bocetos de Platemaroc
+# Bocetos de Tablemaroc
 
 Esquemas de estructura en grises con datos de ejemplo ficticios. **No son el diseño final**: el aspecto final (colores,
 tipografía, logo) lo hará Claude Design siguiendo `docs/01-documento-maestro-operacion.md` (§19 y §20).

@@ -80,7 +80,7 @@ const get = (p, init = {}) => fetch(BASE + p, { redirect: 'manual', ...init });
     await page.click('button[type=submit]');
     await page.waitForSelector('form p[role=alert]');
     assert.match(await page.textContent('form p[role=alert]'), /e-mail valide/);
-    await page.fill('#email', 'nadie@platemaroc-e2e.test');
+    await page.fill('#email', 'nadie@tablemaroc-e2e.test');
     await page.click('button[type=submit]');
     await page.waitForSelector('form p[role=status]', { timeout: 20_000 });
     assert.match(await page.textContent('form p[role=status]'), /Si cet e-mail a un compte/);

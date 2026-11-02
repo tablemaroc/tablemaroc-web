@@ -1,4 +1,4 @@
-# Documento maestro de operación de Platemaroc
+# Documento maestro de operación de Tablemaroc
 
 **Estado:** vigente, se actualiza con cada decisión del titular.  
 **Última actualización:** 01-11-2026 (ver «Registro de cambios» al final).  
@@ -384,7 +384,7 @@ No existen:
 
 **Idioma** (decisión del titular, 01-11-2026):
 - **Idioma base de la web: español.** Es el idioma de referencia del contenido y el de reserva.
-- Al entrar sin idioma elegido (por ejemplo en `platemaroc.com/`), se usa el **idioma del navegador** si es es, en o fr;
+- Al entrar sin idioma elegido (por ejemplo en `tablemaroc.com/`), se usa el **idioma del navegador** si es es, en o fr;
   si no es ninguno de los tres, se usa el **español**.
 - El usuario puede cambiar de idioma en cualquier momento y su elección se recuerda.
 - `hreflang x-default` apunta a la versión en español.
@@ -437,7 +437,7 @@ en lo que se contradigan (proveedor del mapa); el resto del protocolo de fallbac
 
 ## 17. Precios (solo MAD)
 
-- Platemaroc utiliza exclusivamente MAD para los precios.
+- Tablemaroc utiliza exclusivamente MAD para los precios.
 - `menu_items` guarda el importe en `price_mad`; no existe campo genérico de moneda.
 - No hay conversiones a otras monedas, tipos de cambio, selectores de moneda ni precios aproximados.
 - Un precio ausente o no verificado se muestra como pendiente; nunca se inventa.
@@ -507,7 +507,7 @@ Sustituye a la propuesta del VPS de Hostinger y a cualquier mención anterior a 
 |---|---|
 | Web pública | Astro con el adaptador de Cloudflare (Workers / Pages) |
 | Lógica (login, reseñas, reservas, favoritos) | Workers |
-| Panel propio (administración, propietarios, empleados) | Workers, en el mismo proyecto o en `admin.platemaroc.com` |
+| Panel propio (administración, propietarios, empleados) | Workers, en el mismo proyecto o en `admin.tablemaroc.com` |
 | Base de datos | D1 (SQLite) |
 | Fotos y copias de seguridad | R2 |
 | Tareas programadas (moderación 3 veces al día, copias, auditorías) | Cron Triggers |

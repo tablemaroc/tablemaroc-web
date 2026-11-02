@@ -44,28 +44,28 @@ jobs:
           install -m 700 -d ~/.ssh
           printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_deploy && chmod 600 ~/.ssh/id_deploy
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          REL="/srv/platemaroc/releases/${GITHUB_SHA}"
+          REL="/srv/tablemaroc/releases/${GITHUB_SHA}"
           SSH="ssh -i $HOME/.ssh/id_deploy $USER_@$HOST"
           $SSH "mkdir -p $REL"
           rsync -az --delete -e "ssh -i $HOME/.ssh/id_deploy" ./build-output/ "$USER_@$HOST:$REL/"
           # Si la versión nueva no responde en 30 s, vuelve a la anterior y el despliegue queda en rojo.
           $SSH "REL=$REL bash -s" <<'REMOTO'
           set -uo pipefail
-          PREV="$(readlink -f /srv/platemaroc/current || true)"
-          ln -sfn "$REL" /srv/platemaroc/current
-          sudo /usr/bin/systemctl restart platemaroc
+          PREV="$(readlink -f /srv/tablemaroc/current || true)"
+          ln -sfn "$REL" /srv/tablemaroc/current
+          sudo /usr/bin/systemctl restart tablemaroc
           for _ in $(seq 1 30); do
             if curl -fsS -o /dev/null http://127.0.0.1:3000/; then
               # Conserva las 5 versiones más recientes y nunca borra la activa
-              ls -1dt /srv/platemaroc/releases/* | tail -n +6 | grep -vxF "$REL" | xargs -r rm -rf
+              ls -1dt /srv/tablemaroc/releases/* | tail -n +6 | grep -vxF "$REL" | xargs -r rm -rf
               exit 0
             fi
             sleep 1
           done
           echo "La versión nueva no responde: vuelvo a la anterior" >&2
           if [ -n "$PREV" ] && [ "$PREV" != "$REL" ]; then
-            ln -sfn "$PREV" /srv/platemaroc/current
-            sudo /usr/bin/systemctl restart platemaroc
+            ln -sfn "$PREV" /srv/tablemaroc/current
+            sudo /usr/bin/systemctl restart tablemaroc
           fi
           exit 1
           REMOTO

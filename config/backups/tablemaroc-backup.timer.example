@@ -1,5 +1,5 @@
 [Unit]
-Description=Copia diaria de la base de datos de Platemaroc
+Description=Copia diaria de la base de datos de Tablemaroc
 
 [Timer]
 # Hora del servidor (UTC). Persistent: si el servidor estaba apagado, la hace al arrancar.

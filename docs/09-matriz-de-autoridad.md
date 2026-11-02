@@ -30,7 +30,7 @@ Las decisiones del titular del 01-11-2026, recogidas en `01-documento-maestro-op
 
 ## Prioridad de las decisiones técnicas del 29-10-2026
 
-Las decisiones del paquete `platemaroc-ajustes-tecnicos-2026-10-29` (solo MAD; carga diferida del mapa; IndexedDB máx. 20 con LRU; cachés versionadas del Service Worker) tienen prioridad sobre cualquier especificación anterior que contemple moneda dual o carga inmediata del mapa.
+Las decisiones del paquete `tablemaroc-ajustes-tecnicos-2026-10-29` (solo MAD; carga diferida del mapa; IndexedDB máx. 20 con LRU; cachés versionadas del Service Worker) tienen prioridad sobre cualquier especificación anterior que contemple moneda dual o carga inmediata del mapa.
 
 ## Regla de conflicto
 

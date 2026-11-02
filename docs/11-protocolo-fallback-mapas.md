@@ -1,4 +1,4 @@
-# Protocolo de Fallback de Mapas y Geolocalización (Platemaroc.com)
+# Protocolo de Fallback de Mapas y Geolocalización (Tablemaroc.com)
 
 ## 1. Contexto y Problema
 

@@ -1,6 +1,6 @@
 # Ajustes técnicos del 29-10-2026
 
-Decisiones del titular (paquete `platemaroc-ajustes-tecnicos-2026-10-29`). **Tienen prioridad** sobre cualquier especificación anterior
+Decisiones del titular (paquete `tablemaroc-ajustes-tecnicos-2026-10-29`). **Tienen prioridad** sobre cualquier especificación anterior
 que contemplase moneda dual o carga inmediata del mapa (ver `09-matriz-de-autoridad.md`).
 
 | # | Decisión | Dónde se refleja |

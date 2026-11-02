@@ -6,7 +6,7 @@ Cuando esté aprobado, se traduce a inglés y francés, se publica en `/privacid
 
 ---
 
-## Política de privacidad de Platemaroc
+## Política de privacidad de Tablemaroc
 
 Última actualización: [PENDIENTE: fecha de publicación]
 

@@ -1,7 +1,7 @@
 {
-  "name": "platemaroc",
+  "name": "tablemaroc",
   "private": true,
-  "description": "Platemaroc: directorio y guía gastronómica de Marruecos (https://platemaroc.com)",
+  "description": "Tablemaroc: directorio y guía gastronómica de Marruecos (https://tablemaroc.com)",
   "engines": {
     "node": ">=22.18"
   },
@@ -10,10 +10,10 @@
     "codigo/backend"
   ],
   "scripts": {
-    "dev": "npm run dev -w @platemaroc/frontend",
-    "dev:demo": "npm run dev:demo -w @platemaroc/frontend",
-    "build": "npm run build -w @platemaroc/frontend",
-    "start": "npm run start -w @platemaroc/frontend",
+    "dev": "npm run dev -w @tablemaroc/frontend",
+    "dev:demo": "npm run dev:demo -w @tablemaroc/frontend",
+    "build": "npm run build -w @tablemaroc/frontend",
+    "start": "npm run start -w @tablemaroc/frontend",
     "release": "npm run build && node codigo/frontend/scripts/package-release.mjs",
     "typecheck": "tsc -p tsconfig.json && tsc -p codigo/frontend/tsconfig.json",
     "test": "node --test codigo/testing/*.test.ts",

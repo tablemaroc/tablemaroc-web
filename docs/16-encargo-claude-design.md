@@ -8,7 +8,7 @@ estructura: Claude Design define el aspecto (colores, tipografía, logo, iconos)
 
 ---
 
-## 1. Qué es Platemaroc
+## 1. Qué es Tablemaroc
 
 Guía de restaurantes, cafés y teterías, comida callejera y mercados de Marruecos para **turistas europeos**.
 Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados y sin ningún tipo de ingreso.

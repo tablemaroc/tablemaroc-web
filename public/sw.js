@@ -1,4 +1,4 @@
-/* Service Worker de Platemaroc — docs/10-politica-pwa-conectividad.md
+/* Service Worker de Tablemaroc — docs/10-politica-pwa-conectividad.md
  *
  * 1) Cache-First: iconos, CSS críticos, fuentes y página principal de guías gastronómicas
  *    (con revalidación en segundo plano para que no quede obsoleta).
@@ -16,9 +16,9 @@
  * es/en/fr, decisión del 29-10-2026). Los valores de abajo son los de reserva (solo español) para usar el archivo tal cual.
  */
 const VERSION = 'v2';
-const CACHE_PREFIX = 'platemaroc-';
+const CACHE_PREFIX = 'tablemaroc-';
 const STATIC_CACHE = `${CACHE_PREFIX}static-${VERSION}`;
-const DB_NAME = 'platemaroc-offline';
+const DB_NAME = 'tablemaroc-offline';
 const DB_STORE = 'pages';
 const MAX_PAGES = 20; // decisión 29-10-2026
 
@@ -80,7 +80,7 @@ async function loadPage(url) {
     await tx(db, 'readwrite', (s) => s.put({ ...rec, lastAccess: Date.now() }));
     return new Response(rec.body, {
       status: rec.status,
-      headers: { 'content-type': rec.contentType, 'x-platemaroc-offline': String(rec.savedAt) },
+      headers: { 'content-type': rec.contentType, 'x-tablemaroc-offline': String(rec.savedAt) },
     });
   } finally { db.close(); }
 }

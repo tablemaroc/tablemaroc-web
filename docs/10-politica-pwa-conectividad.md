@@ -1,10 +1,10 @@
 # Política de Conectividad Móvil y PWA (Service Worker)
 
-*Actualizada el 29-10-2026 con las decisiones técnicas del paquete `platemaroc-ajustes-tecnicos-2026-10-29`.*
+*Actualizada el 29-10-2026 con las decisiones técnicas del paquete `tablemaroc-ajustes-tecnicos-2026-10-29`.*
 
 ## 1. Enfoque Mobile-First para Conectividad Inestable
 
-Platemaroc.com está optimizado para funcionar en dispositivos móviles bajo condiciones de red variables en Marruecos.
+Tablemaroc.com está optimizado para funcionar en dispositivos móviles bajo condiciones de red variables en Marruecos.
 
 ## 2. Configuración de Service Worker y Caché Crítica
 
