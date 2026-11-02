@@ -278,7 +278,7 @@ Sin SMS ni push.
 
 ## 9. Backups
 
-- Base de datos: diario.
+- Base de datos (D1): diario, exportado a R2 y, además, fuera de Cloudflare.
 - Fotos y configuración no secreta: semanal.
 - Retención propuesta: 7 diarias, 4 semanales y 3 mensuales.
 - Copias externas y cifradas.
@@ -499,6 +499,38 @@ La tabla de reservas se recreará en la base de datos en la fase de desarrollo (
 
 ---
 
+## 18 ter. Stack técnico: todo en Cloudflare
+
+Decisión del titular (02-11-2026), con los criterios **rendimiento, precio, seguridad y mantenimiento**: **opción B, todo en Cloudflare**.
+Sustituye a la propuesta del VPS de Hostinger y a cualquier mención anterior a Supabase, Next.js o VPS como plataforma de producción.
+
+| Pieza | Servicio de Cloudflare |
+|---|---|
+| Web pública | Astro con el adaptador de Cloudflare (Workers / Pages) |
+| Lógica (login, reseñas, reservas, favoritos) | Workers |
+| Panel propio (administración, propietarios, empleados) | Workers, en el mismo proyecto o en `admin.platemaroc.com` |
+| Base de datos | D1 (SQLite) |
+| Fotos y copias de seguridad | R2 |
+| Tareas programadas (moderación 3 veces al día, copias, auditorías) | Cron Triggers |
+| Antispam | Turnstile |
+| CDN, HTTPS, protección DDoS, cortafuegos, DNS | Incluidos |
+| Email de contacto (`contacto@`) | Email Routing |
+| Analítica sin cookies | Web Analytics |
+
+Consecuencias aceptadas por el titular:
+- El proyecto queda ligado a Cloudflare (D1, Workers y R2 son propios de la plataforma).
+- El panel propio sigue siendo código nuestro y reutilizable, pero para ejecutarse en Cloudflare.
+- No hay servidor que mantener; Claude Code se encarga de despliegues, configuración, copias y vigilancia.
+
+Pendiente del titular:
+- Plan: empezar en el gratuito y pasar al de pago de Workers (unos 5 $/mes) cuando los límites lo pidan.
+- Proveedor de **email transaccional** para los códigos de acceso y avisos de reservas (Cloudflare no lo cubre por completo en el plan gratuito; comprobar opciones vigentes).
+- Procesado de fotos (convertir a WebP/AVIF y quitar el GPS): dentro de los Workers o con el servicio de imágenes de pago.
+- Copia de seguridad extra **fuera de Cloudflare** (recomendada).
+- El VPS de Hostinger deja de ser necesario para producción: decide el titular si lo mantiene o lo da de baja.
+
+---
+
 ## 19. Diseño de la interfaz
 
 - **El diseño antiguo queda descartado** (decisión del titular, 01-11-2026): el sistema visual de la «fase 1» de Claude Design
@@ -602,6 +634,7 @@ Barra lateral y cabecera del panel.
 - Reservas: solo locales con «Acepto reservas»; acceso de propietarios al panel en el MVP (Google, email con código o passkey); todos los locales tienen propietario registrado, que confirma las reservas; el titular se encarga del tema de las reservas (§2, §18 bis).
 - Passkey: botón «Continuar con huella o cara» (§18).
 - Huella o cara también para propietarios y administración (§18).
+- **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
 - Encargo para Claude Design preparado en `docs/16-encargo-claude-design.md`, con los bocetos de `diseno/`.
 - Rol Empleado en el panel: solo reservas de su local (ver, confirmar, «No disponible»); los añade el propietario (§18, §20).
 - Moderación automática 3 veces al día (§6).
@@ -615,7 +648,7 @@ Barra lateral y cabecera del panel.
 
 ### Pendiente de decisión del titular
 
-- Stack definitivo de la web (propuesta: todo en el VPS de Hostinger con Astro, PostgreSQL, panel propio y Nginx, con Cloudflare gratuito delante).
+- Stack (§18 ter): plan de Cloudflare, proveedor de email transaccional, procesado de fotos, copia de seguridad fuera de Cloudflare y qué hacer con el VPS.
 
 ### 29-10-2026
 

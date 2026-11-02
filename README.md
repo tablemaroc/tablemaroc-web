@@ -40,7 +40,7 @@ Requisitos: Node.js 26 (versión de `.nvmrc`; mínimo 22.18) y Git. Las claves v
 - Backend separado del frontend.
 - Google Maps (mapa y "Cómo llegar"). Carga de lugares manual; Google Places y Google Business en una fase posterior (las carpetas de integración quedan reservadas).
 - Reseñas al estilo Google Business: puntuación de 1 a 5 estrellas, comentario y fotos, con moderación previa.
-- Alojamiento: VPS KVM 1 de Hostinger con Ubuntu LTS limpio. Sin exportación estática.
+- Alojamiento: **todo en Cloudflare** (decisión del 02-11-2026; ver `docs/01-documento-maestro-operacion.md` §18 ter). El código actual (Next.js + Supabase) se sustituirá en la fase de desarrollo.
 - Desarrollo con Claude Code desde Windows y repositorio en GitHub.
 
 ## Estructura
