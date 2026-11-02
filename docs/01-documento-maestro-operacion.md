@@ -480,8 +480,8 @@ Reglas comunes:
 Decisión del titular (01-11-2026): **se recuperan las reservas**, que se habían retirado el 30-10-2026, con la **opción gestionada**:
 
 1. El usuario, con su cuenta, elige fecha, hora, número de personas y una petición especial opcional, y pulsa «Solicitar reserva». Sin pago.
-2. La reserva queda **pendiente de confirmar**.
-3. **El propietario la confirma o la marca como «No disponible»** desde el **panel** (la misma plantilla del panel de administración, con el rol «Propietario»: solo ve su local).
+2. Con el panel en **automático**, la reserva **se confirma sola** si hay sitio según los ajustes del local; si no encaja, queda **pendiente de confirmar** (decisión del titular, 02-11-2026).
+3. Las pendientes (o todas, con el panel en **manual**): **el propietario o un empleado la confirma o la marca como «No disponible»** desde el **panel** (la misma plantilla del panel de administración, con el rol «Propietario»: solo ve su local).
 4. El usuario recibe el aviso **por email** (sin SMS) y ve el estado en «Mi cuenta → Mis reservas». Puede cancelarla.
 
 Estados: `pendiente -> confirmada | no disponible`; `confirmada -> cancelada`. Las reservas no se borran (historial).
@@ -581,6 +581,16 @@ Cabecera, pie de página (navegación secundaria) y barra inferior del móvil.
 
 ### Panel: 12 plantillas
 
+**Modo automático y manual en cada sección** (decisión del titular, 02-11-2026): cada sección del panel tiene un
+**interruptor «Automático / Manual»** y dos **pestañas**:
+- **Automático:** qué hace el sistema o Claude Code por sí solo, cuándo, y el historial de las últimas ejecuciones;
+- **Manual:** las acciones a mano. Con el interruptor en «Manual», no se hace nada sin una persona.
+
+Secciones con los dos modos: Escritorio (resumen de tareas automáticas), Locales, Fotos, Redirecciones, Usuarios, Auditoría,
+Copias de seguridad y Reservas. Sin modo automático: Ajustes, Empleados, el formulario de un local y la vista del empleado.
+**Reservas en automático: se confirman solas si hay sitio** según los ajustes del local (horas, máximo de personas, días
+cerrados); las que no encajan pasan a «Manual» para el propietario o el empleado.
+
 1. Acceso: solo «Continuar con Google» y después el segundo factor.
 2. **Escritorio, con la moderación de reseñas y fotos dentro** (no hay sección de moderación aparte).
 3. Listado genérico (locales, ciudades, platos, guías).
@@ -638,6 +648,7 @@ Barra lateral y cabecera del panel.
 - Passkey: botón «Continuar con huella o cara» (§18).
 - Huella o cara también para propietarios y administración (§18).
 - Cloudflare confirmado y Hostinger descartado por el titular (02-11-2026). Sin CSV: el panel tiene «Copias de seguridad» con hacer, descargar y restaurar (§5, §20).
+- Panel: interruptor «Automático / Manual» y pestañas en cada sección; reservas confirmadas automáticamente si hay sitio (§20).
 - **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
 - Encargo para Claude Design preparado en `docs/16-encargo-claude-design.md`, con los bocetos de `diseno/`.
 - Rol Empleado en el panel: solo reservas de su local (ver, confirmar, «No disponible»); los añade el propietario (§18, §20).

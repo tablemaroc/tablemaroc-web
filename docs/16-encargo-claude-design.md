@@ -71,6 +71,10 @@ Sin Google Maps dentro de la web.
 
 Un único panel con tres roles: **Administración**, **Propietario** (solo su local) y **Empleado** (solo reservas de su local).
 
+**En cada sección (Escritorio, Locales, Fotos, Redirecciones, Usuarios, Auditoría, Copias de seguridad, Reservas):** un interruptor
+«Automático / Manual» y dos pestañas, «Automático» (qué hace solo y últimas ejecuciones) y «Manual» (acciones a mano).
+Las reservas en automático se confirman solas si hay sitio.
+
 | # | Plantilla | Notas | Bocetos |
 |---|---|---|---|
 | 1 | Acceso | Google, email o huella o cara. Administración: Google + código de la app, o huella o cara | `diseno/login/administrador` y `diseno/login/propietario` |
