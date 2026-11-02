@@ -194,7 +194,7 @@ Si una entidad falla el Quality Gate, permanece almacenada y publicada si proced
 | Vía | Uso |
 |---|---|
 | Base de datos | Scripts/backend autorizados; credenciales solo en entorno seguro. |
-| CSV | Importación/exportación documentada. |
+| Copias de seguridad | Panel → «Copias de seguridad»: hacer, descargar y restaurar copias completas. Sin CSV (decisión del titular, 02-11-2026). |
 | API interna | Endpoint documentado y autenticado. |
 | Panel | Gestión de contenido. |
 
@@ -222,7 +222,7 @@ Las operaciones técnicas relevantes deben quedar auditadas.
 - Semanal: Search Console, rendimiento y backups de fotos/configuración no secreta.
 - Mensual: seguridad, duplicidad, SEO, estado y crecimiento.
 - Trimestral: prueba de restauración.
-- Bajo demanda: contenido, importaciones y traducciones.
+- Bajo demanda: contenido y traducciones.
 
 ---
 
@@ -237,7 +237,6 @@ Fuentes permitidas:
 
 - `panel`
 - `claude_code`
-- `importacion`
 - `sistema`
 
 Entidades auditables:
@@ -527,7 +526,7 @@ Pendiente del titular:
 - Proveedor de **email transaccional** para los códigos de acceso y avisos de reservas (Cloudflare no lo cubre por completo en el plan gratuito; comprobar opciones vigentes).
 - Procesado de fotos (convertir a WebP/AVIF y quitar el GPS): dentro de los Workers o con el servicio de imágenes de pago.
 - Copia de seguridad extra **fuera de Cloudflare** (recomendada).
-- El VPS de Hostinger deja de ser necesario para producción: decide el titular si lo mantiene o lo da de baja.
+- **Hostinger descartado** (decisión del titular, 02-11-2026).
 
 ---
 
@@ -591,7 +590,11 @@ Cabecera, pie de página (navegación secundaria) y barra inferior del móvil.
 6. Redirecciones 301 (vista general de todas, también las de ciudades, platos y guías).
 7. Usuarios (RGPD).
 8. Auditoría.
-9. Importar / exportar CSV.
+9. **Copias de seguridad** (solo administración; sin CSV, decisión del titular, 02-11-2026):
+   - lista de copias (automáticas diarias y manuales) con fecha, contenido (base de datos + fotos), tamaño, dónde se guarda
+     (Cloudflare y fuera de Cloudflare) y estado; aviso en el escritorio si una falla;
+   - botones «Hacer copia ahora», «Descargar» y **«Restaurar»**;
+   - restaurar pide escribir RESTAURAR y el código de la app (o huella o cara), y antes hace una copia automática del estado actual.
 10. Ajustes.
 11. **Reservas** (decisión del titular, 01-11-2026: el panel del propietario va dentro de la plantilla del panel):
     - rol **Administración**: reservas de todos los locales, con filtros por ciudad y local;
@@ -634,6 +637,7 @@ Barra lateral y cabecera del panel.
 - Reservas: solo locales con «Acepto reservas»; acceso de propietarios al panel en el MVP (Google, email con código o passkey); todos los locales tienen propietario registrado, que confirma las reservas; el titular se encarga del tema de las reservas (§2, §18 bis).
 - Passkey: botón «Continuar con huella o cara» (§18).
 - Huella o cara también para propietarios y administración (§18).
+- Cloudflare confirmado y Hostinger descartado por el titular (02-11-2026). Sin CSV: el panel tiene «Copias de seguridad» con hacer, descargar y restaurar (§5, §20).
 - **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
 - Encargo para Claude Design preparado en `docs/16-encargo-claude-design.md`, con los bocetos de `diseno/`.
 - Rol Empleado en el panel: solo reservas de su local (ver, confirmar, «No disponible»); los añade el propietario (§18, §20).
@@ -648,7 +652,7 @@ Barra lateral y cabecera del panel.
 
 ### Pendiente de decisión del titular
 
-- Stack (§18 ter): plan de Cloudflare, proveedor de email transaccional, procesado de fotos, copia de seguridad fuera de Cloudflare y qué hacer con el VPS.
+- Stack (§18 ter): plan de Cloudflare, proveedor de email transaccional, procesado de fotos y dónde se guarda la copia fuera de Cloudflare.
 
 ### 29-10-2026
 

@@ -81,7 +81,7 @@ Un único panel con tres roles: **Administración**, **Propietario** (solo su lo
 | 6 | Redirecciones 301 | Vista general | `diseno/panel-06-redirecciones` |
 | 7 | Usuarios | Incluye RGPD (exportar y borrar) | `diseno/panel-07-usuarios` |
 | 8 | Auditoría | Con «Deshacer» | `diseno/panel-08-auditoria` |
-| 9 | Importar / exportar | CSV | `diseno/panel-09-importar-exportar` |
+| 9 | Copias de seguridad | Lista de copias, «Hacer copia ahora», «Descargar» y «Restaurar» (con confirmación escribiendo RESTAURAR y código). Sin CSV | `diseno/panel-09-copias-de-seguridad` |
 | 10 | Ajustes | | `diseno/panel-10-ajustes` |
 | 11 | Reservas | Vista de administración, del propietario y del empleado | `diseno/panel-11-reservas` |
 | 12 | Empleados | El propietario añade empleados (sin la palabra «invitar») y les quita el acceso | `diseno/panel-12-empleados` |
