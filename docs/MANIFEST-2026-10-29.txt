@@ -1,4 +1,4 @@
-Platemaroc — repositorio integrado
+Tablemaroc — repositorio integrado
 Fecha: 2026-10-29
 Incluye los ajustes técnicos del 29-10-2026 (docs/14).
 Archivos listados (sin .gitkeep, MANIFEST ni este fichero): 119
