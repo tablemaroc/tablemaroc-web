@@ -30,7 +30,7 @@ Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados 
 
 - **Una sola pantalla por plantilla, en móvil y en ordenador.** Lo que no cabe va en pestañas o secciones plegables.
   En ordenador se usan columnas. Las listas largas usan «Ver más» o páginas.
-- Casi sin JavaScript: todo debe poder hacerse con HTML y CSS. Sin vídeos ni carruseles automáticos.
+- Casi sin JavaScript (arquitectura de islas): todo el contenido en HTML y CSS, incluidas las pestañas y los plegables. Solo son interactivos: Reservar, ♡ Favoritos, Escribir reseña, Login, «Ver mapa», «Abierto ahora» y el buscador con filtros. Sin vídeos ni carruseles automáticos.
 - Menos de 60 KB de HTML y CSS por página (sin fotos). Imágenes con tamaño reservado (sin saltos al cargar).
 - Áreas táctiles de 44 × 44 px como mínimo. Los textos aguantan que el francés ocupe un 20–30 % más.
 - **Precios solo en MAD.** El rango de precio se muestra con puntos (●●○○), nunca con «€».

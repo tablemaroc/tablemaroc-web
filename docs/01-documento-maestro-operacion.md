@@ -530,6 +530,33 @@ Pendiente del titular:
 
 ---
 
+### Arquitectura de islas (Astro)
+
+Decisión del titular (04-11-2026). La web usa la **arquitectura de islas** de Astro:
+
+**Parte estática (HTML puro, sin JavaScript, generada en el servidor):**
+- diseño general: cabecera, pie y barra inferior;
+- contenido: info del local (descripción, horario, datos rápidos), guías, platos típicos y páginas de texto;
+- el menú con sus precios en MAD;
+- la imagen estática del mapa y las indicaciones;
+- pestañas y secciones plegables, hechas solo con HTML y CSS.
+
+**Parte dinámica (islas interactivas, solo en la página que las usa y, cuando se pueda, solo al llegar a ellas o tocarlas):**
+| Isla | Por qué necesita JavaScript |
+|---|---|
+| Reservar | Horas libres y número de personas en tiempo real |
+| ♡ Favoritos | Guardar el local y tenerlo sin conexión |
+| Escribir reseña | Estrellas y fotos reducidas y sin GPS en el propio móvil |
+| Login | Google, código por email y huella o cara |
+| «Ver mapa» | Mapa interactivo de OpenStreetMap, solo al pulsarlo |
+| «Abierto ahora» | Cálculo con la hora de Marruecos |
+| Buscador y filtros | Resultados al momento |
+
+Las islas se escriben con **JavaScript ligero o Preact** (no React ni Vue completos), para que cada una pese pocos KB.
+No hay pedidos a domicilio (no forman parte del producto).
+
+---
+
 ## 19. Diseño de la interfaz
 
 - **El diseño antiguo queda descartado** (decisión del titular, 01-11-2026): el sistema visual de la «fase 1» de Claude Design
@@ -648,6 +675,7 @@ Barra lateral y cabecera del panel.
 - Passkey: botón «Continuar con huella o cara» (§18).
 - Huella o cara también para propietarios y administración (§18).
 - Cloudflare confirmado y Hostinger descartado por el titular (02-11-2026). Sin CSV: el panel tiene «Copias de seguridad» con hacer, descargar y restaurar (§5, §20).
+- Arquitectura de islas de Astro: contenido en HTML puro y solo 7 islas interactivas (reservar, favoritos, reseña, login, ver mapa, abierto ahora, buscador) (§18 ter).
 - Panel: interruptor «Automático / Manual» y pestañas en cada sección; reservas confirmadas automáticamente si hay sitio (§20).
 - **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
 - Encargo para Claude Design preparado en `docs/16-encargo-claude-design.md`, con los bocetos de `diseno/`.
