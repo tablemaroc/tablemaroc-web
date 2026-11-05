@@ -1,5 +1,5 @@
 // Tablemaroc en Cloudflare (maestro §18 ter). Sin account_id ni secretos: el titular crea la cuenta y las claves (§2).
-// Los IDs de D1 se rellenan cuando el titular crea la base (`wrangler d1 create tablemaroc`).
+// Base D1 creada el 05-11-2026 con jurisdicción UE (los datos se guardan y procesan solo en la Unión Europea, RGPD).
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "tablemaroc",
@@ -14,7 +14,7 @@
     {
       "binding": "DB",
       "database_name": "tablemaroc",
-      "database_id": "PENDIENTE_TITULAR",
+      "database_id": "73af0f91-dfee-4cec-9c6d-b70263eb4a31",
       "migrations_dir": "./migrations"
     }
   ],
