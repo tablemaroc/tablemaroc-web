@@ -1,7 +1,7 @@
 // PUT /api/panel/contenido/:tipo/:id/traducciones/:idioma  { title, description, content, seo_title, seo_description,
 //      directions?, ramadan_notice?, estado: 'borrador' | 'revisada' | 'publicada' }   (pestañas ES, EN, FR; §3, §20)
 // Solo es, en y fr. Revisar o publicar exige título y texto. Una traducción publicada se mejora, no vuelve a borrador.
-// Solo administración (el propietario envía los textos de su local a administración por otra vía: pendiente de decidir).
+// Solo administración: los textos de la info del local no los edita el propietario (decisión del titular, 06-11-2026; maestro §20).
 import { env } from 'cloudflare:workers';
 import { json, leerJson } from '../../../../../../../lib/acceso';
 import { recalcular } from '../../../../../../../lib/calidad';

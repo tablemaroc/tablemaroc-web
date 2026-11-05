@@ -647,7 +647,8 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
     - rol **Administración**: reservas de todos los locales, con filtros por ciudad y local;
     - rol **Propietario**: el mismo panel, pero su barra lateral solo muestra «Mi local» (Escritorio, Reservas, Información, Menú,
       Fotos, Reseñas, Empleados) y solo ve los datos de su local. Confirma o marca «No disponible» y gestiona los ajustes de reservas. En «Reseñas» ve las
-      reseñas aprobadas de su local y las contesta (§3).
+      reseñas aprobadas de su local y las contesta (§3). Los textos ES/EN/FR de la info del local los escribe y publica
+      **solo administración**; el propietario no los edita (decisión del titular, 06-11-2026).
     - rol **Empleado**: el mismo panel con una sola sección, **Reservas**, de su local: ver, confirmar y «No disponible». Nada más.
 12. **Empleados** (solo propietario): añadir empleados por email (quedan «pendientes de activar» hasta que activan su acceso), reenviar o anular y quitar el acceso. En la interfaz no se usa la palabra «invitar».
 
@@ -672,6 +673,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: las respuestas del propietario no pasan por moderación; se publican al enviarlas, salvo las excepciones legales de §3.2 (§3, §12).
 - Decisión del titular: RGPD y Ley 09-08 de Marruecos se aplican siempre, con la regla más exigente de las dos (§1, §10).
 - Decisión del titular: se pasa ya la base técnica a Cloudflare (datos y lógica), sin plantillas visuales hasta que se apruebe el diseño (§19).
+- Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
 
 ### 04-11-2026 (decisiones del titular)
 
