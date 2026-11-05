@@ -12,13 +12,13 @@ export const GET: APIRoute = async ({ request }) => {
   if (!u || u.role !== 'admin') return json({ error: 'Solo administración' }, 403);
   const fila = await env.DB.prepare('SELECT email, totp_secret_enc FROM users WHERE id = ?').bind(u.id).first<{ email: string; totp_secret_enc: string | null }>();
   if (fila?.totp_secret_enc) return json({ configurado: true });
-  const secreto = crypto.getRandomValues(new Uint8Array(20));
+  const semillaTotp = crypto.getRandomValues(new Uint8Array(20));
   await env.DB.batch([
-    env.DB.prepare('UPDATE users SET totp_secret_enc = ? WHERE id = ? AND totp_secret_enc IS NULL').bind(await cifrar(env, secreto), u.id),
+    env.DB.prepare('UPDATE users SET totp_secret_enc = ? WHERE id = ? AND totp_secret_enc IS NULL').bind(await cifrar(env, semillaTotp), u.id),
     auditar(env.DB, { actor: u.id, origen: 'sistema', entidadTipo: 'account', entidadId: u.id, accion: 'configurar_segundo_factor' }),
   ]);
   const etiqueta = encodeURIComponent(`Tablemaroc:${fila?.email ?? ''}`);
-  return json({ configurado: false, otpauth: `otpauth://totp/${etiqueta}?secret=${base32(secreto)}&issuer=Tablemaroc&algorithm=SHA1&digits=6&period=30` });
+  return json({ configurado: false, otpauth: `otpauth://totp/${etiqueta}?secret=${base32(semillaTotp)}&issuer=Tablemaroc&algorithm=SHA1&digits=6&period=30` });
 };
 
 export const POST: APIRoute = async ({ request }) => {
