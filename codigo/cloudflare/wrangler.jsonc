@@ -37,7 +37,7 @@
 
   // Variables NO secretas. Los secretos (Turnstile, email transaccional, Google OAuth) van con `wrangler secret put`.
   "vars": {
-    "SITE_URL": "https://tablemaroc.com",
+    "SITE_URL": "https://tablemaroc.tablemaroc-cloudflare.workers.dev",   // versión de prueba; pasa a https://tablemaroc.com con el dominio
     "DEFAULT_LOCALE": "es",
     "ENTORNO": "prueba"          // "produccion" solo en tablemaroc.com: fuera de producción, noindex y robots.txt cerrado
   }

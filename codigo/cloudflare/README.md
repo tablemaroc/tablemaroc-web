@@ -46,6 +46,12 @@ y la cabecera `X-Origen: claude_code`, que queda en la auditoría. Restaurar cop
 - **Microsoft Visual C++ Redistributable (x64)**: sin él no arrancan `workerd` (servidor local de Cloudflare) ni el build de Astro.
   Instalado en este PC el 06-11-2026.
 
+## Publicada (versión de prueba)
+
+https://tablemaroc.tablemaroc-cloudflare.workers.dev — sin indexar (`ENTORNO=prueba`). D1 y R2 con jurisdicción UE.
+Desplegar: `npm run build` y `npx wrangler deploy` desde `codigo/cloudflare` (en PowerShell, `npx.cmd`).
+Claves: el titular ejecuta `node scripts/crear-secretos.mjs` (genera, muestra una vez y envía a Cloudflare).
+
 ## Lo que hace el titular (maestro §2)
 
 1. Crear la cuenta de Cloudflare y añadir el dominio `tablemaroc.com`.
