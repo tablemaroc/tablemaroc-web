@@ -16,6 +16,10 @@ const textos = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Tablemaroc</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#555555" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <script is:inline src="/registrar-sw.js" defer></script>
   </head>
   <body>
     <p>{textos[idioma as keyof typeof textos]}</p>

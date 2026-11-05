@@ -4,8 +4,8 @@
   "type": "module",
   "description": "Tablemaroc en Cloudflare (maestro §18 ter): Astro en Workers, D1, R2, Cron Triggers y Turnstile. Sin plantillas visuales hasta que se apruebe el diseño (§19).",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/preparar-pwa.mjs && astro dev",
+    "build": "node scripts/preparar-pwa.mjs && astro build",
     "preview": "wrangler dev",
     "db:migrate:local": "wrangler d1 migrations apply tablemaroc --local",
     "db:migrate:remote": "wrangler d1 migrations apply tablemaroc --remote",

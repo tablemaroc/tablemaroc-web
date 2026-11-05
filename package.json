@@ -22,7 +22,8 @@
     "test:e2e": "node codigo/testing/e2e/sw.e2e.cjs && node codigo/testing/e2e/map.e2e.cjs && node codigo/testing/e2e/pages.e2e.cjs && node codigo/testing/e2e/auth.e2e.cjs && node codigo/testing/e2e/qa.e2e.cjs",
     "scan:secrets": "node codigo/security/scan-secrets.mjs --git",
     "test:e2e:admin": "node codigo/testing/e2e/admin.e2e.cjs && node codigo/testing/e2e/reviews.e2e.cjs && node codigo/testing/e2e/menu.e2e.cjs && node codigo/testing/e2e/seo.e2e.cjs && node codigo/testing/e2e/security.e2e.cjs",
-    "test:perf": "node codigo/performance-monitoring/run-lighthouse.mjs"
+    "test:perf": "node codigo/performance-monitoring/run-lighthouse.mjs",
+    "test:e2e:pwa": "node codigo/cloudflare/scripts/preparar-pwa.mjs && node codigo/testing/e2e/pwa-cloudflare.e2e.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

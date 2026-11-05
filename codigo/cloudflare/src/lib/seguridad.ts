@@ -35,6 +35,9 @@ export function withSecurityHeaders(res: Response): Response {
   const out = new Response(res.body, res);
   for (const [k, v] of Object.entries(SECURITY_HEADERS)) if (!out.headers.has(k)) out.headers.set(k, v);
   out.headers.delete('X-Powered-By');
+  // Una respuesta que pone una cookie (sesión) nunca se guarda en cachés ni en el móvil. Hace falta aquí, en el servidor:
+  // el navegador no deja que el Service Worker vea Set-Cookie, así que él solo puede respetar «private, no-store».
+  if (out.headers.has('Set-Cookie')) out.headers.set('Cache-Control', 'private, no-store');
   return out;
 }
 

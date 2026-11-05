@@ -19,3 +19,12 @@ Tablemaroc.com está optimizado para funcionar en dispositivos móviles bajo con
   - Una versión nueva queda en espera hasta que la página lo permita (mensaje `SKIP_WAITING`), para poder avisar al usuario o aplicarla en la siguiente visita sin recargas inesperadas.
 * **Optimización de Imágenes:**
   - Todas las fotografías de platos y restaurantes se sirven en formatos comprimidos y modernos (WebP / AVIF) con carga diferida (`lazy-loading`) para minimizar el consumo de datos móviles del usuario.
+
+## 3. Aplicación en Cloudflare (06-11-2026)
+
+* La fuente es `codigo/cloudflare/pwa/`; `scripts/preparar-pwa.mjs` genera `public/` en cada build, con la versión del commit y las rutas traducidas.
+* Sin conexión y sin copia guardada, se muestra la página «Sin conexión» (es/en/fr) con estado 503.
+* **Favoritos sin conexión** (maestro §12): se guarda solo la ficha mínima (nombre, dirección, coordenadas e indicaciones) en un almacén aparte, que no cuenta en el límite de 20 páginas.
+* **Privacidad:** el navegador no deja que el Service Worker vea `Set-Cookie`. Por eso el Worker marca como `private, no-store` toda respuesta que pone una cookie, y las páginas no se personalizan en el servidor (lo personal lo cargan las islas desde la API, que nunca se guarda). Al salir o borrar la cuenta se borra todo lo guardado en el dispositivo.
+* Los archivos estáticos llevan las mismas cabeceras de seguridad que el Worker (`_headers` generado desde `src/lib/seguridad.ts`).
+* Iconos provisionales en gris hasta que el diseño aprobado dé los definitivos (maestro §19).

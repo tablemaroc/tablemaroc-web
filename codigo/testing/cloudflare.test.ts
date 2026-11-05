@@ -365,3 +365,10 @@ test('cómo llegar sin API; sitemap con hreflang es/en/fr y x-default; robots', 
   const rb = robotsTxt('https://tablemaroc.com');
   assert.ok(rb.includes('Disallow: /api/') && rb.includes('Disallow: /panel/') && rb.includes('Sitemap: https://tablemaroc.com/sitemap.xml'));
 });
+
+test('una respuesta con cookie nunca se guarda: el Worker la marca «private, no-store» (el Service Worker no ve Set-Cookie)', async () => {
+  const { withSecurityHeaders } = await import('../cloudflare/src/lib/seguridad.ts');
+  const r = withSecurityHeaders(new Response('x', { headers: { 'Set-Cookie': '__Host-tm_sesion=abc; Path=/', 'Cache-Control': 'public, max-age=60' } }));
+  assert.equal(r.headers.get('Cache-Control'), 'private, no-store');
+  assert.equal(withSecurityHeaders(new Response('x', { headers: { 'Cache-Control': 'public, max-age=60' } })).headers.get('Cache-Control'), 'public, max-age=60');
+});
