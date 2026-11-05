@@ -3,8 +3,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "types": ["@cloudflare/workers-types"]
+    "types": ["@cloudflare/workers-types", "node"]
   },
-  "include": ["src", "env.d.ts", ".astro/types.d.ts"],
+  "include": ["src", "env.d.ts", ".astro/types.d.ts", "../testing/cloudflare.test.ts"],
   "exclude": ["dist"]
 }

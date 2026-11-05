@@ -106,3 +106,42 @@ test('idioma de entrada (§13): elegido → navegador es/en/fr → español', ()
   assert.equal(elegirIdioma(null, 'ar-MA,ar;q=0.9'), 'es');
   assert.equal(elegirIdioma(null, null), 'es');
 });
+
+// ───────────── Acceso sin contraseña (§18) ─────────────
+import { base32, deBase32, nombreValido, emailValido, totp, totpValido } from '../cloudflare/src/lib/acceso.ts';
+import { rutaSegura, validarIdToken } from '../cloudflare/src/lib/google.ts';
+import { generarCodigo } from '../cloudflare/src/lib/sesion.ts';
+
+test('TOTP: vector oficial del RFC 6238 (SHA-1) y desfase de ±30 s', async () => {
+  const s = new TextEncoder().encode('12345678901234567890');
+  assert.equal(await totp(s, 59_000), '287082');            // RFC 6238, T = 59 s (8 cifras: 94287082)
+  assert.equal(await totp(s, 1_111_111_109_000), '081804');  // T = 1111111109 s (07081804)
+  assert.ok(await totpValido(s, '287082', 59_000 + 30_000));
+  assert.ok(!(await totpValido(s, '287082', 59_000 + 90_000)));
+  assert.ok(!(await totpValido(s, 'abcdef', 59_000)));
+  assert.deepEqual(deBase32(base32(s)), s);
+});
+
+test('códigos por email: 6 cifras', () => {
+  for (let i = 0; i < 200; i++) assert.match(generarCodigo(), /^\d{6}$/);
+});
+
+test('Google: id_token con emisor, audiencia, caducidad y email verificado', () => {
+  const tok = (c: object) => `x.${btoa(JSON.stringify(c)).replace(/=+$/, '')}.y`;
+  const ok = { iss: 'https://accounts.google.com', aud: 'cid', exp: 2_000_000_000, email_verified: true, email: 'Ana@Example.test', sub: '123' };
+  assert.deepEqual(validarIdToken(tok(ok), 'cid', 1_900_000_000_000), { sub: '123', email: 'ana@example.test' });
+  assert.equal(validarIdToken(tok({ ...ok, aud: 'otra' }), 'cid', 1_900_000_000_000), null);
+  assert.equal(validarIdToken(tok({ ...ok, iss: 'https://malicioso.example' }), 'cid', 1_900_000_000_000), null);
+  assert.equal(validarIdToken(tok({ ...ok, email_verified: false }), 'cid', 1_900_000_000_000), null);
+  assert.equal(validarIdToken(tok(ok), 'cid', 2_100_000_000_000), null);
+});
+
+test('sin redirecciones abiertas; nombre visible y email', () => {
+  assert.equal(rutaSegura('/fr/', '/es/'), '/fr/');
+  for (const malo of ['//malicioso.example', 'https://malicioso.example', '/\\malicioso', '/es/../x', 42]) assert.equal(rutaSegura(malo, '/es/'), '/es/');
+  assert.equal(nombreValido('  Ana   María '), 'Ana María');
+  assert.equal(nombreValido('a'), null);
+  assert.equal(nombreValido('<script>'), null);
+  assert.ok(emailValido('ana@example.test'));
+  assert.ok(!emailValido('ana@'));
+});

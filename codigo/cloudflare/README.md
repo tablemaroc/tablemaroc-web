@@ -10,7 +10,11 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Esquema de la base de datos (D1) | `migrations/` |
 | Entrada del Worker: redirecciones 301, CSRF, cabeceras y tareas | `src/worker.ts` |
 | Cabeceras de seguridad (CSP, HSTS…) | `src/lib/seguridad.ts` |
-| Acceso sin contraseña: código por email, sesiones, límites | `src/lib/sesion.ts` |
+| Acceso sin contraseña: código por email, sesiones, límites | `src/lib/sesion.ts`, `src/lib/acceso.ts` |
+| Continuar con email (código) y Crear cuenta | `src/pages/api/acceso/email/` |
+| Continuar con Google (OAuth + PKCE) y último paso del alta | `src/lib/google.ts`, `src/pages/api/acceso/google/` |
+| Segundo factor de administración (código de la app, TOTP) | `src/pages/api/acceso/segundo-factor.ts` |
+| Continuar con huella o cara (passkeys) | `src/pages/api/acceso/huella/` |
 | Reservas (confirmación automática) | `src/lib/reservas.ts`, `src/pages/api/reservas/` |
 | Copias de seguridad a R2 | `src/lib/copias.ts` |
 | Tareas programadas (moderación 3/día, copias, revisión mensual) | `src/lib/tareas.ts` |
@@ -28,8 +32,10 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 1. Crear la cuenta de Cloudflare y añadir el dominio `tablemaroc.com`.
 2. `npx wrangler login`, después `npx wrangler d1 create tablemaroc` y copiar el `database_id` en `wrangler.jsonc`.
 3. Crear los buckets R2 `tablemaroc-fotos` y `tablemaroc-copias`.
-4. Crear los secretos con `npx wrangler secret put <NOMBRE>`: `SESSION_PEPPER`, `TURNSTILE_SECRET` y, cuando toquen,
-   `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `TOTP_KEY` y `EMAIL_API_KEY`.
+4. Crear los secretos con `npx wrangler secret put <NOMBRE>`: `SESSION_PEPPER`, `TURNSTILE_SECRET`, `TOTP_KEY`
+   (32 bytes aleatorios en base64url) y, cuando toquen, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` y `EMAIL_API_KEY`.
+   En Google Cloud, la URI de redirección autorizada es `https://tablemaroc.com/api/acceso/google/vuelta/`.
+   Los correos de administración van en la variable `ADMIN_EMAILS` (no es secreta).
 5. Elegir el proveedor de email transaccional y dónde va la copia fuera de Cloudflare.
 
 ## Comandos (desde `codigo/cloudflare`)

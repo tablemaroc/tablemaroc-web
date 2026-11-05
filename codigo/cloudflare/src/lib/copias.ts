@@ -2,7 +2,7 @@
 // Sin secretos: no se copian sesiones, códigos de email ni límites (son temporales); el secreto TOTP va cifrado.
 // La copia fuera de Cloudflare queda pendiente del titular (§18 ter).
 
-import { ahoraIso, nuevoId } from './db';
+import { ahoraIso, nuevoId } from './db.ts';
 
 /** Tablas que se copian, en orden de dependencias (para restaurar sin romper claves foráneas). */
 export const TABLAS_COPIA = [

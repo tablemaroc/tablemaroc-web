@@ -2,8 +2,8 @@
 // Moderación: el Cron prepara la cola y la deja registrada; la decisión de aprobar o rechazar la toma Claude Code
 // mediante la API autenticada del panel (§2), en su tarea programada de 3 veces al día. Con la sección en «Manual», no se hace nada.
 
-import { ahoraIso, modoSeccion, nuevoId } from './db';
-import { clavesCaducadas, copiarBase } from './copias';
+import { ahoraIso, modoSeccion, nuevoId } from './db.ts';
+import { clavesCaducadas, copiarBase } from './copias.ts';
 
 export type Job = 'moderacion' | 'copia_diaria' | 'copia_semanal' | 'revision_mensual';
 

@@ -14,6 +14,8 @@ interface Env {
   GOOGLE_CLIENT_SECRET?: string;
   TOTP_KEY?: string;               // cifra el secreto del segundo factor de administración
   EMAIL_API_KEY?: string;          // proveedor de email transaccional (pendiente del titular)
+  ADMIN_EMAILS?: string;           // cuentas de Google autorizadas para administración (no secreto)
+  DEV_MOSTRAR_CODIGOS?: string;    // solo en local: "1" escribe los códigos en la consola
 }
 }
 interface Env extends Cloudflare.Env {}

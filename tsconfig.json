@@ -2,5 +2,5 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": { "types": ["node"] },
   "include": ["codigo/**/*.ts", "codigo/**/*.tsx", "seo/**/*.ts"],
-  "exclude": ["node_modules", "codigo/frontend", "codigo/cloudflare"]
+  "exclude": ["node_modules", "codigo/frontend", "codigo/cloudflare", "codigo/testing/cloudflare.test.ts"]
 }

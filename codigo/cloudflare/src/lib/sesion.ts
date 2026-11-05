@@ -2,7 +2,7 @@
 // Google y «Continuar con huella o cara» (passkeys) se conectan a estas mismas sesiones.
 // Nunca se guarda el código ni el token en claro: solo su hash SHA-256 con una sal secreta (SESSION_PEPPER).
 
-import { ahoraIso, nuevoId } from './db';
+import { ahoraIso, nuevoId } from './db.ts';
 
 export const CODIGO_MINUTOS = 10;         // caducidad corta
 export const CODIGO_INTENTOS = 5;         // intentos por código
@@ -52,19 +52,37 @@ export async function crearCodigo(db: D1Database, pepper: string, email: string,
   return codigo;
 }
 
-/** Comprueba el código: un solo uso, caducidad y límite de intentos. */
-export async function verificarCodigo(db: D1Database, pepper: string, email: string, codigo: string): Promise<boolean> {
+/** Comprueba el código (caducidad y límite de intentos) SIN consumirlo. Devuelve su id si es correcto, o null.
+ *  Cada fallo cuenta como intento; al quinto, el código deja de valer. */
+export async function codigoCorrecto(db: D1Database, pepper: string, email: string, codigo: string): Promise<string | null> {
   const e = email.trim().toLowerCase();
   const fila = await db.prepare(
     `SELECT id, code_hash, attempts, expires_at FROM email_codes
      WHERE email = ? AND used_at IS NULL ORDER BY created_at DESC LIMIT 1`,
   ).bind(e).first<{ id: string; code_hash: string; attempts: number; expires_at: string }>();
-  if (!fila || Date.parse(fila.expires_at) <= Date.now() || fila.attempts >= CODIGO_INTENTOS) return false;
-  if (!/^\d{6}$/.test(codigo)) return false;
-  const ok = fila.code_hash === (await hashCon(pepper, `${e}:${codigo}`));
-  if (ok) await db.prepare('UPDATE email_codes SET used_at = ? WHERE id = ?').bind(ahoraIso(), fila.id).run();
-  else await db.prepare('UPDATE email_codes SET attempts = attempts + 1 WHERE id = ?').bind(fila.id).run();
-  return ok;
+  if (!fila || Date.parse(fila.expires_at) <= Date.now() || fila.attempts >= CODIGO_INTENTOS) return null;
+  const ok = /^\d{6}$/.test(codigo) && fila.code_hash === (await hashCon(pepper, `${e}:${codigo}`));
+  if (!ok) await db.prepare('UPDATE email_codes SET attempts = attempts + 1 WHERE id = ?').bind(fila.id).run();
+  return ok ? fila.id : null;
+}
+
+/** Marca el código como usado (un solo uso). Devuelve false si ya se había usado. */
+export async function consumirCodigo(db: D1Database, id: string): Promise<boolean> {
+  const r = await db.prepare('UPDATE email_codes SET used_at = ? WHERE id = ? AND used_at IS NULL').bind(ahoraIso(), id).run();
+  return (r.meta.changes ?? 0) === 1;
+}
+
+/** Cierra la sesión de la cookie (borra la fila) y devuelve la cabecera que borra la cookie. */
+export async function cerrarSesion(req: Request, db: D1Database, pepper: string): Promise<string> {
+  const m = (req.headers.get('Cookie') ?? '').match(new RegExp(`(?:^|;\\s*)${COOKIE}=([0-9a-f]{64})`));
+  if (m) await db.prepare('DELETE FROM sessions WHERE id_hash = ?').bind(await hashCon(pepper, m[1]!)).run();
+  return `${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
+}
+
+/** Marca el segundo factor como superado en la sesión actual (administración). */
+export async function marcarSegundoFactor(req: Request, db: D1Database, pepper: string): Promise<void> {
+  const m = (req.headers.get('Cookie') ?? '').match(new RegExp(`(?:^|;\\s*)${COOKIE}=([0-9a-f]{64})`));
+  if (m) await db.prepare('UPDATE sessions SET second_factor_ok = 1 WHERE id_hash = ?').bind(await hashCon(pepper, m[1]!)).run();
 }
 
 /** Abre una sesión y devuelve la cabecera Set-Cookie. */
