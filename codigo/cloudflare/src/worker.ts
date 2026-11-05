@@ -12,6 +12,14 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const produccion = env.ENTORNO === 'produccion';
+    // www.tablemaroc.com → tablemaroc.com (una sola dirección para la web; 301 para no duplicar contenido en buscadores).
+    // Y siempre por HTTPS: http:// → https:// (HSTS hace el resto en las visitas siguientes).
+    const local = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
+    if (url.hostname.startsWith('www.') || (url.protocol === 'http:' && !local)) {
+      if (url.hostname.startsWith('www.')) url.hostname = url.hostname.slice(4);
+      if (!local) url.protocol = 'https:';
+      return withSecurityHeaders(Response.redirect(url.toString(), 301));
+    }
     const fin = (res: Response) => {
       const r = withSecurityHeaders(res);
       if (!produccion) r.headers.set('X-Robots-Tag', 'noindex, nofollow');

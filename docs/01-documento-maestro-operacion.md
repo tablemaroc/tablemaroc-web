@@ -679,6 +679,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: se pasa ya la base técnica a Cloudflare (datos y lógica), sin plantillas visuales hasta que se apruebe el diseño (§19).
 - Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
 - Decisión del titular: reseñas sin límite total ni por local, con un máximo de 5 cada 24 horas por usuario como freno antispam (§3).
+- Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 
 ### 04-11-2026 (decisiones del titular)
 

@@ -6,7 +6,11 @@
   "main": "./src/worker.ts",
   "compatibility_date": "2026-11-04",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,   // versión de prueba en *.workers.dev (sin indexar) hasta tener tablemaroc.com
+  "workers_dev": false,  // solo en tablemaroc.com (la dirección *.workers.dev se desactiva para no duplicar la web)
+  "routes": [
+    { "pattern": "tablemaroc.com", "custom_domain": true },
+    { "pattern": "www.tablemaroc.com", "custom_domain": true }   // redirige (301) a tablemaroc.com en src/worker.ts
+  ],
   "observability": { "enabled": true },
 
   // Base de datos (D1, SQLite). Migraciones en ./migrations.
@@ -37,8 +41,8 @@
 
   // Variables NO secretas. Los secretos (Turnstile, email transaccional, Google OAuth) van con `wrangler secret put`.
   "vars": {
-    "SITE_URL": "https://tablemaroc.tablemaroc-cloudflare.workers.dev",   // versión de prueba; pasa a https://tablemaroc.com con el dominio
+    "SITE_URL": "https://tablemaroc.com",
     "DEFAULT_LOCALE": "es",
-    "ENTORNO": "prueba"          // "produccion" solo en tablemaroc.com: fuera de producción, noindex y robots.txt cerrado
+    "ENTORNO": "prueba"          // sin indexar hasta que el titular decida abrir la web; entonces "produccion"
   }
 }
