@@ -55,7 +55,7 @@ Solo con proveedores que hacen funcionar la web:
 | Proveedor | Función | Ubicación |
 |---|---|---|
 | Cloudflare, Inc. | Alojamiento de la web, base de datos, fotos, copias de seguridad, protección antispam (Turnstile) y analítica sin cookies | Red mundial; [PENDIENTE: confirmar con asesor la región de los datos y las garantías de transferencia] |
-| [PENDIENTE: proveedor de email transaccional] | Envío de los códigos de acceso y de los avisos de reserva | [PENDIENTE] |
+| Brevo (Sendinblue SAS, Francia) | Envío de los códigos de acceso y de los avisos de reserva. Solo recibe tu email y el texto del mensaje; no te añadimos a ninguna lista de contactos ni de marketing | Unión Europea; [PENDIENTE: confirmar con asesor el contrato de encargo del tratamiento (DPA) de Brevo] |
 | Google | Solo si eliges «Continuar con Google» | [PENDIENTE: confirmar con asesor: puede implicar transferencia fuera de la UE y de Marruecos] |
 | El local donde reservas | Recibe los datos de tu reserva para atenderla | Marruecos |
 
@@ -116,8 +116,9 @@ Si cambia esta política, publicaremos la nueva versión aquí con su fecha. Si 
 - **Sí existe:** descarga de datos y borrado de la cuenta (`/api/cuenta/datos`), registro de consentimientos con versión y fecha,
   moderación previa de reseñas y fotos, cabeceras de seguridad, cookie de sesión `__Host-` con `HttpOnly`, `Secure` y `SameSite=Lax`,
   hash de códigos y sesiones, límites de intentos y auditoría de solo inserción.
-- **Pendiente:** proveedor de email, inicio de sesión con Google y con huella o cara, retirada del GPS de las fotos en el Worker
-  y copia fuera de Cloudflare.
+- **Hecho después (05-11-2026):** acceso con Google y con huella o cara, fotos solo en WebP y sin EXIF/GPS, y envío de emails con Brevo
+  (API transaccional, sin listas de contactos, sin píxeles ni enlaces de seguimiento). D1 y R2 de Cloudflare con jurisdicción UE.
+- **Pendiente:** copia fuera de Cloudflare.
 - Retirados respecto a la versión del 30-10-2026: Supabase, Hostinger, Apple y Google Maps.
 
 ### Preguntas para el asesor

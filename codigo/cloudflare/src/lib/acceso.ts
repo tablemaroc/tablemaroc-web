@@ -40,20 +40,12 @@ export async function turnstileOk(env: Env, token: unknown, ip: string | null): 
   return d.success === true;
 }
 
-export class EmailPendiente extends Error {}
+export { EmailPendiente } from './email.ts';
+import { enviar, mensajeCodigo } from './email.ts';
 
-/** Envía el código de acceso. El proveedor de email está pendiente del titular (§18 ter).
- *  Solo en local (DEV_MOSTRAR_CODIGOS = "1") el código se escribe en la consola de wrangler dev. */
+/** Envía el código de acceso por email (Brevo, src/lib/email.ts). */
 export async function enviarCodigo(env: Env, email: string, codigo: string, idioma: 'es' | 'en' | 'fr') {
-  if (!env.EMAIL_API_KEY) {
-    if (env.DEV_MOSTRAR_CODIGOS === '1' && !env.SITE_URL.startsWith('https://tablemaroc.com')) {
-      console.log(`[solo local] código para ${email}: ${codigo}`);
-      return;
-    }
-    throw new EmailPendiente('Proveedor de email transaccional pendiente del titular');
-  }
-  void idioma;
-  throw new EmailPendiente('Integración del proveedor de email aún no escrita');
+  await enviar(env, email, mensajeCodigo(codigo, idioma), 'codigo-acceso');
 }
 
 /** Correos autorizados para administración (variable ADMIN_EMAILS, separados por comas). */

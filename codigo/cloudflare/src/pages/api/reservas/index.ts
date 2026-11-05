@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { auditar, modoSeccion, nuevoId } from '../../../lib/db';
 import { ahoraEnMarruecos, decidir, validarSolicitud, type AjustesReserva } from '../../../lib/reservas';
+import { avisarReserva } from '../../../lib/email';
 import { usuarioDe } from '../../../lib/sesion';
 
 const json = (data: unknown, status = 200) =>
@@ -53,6 +54,6 @@ export const POST: APIRoute = async ({ request }) => {
     auditar(env.DB, { actor: auto ? 'sistema' : usuario.id, origen: 'sistema', entidadTipo: 'reservation', entidadId: id,
       accion: 'solicitar', valorNuevo: { estado: d.estado, motivo: d.motivo } }),
   ]);
-  // Aviso por email al usuario y al local: pendiente del proveedor de email transaccional (§18 ter).
-  return json({ id, estado: d.estado }, 201);
+  const avisado = await avisarReserva(env, id);            // aviso por email al cliente (Brevo); nunca hace fallar la reserva
+  return json({ id, estado: d.estado, avisado }, 201);
 };

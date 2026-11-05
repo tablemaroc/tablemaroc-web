@@ -534,7 +534,7 @@ Consecuencias aceptadas por el titular:
 
 Pendiente del titular:
 - Plan: empezar en el gratuito y pasar al de pago de Workers (unos 5 $/mes) cuando los límites lo pidan.
-- Proveedor de **email transaccional** para los códigos de acceso y avisos de reservas (Cloudflare no lo cubre por completo en el plan gratuito; comprobar opciones vigentes).
+- ~~Proveedor de email transaccional~~ → **Brevo, plan gratuito (300 emails al día)**, elegido por el titular el 05-11-2026: API transaccional, sin listas de contactos.
 - Procesado de fotos (convertir a WebP/AVIF y quitar el GPS): dentro de los Workers o con el servicio de imágenes de pago.
 - Copia de seguridad extra **fuera de Cloudflare** (recomendada).
 - **Hostinger descartado** (decisión del titular, 02-11-2026).
@@ -679,6 +679,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: se pasa ya la base técnica a Cloudflare (datos y lógica), sin plantillas visuales hasta que se apruebe el diseño (§19).
 - Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
 - Decisión del titular: reseñas sin límite total ni por local, con un máximo de 5 cada 24 horas por usuario como freno antispam (§3).
+- Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 
 ### 04-11-2026 (decisiones del titular)
@@ -730,7 +731,7 @@ Barra lateral y cabecera del panel.
 
 ### Pendiente de decisión del titular
 
-- Stack (§18 ter): plan de Cloudflare, proveedor de email transaccional, procesado de fotos y dónde se guarda la copia fuera de Cloudflare.
+- Stack (§18 ter): plan de Cloudflare y dónde se guarda la copia fuera de Cloudflare. (Email: Brevo, decidido; fotos: WebP sin GPS, hecho.)
 
 ### 29-10-2026
 

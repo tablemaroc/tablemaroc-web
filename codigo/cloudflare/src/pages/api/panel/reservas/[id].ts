@@ -4,6 +4,7 @@ import { env } from 'cloudflare:workers';
 import { json, leerJson } from '../../../../lib/acceso';
 import { auditar } from '../../../../lib/db';
 import { panel, puedeLocal, TODOS_LOS_ROLES_DEL_PANEL } from '../../../../lib/panel';
+import { avisarReserva } from '../../../../lib/email';
 import { transicionPermitida } from '../../../../lib/reservas';
 
 export const POST = panel(TODOS_LOS_ROLES_DEL_PANEL, async ({ params, request }, c) => {
@@ -20,6 +21,6 @@ export const POST = panel(TODOS_LOS_ROLES_DEL_PANEL, async ({ params, request },
     auditar(env.DB, { actor: c.actor, origen: c.origen, entidadTipo: 'reservation', entidadId: params.id!, accion: b.accion!,
       campo: 'status', valorAnterior: r.status, valorNuevo: nuevo }),
   ]);
-  // Aviso por email al cliente: pendiente del proveedor de email transaccional (§18 ter).
-  return json({ ok: true, estado: nuevo });
+  const avisado = await avisarReserva(env, params.id!);    // aviso por email al cliente (Brevo)
+  return json({ ok: true, estado: nuevo, avisado });
 });

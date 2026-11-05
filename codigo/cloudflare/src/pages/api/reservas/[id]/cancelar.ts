@@ -3,6 +3,7 @@ import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { auditar } from '../../../../lib/db';
 import { transicionPermitida } from '../../../../lib/reservas';
+import { avisarReserva } from '../../../../lib/email';
 import { usuarioDe } from '../../../../lib/sesion';
 
 export const POST: APIRoute = async ({ request, params }) => {
@@ -19,5 +20,6 @@ export const POST: APIRoute = async ({ request, params }) => {
     auditar(env.DB, { actor: usuario.id, origen: 'sistema', entidadTipo: 'reservation', entidadId: params.id!,
       accion: 'cancelar', campo: 'status', valorAnterior: r.status, valorNuevo: 'cancelada' }),
   ]);
+  await avisarReserva(env, params.id!);
   return new Response(null, { status: 204 });
 };

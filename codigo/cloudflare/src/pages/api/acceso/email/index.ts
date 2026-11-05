@@ -18,7 +18,8 @@ export const POST: APIRoute = async ({ request }) => {
     await enviarCodigo(env, b.email.trim().toLowerCase(), codigo, idiomaValido(b.idioma));
   } catch (e) {
     if (e instanceof EmailPendiente) return json({ error: 'El envío de emails aún no está activado' }, 503);
-    throw e;
+    console.error(String(e).slice(0, 300));
+    return json({ error: 'No se ha podido enviar el email. Inténtalo de nuevo en unos minutos' }, 502);
   }
   return json({ enviado: true });
 };

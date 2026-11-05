@@ -380,3 +380,38 @@ test('versión de prueba (workers.dev): robots.txt cierra todo el sitio', async 
   const prod = await servirSeo(new URL('https://tablemaroc.com/robots.txt'), {} as D1Database, 'https://tablemaroc.com', true);
   assert.ok((await prod!.text()).includes('Sitemap: https://tablemaroc.com/sitemap.xml'));
 });
+
+// ───────────── Emails con Brevo (§8, §18, §18 bis) ─────────────
+import { enviar, mensajeCodigo, mensajeReserva } from '../cloudflare/src/lib/email.ts';
+
+test('email del código en es/en/fr, con caducidad y sin enlaces', () => {
+  for (const [l, palabra] of [['es', 'Caduca'], ['en', 'expires'], ['fr', 'expire']] as const) {
+    const m = mensajeCodigo('123456', l);
+    assert.ok(m.asunto.includes('123456') && m.texto.includes('123456') && m.html.includes(`lang="${l}"`) && m.texto.includes(palabra));
+    assert.ok(!m.html.includes('<a ') && !m.html.includes('<img'));                 // sin enlaces ni píxeles de seguimiento
+  }
+});
+
+test('aviso de reserva en el idioma del cliente y sin inyección de HTML', () => {
+  const m = mensajeReserva('confirmada', 'Café <script>x</script>', '2026-12-01T13:30', 2, 'fr');
+  assert.ok(m.asunto.includes('confirmée') && m.texto.includes('2 personnes') && m.texto.includes('2026-12-01 13:30'));
+  assert.ok(!m.html.includes('<script>') && m.html.includes('&lt;script&gt;'));
+  assert.ok(mensajeReserva('no_disponible', 'X', '2026-12-01T13:30', 1, 'es').texto.includes('1 persona'));
+});
+
+test('envío a Brevo: API transaccional, sin crear contactos; sin clave en producción → error claro', async () => {
+  const llamadas: { url: string; init: RequestInit }[] = [];
+  const original = globalThis.fetch;
+  globalThis.fetch = (async (url: string, init: RequestInit) => { llamadas.push({ url, init }); return new Response('{"messageId":"x"}', { status: 201 }); }) as typeof fetch;
+  try {
+    const env = { EMAIL_API_KEY: 'clave-de-prueba', SITE_URL: 'https://tablemaroc.com' } as unknown as Env;
+    await enviar(env, 'ana@example.test', mensajeCodigo('654321', 'es'), 'codigo-acceso');
+    assert.equal(llamadas[0]!.url, 'https://api.brevo.com/v3/smtp/email');
+    assert.equal((llamadas[0]!.init.headers as Record<string, string>)['api-key'], 'clave-de-prueba');
+    const cuerpo = JSON.parse(String(llamadas[0]!.init.body));
+    assert.deepEqual(cuerpo.to, [{ email: 'ana@example.test' }]);
+    assert.equal(cuerpo.sender.email, 'no-reply@tablemaroc.com');
+    assert.ok(!('listIds' in cuerpo) && !('attributes' in cuerpo));                // no se añade a ninguna lista de contactos
+    await assert.rejects(enviar({ SITE_URL: 'https://tablemaroc.com' } as unknown as Env, 'x@example.test', mensajeCodigo('1', 'es'), 't'), /EMAIL_API_KEY/);
+  } finally { globalThis.fetch = original; }
+});
