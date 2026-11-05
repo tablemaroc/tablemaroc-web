@@ -325,3 +325,43 @@ test('reseñas sin límite por local: el mismo usuario puede reseñar varias vec
   db.exec(`INSERT INTO reviews (id, user_id, place_id, rating) VALUES ('v1', 'u1', 'p1', 4), ('v2', 'u1', 'p1', 5), ('v3', 'u1', 'p1', 3)`);
   assert.equal((db.prepare(`SELECT count(*) AS n FROM reviews WHERE user_id = 'u1' AND place_id = 'p1'`).get() as { n: number }).n, 3);
 });
+
+// ───────────── Parte pública: abierto ahora, cerca de aquí, sitemap (§13, §18 ter, §20) ─────────────
+import { abiertoAhora, distancia, esRamadan, masCercanos } from '../cloudflare/src/lib/horario.ts';
+import { robotsTxt, sitemapXml } from '../cloudflare/src/lib/seo.ts';
+import { comoLlegar } from '../cloudflare/src/lib/publico.ts';
+
+test('abierto ahora con la hora de Marruecos (lunes = mon)', () => {
+  const h = { mon: '9:00–13:00, 16:00–20:00', fri: '20:00–02:00' };
+  const a = (iso: string, o = {}) => abiertoAhora(h, new Date(iso), { ramadan: false, ...o });
+  assert.equal(a('2026-11-02T10:00:00Z'), 'abierto');          // lunes 10:00
+  assert.equal(a('2026-11-02T14:00:00Z'), 'cerrado');          // lunes entre tramos
+  assert.equal(a('2026-11-02T20:00:00Z'), 'cerrado');          // hora de cierre: ya cerrado
+  assert.equal(a('2026-11-03T10:00:00Z'), 'cerrado');          // martes: sin horario = cerrado
+  assert.equal(a('2026-11-06T23:30:00Z'), 'abierto');          // viernes 23:30, tramo que pasa de medianoche
+  assert.equal(a('2026-11-07T01:30:00Z'), 'abierto');          // sábado 01:30, sigue el tramo del viernes
+  assert.equal(a('2026-11-07T02:30:00Z'), 'cerrado');
+  assert.equal(abiertoAhora(null, new Date()), 'sin_horario');
+  assert.equal(a('2026-11-02T10:00:00Z', { avisoRamadan: true, ramadan: true }), 'consultar_ramadan');   // no se inventa
+  assert.equal(a('2026-11-02T10:00:00Z', { aperturaLocal: 'cerrado_temporalmente' }), 'cerrado_temporalmente');
+});
+
+test('Ramadán con el calendario islámico, sin servicios externos', () => {
+  assert.ok(esRamadan(new Date('2026-03-01T12:00:00Z')));
+  assert.ok(!esRamadan(new Date('2026-11-05T12:00:00Z')));
+});
+
+test('cerca de aquí: los más próximos dentro de 3 km, sin el propio local', () => {
+  const o = { id: 'a', lat: 35.7595, lng: -5.834 };
+  assert.ok(Math.abs(distancia(35.7595, -5.834, 35.7685, -5.834) - 1001) < 5);   // ~1 km por 0,009° de latitud
+  const r = masCercanos(o, [o, { id: 'b', lat: 35.7605, lng: -5.834 }, { id: 'c', lat: 35.77, lng: -5.834 }, { id: 'lejos', lat: 35.9, lng: -5.834 }]);
+  assert.deepEqual(r.map((x) => x.id), ['b', 'c']);
+});
+
+test('cómo llegar sin API; sitemap con hreflang es/en/fr y x-default; robots', () => {
+  assert.equal(comoLlegar(35.7595, -5.834).google, 'https://www.google.com/maps/dir/?api=1&destination=35.7595,-5.834');
+  const xml = sitemapXml([{ loc: 'https://tablemaroc.com/es/x/', lastmod: '2026-11-05', alternativas: { es: 'https://tablemaroc.com/es/x/', fr: 'https://tablemaroc.com/fr/x/', 'x-default': 'https://tablemaroc.com/es/x/' } }]);
+  assert.ok(xml.includes('hreflang="x-default"') && xml.includes('hreflang="fr"') && !xml.includes('hreflang="ar"'));
+  const rb = robotsTxt('https://tablemaroc.com');
+  assert.ok(rb.includes('Disallow: /api/') && rb.includes('Disallow: /panel/') && rb.includes('Sitemap: https://tablemaroc.com/sitemap.xml'));
+});

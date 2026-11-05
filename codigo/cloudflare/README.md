@@ -30,6 +30,10 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Menú: categorías, platos, precios solo en MAD, archivar agotados | `src/lib/menu.ts`, `src/pages/api/panel/locales/[id]/menu/`, `src/pages/api/panel/menu/` |
 | Reseñas: escribir, editar, borrar, fotos (máx. 3) y listado público con media | `src/lib/resenas.ts`, `src/pages/api/resenas/`, `src/pages/api/locales/[id]/resenas.ts`, `src/pages/api/cuenta/resenas.ts` |
 | Panel: Usuarios (buscar, exportar datos, cerrar sesiones, borrar por petición) | `src/lib/cuenta.ts`, `src/pages/api/panel/usuarios/` |
+| Mi cuenta: favoritos (sin conexión) y mis reservas | `src/pages/api/cuenta/favoritos.ts`, `src/pages/api/cuenta/reservas.ts` |
+| Parte pública: info del local, carta, listado único, buscador | `src/lib/publico.ts`, `src/pages/api/publico/` |
+| Abierto ahora (hora de Marruecos y Ramadán) y Cerca de aquí | `src/lib/horario.ts` |
+| sitemap.xml (solo indexables, hreflang es/en/fr + x-default) y robots.txt | `src/lib/seo.ts` |
 | Pruebas | `codigo/testing/cloudflare.test.ts` |
 
 El panel es, por ahora, **solo API** (sin pantallas, maestro §19). Claude Code lo usa con una cuenta de administración
