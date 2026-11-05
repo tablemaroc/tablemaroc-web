@@ -24,6 +24,10 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Panel: reservas, ajustes de reservas, empleados, respuestas a reseñas | `src/pages/api/panel/reservas/`, `locales/[id]/` |
 | Panel: reclamaciones de local, redirecciones 301, auditoría | `src/pages/api/panel/reclamaciones/`, `redirecciones.ts`, `auditoria.ts`; `src/pages/api/locales/[id]/reclamar.ts` |
 | Panel: copias (hacer, descargar, restaurar sin borrar) | `src/pages/api/panel/copias/`, `src/lib/copias.ts` |
+| Panel: contenido (locales, ciudades, platos, guías), estados, apertura, traducciones es/en/fr, relaciones | `src/lib/contenido.ts`, `src/pages/api/panel/contenido/` |
+| Quality Gate por entidad e idioma (`is_indexable`) | `src/lib/calidad.ts` |
+| Fotos: solo WebP, sin EXIF/XMP (GPS), alt por idioma; se sirven desde `/fotos/` | `src/lib/fotos.ts`, `src/pages/api/panel/fotos/` |
+| Menú: categorías, platos, precios solo en MAD, archivar agotados | `src/lib/menu.ts`, `src/pages/api/panel/locales/[id]/menu/`, `src/pages/api/panel/menu/` |
 | Pruebas | `codigo/testing/cloudflare.test.ts` |
 
 El panel es, por ahora, **solo API** (sin pantallas, maestro §19). Claude Code lo usa con una cuenta de administración

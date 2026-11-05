@@ -5,6 +5,7 @@ import { env } from 'cloudflare:workers';
 import { json, leerJson } from '../../../../../lib/acceso';
 import { auditar } from '../../../../../lib/db';
 import { motivoValido, panel, SOLO_ADMIN } from '../../../../../lib/panel';
+import { recalcular } from '../../../../../lib/calidad';
 
 const TABLA = { resena: 'reviews', foto: 'photos' } as const;
 const ENTIDAD = { resena: 'review', foto: 'photo' } as const;
@@ -17,8 +18,8 @@ export const POST = panel(SOLO_ADMIN, async ({ params, request }, c) => {
   const motivo = motivoValido(b.motivo);
   if (b.accion === 'rechazar' && !motivo) return json({ error: 'El rechazo necesita un motivo' }, 400);
 
-  const fila = await env.DB.prepare(`SELECT status${tipo === 'foto' ? ', source, author, license' : ''} FROM ${TABLA[tipo]} WHERE id = ?`)
-    .bind(params.id).first<{ status: string; source?: string | null; author?: string | null; license?: string | null }>();
+  const fila = await env.DB.prepare(`SELECT status${tipo === 'foto' ? ', source, author, license, place_id, city_id, dish_id, guide_id' : ''} FROM ${TABLA[tipo]} WHERE id = ?`)
+    .bind(params.id).first<{ status: string; source?: string | null; author?: string | null; license?: string | null; place_id?: string | null; city_id?: string | null; dish_id?: string | null; guide_id?: string | null }>();
   if (!fila) return json({ error: 'No existe' }, 404);
   if (fila.status !== 'pendiente') return json({ error: 'Ya estaba moderada' }, 409);
   if (tipo === 'foto' && b.accion === 'aprobar' && !(fila.source && fila.author && fila.license)) {
@@ -33,5 +34,10 @@ export const POST = panel(SOLO_ADMIN, async ({ params, request }, c) => {
     auditar(env.DB, { actor: c.actor, origen: c.origen, entidadTipo: ENTIDAD[tipo], entidadId: params.id!, accion: 'moderar',
       campo: 'status', valorAnterior: 'pendiente', valorNuevo: estado, motivo: motivo ?? undefined }),
   ]);
+  // Una foto aprobada (con alt) puede hacer indexable la página de su destino (§4.2).
+  if (tipo === 'foto' && estado === 'aprobada') {
+    const d = fila.place_id ? ['place', fila.place_id] : fila.city_id ? ['city', fila.city_id] : fila.dish_id ? ['dish', fila.dish_id] : fila.guide_id ? ['guide', fila.guide_id] : null;
+    if (d) await recalcular(env.DB, d[0] as 'place', String(d[1]));
+  }
   return json({ ok: true, estado });
 });

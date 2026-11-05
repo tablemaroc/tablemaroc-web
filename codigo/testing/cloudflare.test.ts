@@ -201,3 +201,83 @@ test('restaurar: vuelve al estado de la copia SIN borrar nada; auditoría y rese
   assert.ok(!validarVolcado({ version: 1, tablas: { sessions: [] } }));                    // tablas fuera de la lista: no
   assert.ok(!validarVolcado({ version: 2, tablas: {} }));
 });
+
+// ───────────── Contenido, fotos y menú (§3, §4, §17) ─────────────
+import sharpLib from 'sharp';
+import { evaluar } from '../cloudflare/src/lib/calidad.ts';
+import { cambioEstadoPermitido, rutaPublica, validarCampos } from '../cloudflare/src/lib/contenido.ts';
+import { limpiarWebp } from '../cloudflare/src/lib/fotos.ts';
+import { validarPlato } from '../cloudflare/src/lib/menu.ts';
+
+/** WebP real de 4×4 con un bloque EXIF que lleva una ubicación GPS inventada. */
+async function webpConGps(): Promise<Uint8Array> {
+  const limpio = await sharpLib({ create: { width: 4, height: 4, channels: 3, background: '#c33' } }).webp().toBuffer();
+  const exif = Buffer.from('Exif\0\0GPSLatitude=35.7595;GPSLongitude=-5.8340');   // contenido de prueba
+  const chunk = (id: string, d: Buffer) => { const h = Buffer.alloc(8); h.write(id, 0, 'ascii'); h.writeUInt32LE(d.length, 4); return Buffer.concat([h, d, d.length % 2 ? Buffer.alloc(1) : Buffer.alloc(0)]); };
+  const vp8x = Buffer.alloc(10); vp8x[0] = 0x08; vp8x.writeUIntLE(3, 4, 3); vp8x.writeUIntLE(3, 7, 3);   // marca EXIF, 4×4
+  const cuerpo = Buffer.concat([Buffer.from('WEBP'), chunk('VP8X', vp8x), limpio.subarray(12), chunk('EXIF', exif)]);
+  const riff = Buffer.alloc(8); riff.write('RIFF', 0, 'ascii'); riff.writeUInt32LE(cuerpo.length, 4);
+  return new Uint8Array(Buffer.concat([riff, cuerpo]));
+}
+
+test('fotos: el WebP se limpia de EXIF (GPS) y sigue siendo una imagen válida', async () => {
+  const entrada = await webpConGps();
+  assert.ok(Buffer.from(entrada).includes('GPSLatitude'));
+  const r = limpiarWebp(entrada);
+  assert.ok(r.ok);
+  if (!r.ok) return;
+  assert.deepEqual(r.quitados, ['EXIF']);
+  assert.ok(!Buffer.from(r.datos).includes('GPSLatitude'));
+  const meta = await sharpLib(Buffer.from(r.datos)).metadata();
+  assert.equal(meta.format, 'webp'); assert.equal(meta.width, 4); assert.equal(meta.exif, undefined);
+  assert.equal(r.datos[20]! & 0x0c, 0);                                   // marcas EXIF/XMP quitadas en VP8X
+  assert.ok(!limpiarWebp(new TextEncoder().encode('no es una imagen, solo texto de prueba')).ok);
+  const jpeg = await sharpLib({ create: { width: 2, height: 2, channels: 3, background: '#fff' } }).jpeg().toBuffer();
+  assert.ok(!limpiarWebp(new Uint8Array(jpeg)).ok);                        // solo WebP
+});
+
+test('estados del contenido: lo publicado no vuelve atrás', () => {
+  assert.ok(cambioEstadoPermitido('borrador', 'revisado'));
+  assert.ok(cambioEstadoPermitido('revisado', 'publicado'));
+  assert.ok(cambioEstadoPermitido('revisado', 'borrador'));
+  assert.ok(!cambioEstadoPermitido('borrador', 'publicado'));
+  assert.ok(!cambioEstadoPermitido('publicado', 'borrador'));
+  assert.ok(!cambioEstadoPermitido('publicado', 'revisado'));
+});
+
+test('campos del local: coordenadas obligatorias, sin datos inventados', () => {
+  const e: Record<string, string> = {};
+  const v = validarCampos('locales', { lat: '35.7595', lng: '-5.834', phone: '+212 539 12 34 56', accepts_card: true, has_terrace: null, staff_languages: ['es', 'fr', 'es'] }, e);
+  assert.deepEqual(e, {});
+  assert.equal(v.has_terrace, null);                                      // sin verificar = pendiente
+  assert.equal(v.staff_languages, '["es","fr"]');
+  const e2: Record<string, string> = {};
+  validarCampos('locales', { lat: '', lng: '', staff_languages: ['ar'] }, e2);
+  assert.ok(e2.coords && e2.staff_languages);
+});
+
+test('rutas públicas para las 301 (la sección se traduce, el slug no)', () => {
+  assert.equal(rutaPublica('locales', 'en', 'cafe-hafa', 'cafes-y-teterias'), '/en/cafes-and-tea-rooms/cafe-hafa/');
+  assert.equal(rutaPublica('ciudades', 'fr', 'tanger'), '/fr/villes/tanger/');
+  assert.equal(rutaPublica('platos', 'es', 'harira'), '/es/platos-tipicos/harira/');
+});
+
+test('Quality Gate: indexable solo si cumple todo; un fallo no borra nada', () => {
+  const base = { tipo: 'place' as const, idioma: 'es' as const, estado: 'publicado', traduccionPublicada: true, caracteres: 320, duplicada: false,
+    lat: 35.7, lng: -5.8, ciudad: true, fotosConAlt: 1, entrantes: 1, salientes: 2, relaciones: 0 };
+  assert.ok(evaluar(base).indexable);
+  assert.ok(!evaluar({ ...base, caracteres: 299 }).indexable);
+  assert.ok(!evaluar({ ...base, fotosConAlt: 0 }).indexable);
+  assert.ok(!evaluar({ ...base, duplicada: true }).indexable);
+  assert.ok(!evaluar({ ...base, estado: 'revisado' }).indexable);
+  assert.ok(!evaluar({ ...base, tipo: 'guide', caracteres: 600, relaciones: 3, fotosConAlt: 2, autoria: false }).indexable);
+});
+
+test('menú: precios solo en MAD; vacío = pendiente; verificado exige importe', () => {
+  const e: Record<string, string> = {};
+  assert.deepEqual(validarPlato({ precio_mad: '35,50', precio_verificado: true }, e), { price_mad: 35.5, price_status: 'verificado' });
+  assert.deepEqual(e, {});
+  const e2: Record<string, string> = {}; validarPlato({ precio_mad: null, precio_verificado: true }, e2); assert.ok(e2.precio_mad);
+  const e3: Record<string, string> = {}; validarPlato({ precio_mad: '10', moneda: 'EUR' }, e3); assert.ok(e3.moneda);
+  const e4: Record<string, string> = {}; validarPlato({ precio_mad: '-5' }, e4); assert.ok(e4.price_mad);
+});
