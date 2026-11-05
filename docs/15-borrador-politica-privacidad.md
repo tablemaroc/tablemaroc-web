@@ -55,7 +55,7 @@ Solo con proveedores que hacen funcionar la web:
 | Proveedor | Función | Ubicación |
 |---|---|---|
 | Cloudflare, Inc. | Alojamiento de la web, base de datos, fotos, copias de seguridad, protección antispam (Turnstile) y analítica sin cookies | Red mundial; [PENDIENTE: confirmar con asesor la región de los datos y las garantías de transferencia] |
-| Brevo (Sendinblue SAS, Francia) | Envío de los códigos de acceso y de los avisos de reserva. Solo recibe tu email y el texto del mensaje; no te añadimos a ninguna lista de contactos ni de marketing | Unión Europea; [PENDIENTE: confirmar con asesor el contrato de encargo del tratamiento (DPA) de Brevo] |
+| Brevo (Sendinblue SAS, Francia) | Envío de los códigos de acceso y de los avisos de reserva. Solo recibe tu email y el texto del mensaje; no te añadimos a ninguna lista de contactos ni de marketing | [PENDIENTE: confirmar en Brevo dónde se alojan los datos y, con el asesor, su contrato de encargo del tratamiento (DPA)] |
 | Google | Solo si eliges «Continuar con Google» | [PENDIENTE: confirmar con asesor: puede implicar transferencia fuera de la UE y de Marruecos] |
 | El local donde reservas | Recibe los datos de tu reserva para atenderla | Marruecos |
 
