@@ -6,7 +6,7 @@
   "main": "./src/worker.ts",
   "compatibility_date": "2026-11-04",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": false,
+  "workers_dev": true,   // versión de prueba en *.workers.dev (sin indexar) hasta tener tablemaroc.com
   "observability": { "enabled": true },
 
   // Base de datos (D1, SQLite). Migraciones en ./migrations.
@@ -38,6 +38,7 @@
   // Variables NO secretas. Los secretos (Turnstile, email transaccional, Google OAuth) van con `wrangler secret put`.
   "vars": {
     "SITE_URL": "https://tablemaroc.com",
-    "DEFAULT_LOCALE": "es"
+    "DEFAULT_LOCALE": "es",
+    "ENTORNO": "prueba"          // "produccion" solo en tablemaroc.com: fuera de producción, noindex y robots.txt cerrado
   }
 }

@@ -372,3 +372,11 @@ test('una respuesta con cookie nunca se guarda: el Worker la marca «private, no
   assert.equal(r.headers.get('Cache-Control'), 'private, no-store');
   assert.equal(withSecurityHeaders(new Response('x', { headers: { 'Cache-Control': 'public, max-age=60' } })).headers.get('Cache-Control'), 'public, max-age=60');
 });
+
+test('versión de prueba (workers.dev): robots.txt cierra todo el sitio', async () => {
+  const { servirSeo } = await import('../cloudflare/src/lib/seo.ts');
+  const prueba = await servirSeo(new URL('https://x.workers.dev/robots.txt'), {} as D1Database, 'https://x.workers.dev', false);
+  assert.equal(await prueba!.text(), 'User-agent: *\nDisallow: /\n');
+  const prod = await servirSeo(new URL('https://tablemaroc.com/robots.txt'), {} as D1Database, 'https://tablemaroc.com', true);
+  assert.ok((await prod!.text()).includes('Sitemap: https://tablemaroc.com/sitemap.xml'));
+});

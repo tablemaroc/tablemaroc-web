@@ -56,9 +56,10 @@ export const robotsTxt = (sitio: string) =>
   ['User-agent: *', ...NO_RASTREAR.map((p) => `Disallow: ${p}`), '', `Sitemap: ${sitio}/sitemap.xml`, ''].join('\n');
 
 /** Sirve /robots.txt y /sitemap.xml antes de Astro. null = no es ninguno de los dos. */
-export async function servirSeo(url: URL, db: D1Database, sitio: string): Promise<Response | null> {
+export async function servirSeo(url: URL, db: D1Database, sitio: string, produccion = true): Promise<Response | null> {
   if (url.pathname === '/robots.txt') {
-    return new Response(robotsTxt(sitio), { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } });
+    // Fuera de producción (versión de prueba) no se rastrea nada.
+    return new Response(produccion ? robotsTxt(sitio) : 'User-agent: *\nDisallow: /\n', { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } });
   }
   if (url.pathname === '/sitemap.xml') {
     return new Response(sitemapXml(await entradasSitemap(db, sitio)), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } });
