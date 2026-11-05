@@ -319,3 +319,9 @@ test('borrar cuenta: se van sus datos y la reserva queda en el historial sin dat
   db.exec(`INSERT INTO users (id, email, role) VALUES ('u9', 'local@example.test', 'propietario')`);
   assert.equal((await borrarCuenta(D, r2, 'u9', 'x', 'panel', 'm')).ok, false);          // un propietario no se borra así
 });
+
+test('reseñas sin límite por local: el mismo usuario puede reseñar varias veces el mismo local (06-11-2026)', () => {
+  const db = base(); conLocal(db);
+  db.exec(`INSERT INTO reviews (id, user_id, place_id, rating) VALUES ('v1', 'u1', 'p1', 4), ('v2', 'u1', 'p1', 5), ('v3', 'u1', 'p1', 3)`);
+  assert.equal((db.prepare(`SELECT count(*) AS n FROM reviews WHERE user_id = 'u1' AND place_id = 'p1'`).get() as { n: number }).n, 3);
+});

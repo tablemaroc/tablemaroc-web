@@ -199,10 +199,10 @@ CREATE TABLE reviews (
   moderated_by TEXT, moderated_at TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
-  UNIQUE (user_id, place_id),
   CHECK (status <> 'rechazada' OR length(trim(coalesce(rejection_reason,''))) > 0)
 );
 CREATE INDEX reviews_place ON reviews(place_id, status);
+CREATE INDEX reviews_user ON reviews(user_id, created_at);   -- límite de 5 cada 24 h; sin límite total ni por local (06-11-2026)
 CREATE TABLE review_replies (                                -- del propietario, sin moderación (§3, 06-11-2026)
   id TEXT PRIMARY KEY,
   review_id TEXT NOT NULL UNIQUE REFERENCES reviews(id) ON DELETE CASCADE,  -- una respuesta por reseña

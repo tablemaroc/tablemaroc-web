@@ -1,6 +1,6 @@
 // POST /api/resenas  { placeId, puntuacion, comentario?, fechaVisita?, tipoViaje?, idioma?, turnstile }   («Escribir reseña», §20)
 // Con cuenta y Turnstile (antispam). Entra PENDIENTE: solo se ve y cuenta para la media cuando se aprueba (§3).
-// Una reseña por persona y local; máximo 5 cada 24 horas.
+// Sin límite total ni por local (se puede reseñar cada visita); solo un máximo de 5 cada 24 horas (decisión del titular, 06-11-2026).
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { json, leerJson, turnstileOk } from '../../../lib/acceso';
@@ -26,9 +26,6 @@ export const POST: APIRoute = async ({ request }) => {
   const hoy = await env.DB.prepare(`SELECT count(*) AS n FROM reviews WHERE user_id = ? AND created_at > ?`)
     .bind(u.id, new Date(Date.now() - 86_400_000).toISOString()).first<{ n: number }>();
   if ((hoy?.n ?? 0) >= RESENAS_POR_DIA) return json({ error: `Máximo ${RESENAS_POR_DIA} reseñas cada 24 horas` }, 429);
-  if (await env.DB.prepare('SELECT 1 FROM reviews WHERE user_id = ? AND place_id = ?').bind(u.id, b.placeId).first()) {
-    return json({ error: 'Ya has reseñado este local. Puedes editar tu reseña desde Mi cuenta' }, 409);
-  }
 
   const id = nuevoId();
   const d = v.datos;
