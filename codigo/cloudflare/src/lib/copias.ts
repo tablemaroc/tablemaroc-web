@@ -53,3 +53,41 @@ export async function copiarBase(
 export function clavesCaducadas(claves: { key: string; uploaded: Date }[], conservar = 7): string[] {
   return [...claves].sort((a, b) => b.uploaded.getTime() - a.uploaded.getTime()).slice(conservar).map((c) => c.key);
 }
+
+// ───────────── Restaurar (§20) ─────────────
+// Restaurar devuelve a su estado de la copia cada registro que está en ella. NO borra nada (maestro §1):
+// lo creado después de la copia se conserva. La auditoría y las reservas son historial: solo se añaden
+// las filas que falten, nunca se reescriben. Antes de restaurar, el endpoint hace una copia del estado actual.
+
+const SOLO_ANADIR = new Set(['audit_log', 'reservations']);
+const IDENT = /^[a-z_][a-z0-9_]*$/;
+
+export function validarVolcado(v: unknown): v is Volcado {
+  if (!v || typeof v !== 'object') return false;
+  const x = v as Partial<Volcado>;
+  if (x.version !== 1 || !x.tablas || typeof x.tablas !== 'object') return false;
+  return Object.entries(x.tablas).every(([t, filas]) => (TABLAS_COPIA as readonly string[]).includes(t) && Array.isArray(filas));
+}
+
+export async function restaurarBase(db: D1Database, v: Volcado): Promise<Record<string, number>> {
+  const resumen: Record<string, number> = {};
+  for (const t of TABLAS_COPIA) {
+    const filas = (v.tablas[t] ?? []) as Record<string, unknown>[];
+    if (!filas.length) continue;
+    const info = await db.prepare(`PRAGMA table_info(${t})`).all<{ name: string; pk: number }>();
+    const columnas = info.results.map((c) => c.name).filter((c) => IDENT.test(c));
+    const pk = info.results.filter((c) => c.pk > 0).sort((a, b) => a.pk - b.pk).map((c) => c.name);
+    const resto = columnas.filter((c) => !pk.includes(c));
+    const sql = SOLO_ANADIR.has(t) || !resto.length
+      ? `INSERT OR IGNORE INTO ${t} (${columnas.join(', ')}) VALUES (${columnas.map(() => '?').join(', ')})`
+      : `INSERT INTO ${t} (${columnas.join(', ')}) VALUES (${columnas.map(() => '?').join(', ')})
+         ON CONFLICT(${pk.join(', ')}) DO UPDATE SET ${resto.map((c) => `${c} = excluded.${c}`).join(', ')}`;
+    const stmt = db.prepare(sql);
+    for (let i = 0; i < filas.length; i += 50) {
+      const lote = filas.slice(i, i + 50).map((f) => stmt.bind(...columnas.map((c) => (f[c] === undefined ? null : f[c]))));
+      await db.batch([db.prepare('PRAGMA defer_foreign_keys = ON'), ...lote]);
+    }
+    resumen[t] = filas.length;
+  }
+  return resumen;
+}

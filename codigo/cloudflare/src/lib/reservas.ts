@@ -61,3 +61,27 @@ export function ahoraEnMarruecos(now = new Date()): Date {
   const p = Object.fromEntries(parts.map((x) => [x.type, x.value]));
   return new Date(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}Z`);
 }
+
+// Ajustes de reservas del propietario (§18 bis), validados antes de guardarlos.
+
+export function validarAjustes(b: Record<string, unknown>): { error: string } | {
+  acepta: boolean; franjas: Franja[]; maxPersonas: number; aforo: number | null; diasCerrados: string[];
+} {
+  if (typeof b.acepta !== 'boolean') return { error: '«Acepto reservas» debe ser sí o no' };
+  const franjas = Array.isArray(b.franjas) ? b.franjas : null;
+  if (!franjas || franjas.length > 50) return { error: 'Franjas no válidas' };
+  for (const f of franjas as Franja[]) {
+    if (!Number.isInteger(f?.dia) || f.dia < 0 || f.dia > 6 || !HHMM.test(f.desde) || !HHMM.test(f.hasta) || f.desde >= f.hasta) {
+      return { error: 'Cada franja necesita día (0-6), desde y hasta (HH:MM), con desde < hasta' };
+    }
+  }
+  const maxPersonas = Number(b.maxPersonas);
+  if (!Number.isInteger(maxPersonas) || maxPersonas < 1 || maxPersonas > 100) return { error: 'Máximo de personas no válido' };
+  const aforo = b.aforo === null || b.aforo === undefined ? null : Number(b.aforo);
+  if (aforo !== null && (!Number.isInteger(aforo) || aforo < 1 || aforo > 1000)) return { error: 'Aforo no válido' };
+  const dias = Array.isArray(b.diasCerrados) ? b.diasCerrados : [];
+  if (dias.length > 366 || !dias.every((d) => typeof d === 'string' && FECHA.test(d))) return { error: 'Días cerrados no válidos (AAAA-MM-DD)' };
+  if (b.acepta && !franjas.length) return { error: 'Para aceptar reservas hace falta al menos una franja' };
+  return { acepta: b.acepta, franjas: franjas as Franja[], maxPersonas, aforo, diasCerrados: [...new Set(dias as string[])].sort() };
+}
+

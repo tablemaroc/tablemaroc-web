@@ -145,3 +145,59 @@ test('sin redirecciones abiertas; nombre visible y email', () => {
   assert.ok(emailValido('ana@example.test'));
   assert.ok(!emailValido('ana@'));
 });
+
+// ───────────── Panel (§20) ─────────────
+import { validarAjustes } from '../cloudflare/src/lib/reservas.ts';
+import { normalizarRuta } from '../cloudflare/src/lib/rutas.ts';
+import { restaurarBase, validarVolcado, volcarBase } from '../cloudflare/src/lib/copias.ts';
+
+/** Imitación mínima de D1 sobre el SQLite de Node, para probar la lógica de copias sin Cloudflare. */
+function d1(db: DatabaseSync) {
+  const stmt = (sql: string, args: unknown[] = []) => ({
+    bind: (...a: unknown[]) => stmt(sql, a),
+    all: async () => ({ results: db.prepare(sql).all(...(args as never[])) }),
+    first: async () => db.prepare(sql).get(...(args as never[])) ?? null,
+    run: async () => ({ meta: { changes: Number(db.prepare(sql).run(...(args as never[])).changes) } }),
+  });
+  return { prepare: (sql: string) => stmt(sql), batch: async (ss: ReturnType<typeof stmt>[]) => { db.exec('BEGIN'); try { for (const s of ss) await s.run(); db.exec('COMMIT'); } catch (e) { db.exec('ROLLBACK'); throw e; } } } as unknown as D1Database;
+}
+
+test('ajustes de reservas: validación', () => {
+  const ok = { acepta: true, franjas: [{ dia: 5, desde: '20:00', hasta: '23:00' }], maxPersonas: 8, aforo: 30, diasCerrados: ['2026-12-25', '2026-12-25'] };
+  const v = validarAjustes(ok);
+  assert.ok(!('error' in v) && v.diasCerrados.length === 1);
+  assert.ok('error' in validarAjustes({ ...ok, franjas: [] }));                                     // acepta sin franjas
+  assert.ok('error' in validarAjustes({ ...ok, franjas: [{ dia: 7, desde: '20:00', hasta: '23:00' }] }));
+  assert.ok('error' in validarAjustes({ ...ok, franjas: [{ dia: 1, desde: '23:00', hasta: '20:00' }] }));
+  assert.ok('error' in validarAjustes({ ...ok, maxPersonas: 0 }));
+  assert.ok('error' in validarAjustes({ ...ok, diasCerrados: ['25/12/2026'] }));
+  assert.ok(!('error' in validarAjustes({ acepta: false, franjas: [], maxPersonas: 4, aforo: null, diasCerrados: [] })));
+});
+
+test('redirecciones: solo rutas internas es/en/fr', () => {
+  assert.equal(normalizarRuta('/ES/Tanger/Cafe-Hafa'), '/es/tanger/cafe-hafa/');
+  for (const malo of ['/ar/x/', 'https://otro.example/', '/es//x/', '/de/x/', 'es/x', 3]) assert.equal(normalizarRuta(malo), null);
+});
+
+test('restaurar: vuelve al estado de la copia SIN borrar nada; auditoría y reservas solo se añaden', async () => {
+  const db = base(); conLocal(db); const D = d1(db);
+  db.exec(`INSERT INTO audit_log (id, actor, origen, entidad_tipo, entidad_id, accion) VALUES ('a1','x','sistema','place','p1','crear');
+           INSERT INTO photos (id, place_id, r2_key, status) VALUES ('f1','p1','fotos/f1.webp','pendiente')`);
+  const copia = await volcarBase(D);
+  assert.ok(validarVolcado(copia));
+  assert.ok(!('sessions' in copia.tablas) && !('email_codes' in copia.tablas));      // nada temporal en la copia
+  // Después de la copia: se cambia un local, se cancela la reserva, se añade otro usuario y otra auditoría.
+  db.exec(`UPDATE places SET slug = 'cambiado' WHERE id = 'p1';
+           UPDATE reservations SET status = 'cancelada' WHERE id = 'r1';
+           INSERT INTO users (id, email) VALUES ('u2', 'nuevo@example.test');
+           INSERT INTO audit_log (id, actor, origen, entidad_tipo, entidad_id, accion) VALUES ('a2','x','sistema','place','p1','editar');`);
+  await restaurarBase(D, copia);
+  const v = (sql: string) => db.prepare(sql).get() as Record<string, unknown>;
+  assert.equal(v(`SELECT slug FROM places WHERE id = 'p1'`).slug, 'cafe-prueba');        // vuelve al estado de la copia
+  assert.equal(v(`SELECT count(*) AS n FROM users WHERE id = 'u2'`).n, 1);               // lo nuevo se conserva
+  assert.equal(v(`SELECT status FROM reservations WHERE id = 'r1'`).status, 'cancelada'); // el historial no se reescribe
+  assert.equal(v(`SELECT count(*) AS n FROM audit_log`).n, 2);                            // auditoría intacta
+  assert.equal(v(`SELECT r2_key FROM photos WHERE id = 'f1'`).r2_key, 'fotos/f1.webp');        // columnas con números (r2_key)
+  assert.ok(!validarVolcado({ version: 1, tablas: { sessions: [] } }));                    // tablas fuera de la lista: no
+  assert.ok(!validarVolcado({ version: 2, tablas: {} }));
+});

@@ -19,7 +19,15 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Copias de seguridad a R2 | `src/lib/copias.ts` |
 | Tareas programadas (moderación 3/día, copias, revisión mensual) | `src/lib/tareas.ts` |
 | Descargar y borrar mis datos (RGPD + Ley 09-08) | `src/pages/api/cuenta/datos.ts` |
+| Panel: permisos por rol (admin con segundo factor, propietario, empleado) | `src/lib/panel.ts` |
+| Panel: escritorio, moderación, modos Automático / Manual | `src/pages/api/panel/escritorio.ts`, `moderacion/`, `modos.ts` |
+| Panel: reservas, ajustes de reservas, empleados, respuestas a reseñas | `src/pages/api/panel/reservas/`, `locales/[id]/` |
+| Panel: reclamaciones de local, redirecciones 301, auditoría | `src/pages/api/panel/reclamaciones/`, `redirecciones.ts`, `auditoria.ts`; `src/pages/api/locales/[id]/reclamar.ts` |
+| Panel: copias (hacer, descargar, restaurar sin borrar) | `src/pages/api/panel/copias/`, `src/lib/copias.ts` |
 | Pruebas | `codigo/testing/cloudflare.test.ts` |
+
+El panel es, por ahora, **solo API** (sin pantallas, maestro §19). Claude Code lo usa con una cuenta de administración
+y la cabecera `X-Origen: claude_code`, que queda en la auditoría. Restaurar copias solo lo hace una persona.
 
 ## Requisitos en Windows
 
