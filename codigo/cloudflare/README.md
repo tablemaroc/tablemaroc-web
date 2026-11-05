@@ -28,6 +28,8 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Quality Gate por entidad e idioma (`is_indexable`) | `src/lib/calidad.ts` |
 | Fotos: solo WebP, sin EXIF/XMP (GPS), alt por idioma; se sirven desde `/fotos/` | `src/lib/fotos.ts`, `src/pages/api/panel/fotos/` |
 | Menú: categorías, platos, precios solo en MAD, archivar agotados | `src/lib/menu.ts`, `src/pages/api/panel/locales/[id]/menu/`, `src/pages/api/panel/menu/` |
+| Reseñas: escribir, editar, borrar, fotos (máx. 3) y listado público con media | `src/lib/resenas.ts`, `src/pages/api/resenas/`, `src/pages/api/locales/[id]/resenas.ts`, `src/pages/api/cuenta/resenas.ts` |
+| Panel: Usuarios (buscar, exportar datos, cerrar sesiones, borrar por petición) | `src/lib/cuenta.ts`, `src/pages/api/panel/usuarios/` |
 | Pruebas | `codigo/testing/cloudflare.test.ts` |
 
 El panel es, por ahora, **solo API** (sin pantallas, maestro §19). Claude Code lo usa con una cuenta de administración

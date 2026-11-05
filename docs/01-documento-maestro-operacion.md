@@ -120,6 +120,9 @@ Un idioma solo puede publicarse/indexarse cuando su traducción está realmente 
 
 Las rechazadas conservan el motivo de moderación. Solo las aprobadas se muestran y cuentan para la valoración media.
 
+Límites (decisión del titular, 06-11-2026): **máximo 5 reseñas cada 24 horas** por usuario y **sin límite total**.
+Una reseña por usuario y local (se edita desde «Mi cuenta»; al editarla vuelve a moderación). Hasta 3 fotos por reseña.
+
 ### Respuestas a reseñas (MVP)
 `borrador -> publicada`
 
@@ -674,6 +677,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: RGPD y Ley 09-08 de Marruecos se aplican siempre, con la regla más exigente de las dos (§1, §10).
 - Decisión del titular: se pasa ya la base técnica a Cloudflare (datos y lógica), sin plantillas visuales hasta que se apruebe el diseño (§19).
 - Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
+- Decisión del titular: reseñas sin límite total, con un máximo de 5 cada 24 horas por usuario (§3).
 
 ### 04-11-2026 (decisiones del titular)
 

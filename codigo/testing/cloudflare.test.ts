@@ -281,3 +281,41 @@ test('menú: precios solo en MAD; vacío = pendiente; verificado exige importe',
   const e3: Record<string, string> = {}; validarPlato({ precio_mad: '10', moneda: 'EUR' }, e3); assert.ok(e3.moneda);
   const e4: Record<string, string> = {}; validarPlato({ precio_mad: '-5' }, e4); assert.ok(e4.price_mad);
 });
+
+// ───────────── Reseñas y cuentas (§3, §3.2, §20) ─────────────
+import { validarResena } from '../cloudflare/src/lib/resenas.ts';
+import { borrarCuenta, exportarDatos } from '../cloudflare/src/lib/cuenta.ts';
+
+test('reseñas: estrellas 1-5, comentario ≤ 2000, visita no futura, tipo de viaje aprobado', () => {
+  const hoy = new Date('2026-11-05T12:00:00Z');
+  const ok = validarResena({ puntuacion: 5, comentario: '  Muy bueno  ', fechaVisita: '2026-11-01', tipoViaje: 'pareja', idioma: 'fr' }, hoy);
+  assert.ok(ok.ok && ok.datos.comment === 'Muy bueno' && ok.datos.locale === 'fr' && ok.datos.trip_type === 'pareja');
+  const sinIdioma = validarResena({ puntuacion: 3, idioma: 'ar' }, hoy);
+  assert.ok(sinIdioma.ok && sinIdioma.datos.locale === 'es');                       // árabe no existe: español
+  const mal = validarResena({ puntuacion: 6, comentario: 'x'.repeat(2001), fechaVisita: '2026-12-01', tipoViaje: 'negocios' }, hoy);
+  assert.ok(!mal.ok && ['rating', 'comment', 'visited_on', 'trip_type'].every((c) => mal.campos.includes(c)));
+});
+
+test('borrar cuenta: se van sus datos y la reserva queda en el historial sin datos personales', async () => {
+  const db = base(); conLocal(db); const D = d1(db);
+  db.exec(`UPDATE reservations SET special_request = 'Alergia al marisco' WHERE id = 'r1';
+           INSERT INTO reviews (id, user_id, place_id, rating) VALUES ('rv1', 'u1', 'p1', 4);
+           INSERT INTO photos (id, place_id, review_id, user_id, r2_key) VALUES ('f1', 'p1', 'rv1', 'u1', 'fotos/locales/x.webp');
+           INSERT INTO consents (id, user_id, purpose, version, granted) VALUES ('c1', 'u1', 'condiciones', 'v1', 1);`);
+  const datos = await exportarDatos(D, 'u1');
+  assert.equal((datos.cuenta as { email: string }).email, 'prueba@example.test');
+  assert.equal(datos.resenas.length, 1); assert.equal(datos.reservas.length, 1); assert.equal(datos.consentimientos.length, 1);
+  const borradas: string[][] = [];
+  const r2 = { delete: async (k: string[]) => { borradas.push(k); } } as unknown as R2Bucket;
+  assert.deepEqual(await borrarCuenta(D, r2, 'u1', 'u1', 'sistema', 'Solicitud del usuario'), { ok: true });
+  const v = (sql: string) => db.prepare(sql).get() as Record<string, unknown>;
+  assert.equal(v(`SELECT count(*) AS n FROM users WHERE id = 'u1'`).n, 0);
+  assert.equal(v(`SELECT count(*) AS n FROM reviews`).n, 0);
+  assert.equal(v(`SELECT count(*) AS n FROM photos`).n, 0);
+  assert.deepEqual(borradas, [['fotos/locales/x.webp']]);                               // también se borra el archivo en R2
+  const res = v(`SELECT user_id, special_request FROM reservations WHERE id = 'r1'`);
+  assert.equal(res.user_id, null); assert.equal(res.special_request, null);
+  assert.equal(v(`SELECT count(*) AS n FROM audit_log WHERE accion = 'borrar_cuenta'`).n, 1);
+  db.exec(`INSERT INTO users (id, email, role) VALUES ('u9', 'local@example.test', 'propietario')`);
+  assert.equal((await borrarCuenta(D, r2, 'u9', 'x', 'panel', 'm')).ok, false);          // un propietario no se borra así
+});
