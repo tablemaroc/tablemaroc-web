@@ -11,7 +11,7 @@ const PATTERNS = [
   ['JWT', /eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{10,}/],
   ['clave AWS', /AKIA[0-9A-Z]{16}/],
   ['clave Google API', /AIza[0-9A-Za-z_-]{35}/],
-  ['asignación de secreto', /(?:SECRET|TOKEN|PASSWORD|PASSWD|API_KEY|SERVICE_ROLE_KEY|PRIVATE_KEY)\w*\s*[=:]\s*['"]?[A-Za-z0-9/+_.\-]{16,}/i],
+  ['asignación de secreto', /(?:SECRET|TOKEN|PASSWORD|PASSWD|API_KEY|SERVICE_ROLE_KEY|PRIVATE_KEY)\w*\s*[=:]\s*(?!(?:process\.)?env\.)['"]?[A-Za-z0-9/+_.\-]{16,}/i],   // leer de env. no es un secreto escrito
 ];
 const SKIP_DIRS = new Set(['node_modules', '.git', '.next']);
 const hits = [];
