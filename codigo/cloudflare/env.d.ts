@@ -8,6 +8,7 @@ interface Env {
   SITE_URL: string;
   DEFAULT_LOCALE: 'es' | 'en' | 'fr';
   ENTORNO: 'prueba' | 'produccion';   // fuera de producción: noindex y robots.txt cerrado
+  TURNSTILE_SITE_KEY: string;      // clave PÚBLICA de Turnstile (widget «Tablemaroc», modo administrado, sin preautorización)
   // Secretos (nunca en Git):
   SESSION_PEPPER: string;          // sal para los hash de códigos y sesiones
   TURNSTILE_SECRET: string;        // antispam

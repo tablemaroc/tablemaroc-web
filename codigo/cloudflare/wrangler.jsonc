@@ -43,6 +43,7 @@
   "vars": {
     "SITE_URL": "https://tablemaroc.com",
     "DEFAULT_LOCALE": "es",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAF1dPdAcEait930o",   // pública (va en la web); la secreta es TURNSTILE_SECRET
     "ENTORNO": "prueba"          // sin indexar hasta que el titular decida abrir la web; entonces "produccion"
   }
 }
