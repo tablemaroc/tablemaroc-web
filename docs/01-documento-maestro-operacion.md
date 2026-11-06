@@ -52,7 +52,7 @@ Solo:
 Hace todo lo demás:
 
 - crear, verificar, traducir, revisar y **publicar** contenido;
-- moderar reseñas, respuestas de propietarios y fotos (aprobar o rechazar con motivo);
+- moderar reseñas y fotos (aprobar o rechazar con motivo);
 - cambios de URL, siempre con redirección 301;
 - marcar locales como cerrados, fusionar duplicados y corregir datos (§3.1);
 - SEO, Quality Gate, sitemap y enlazado interno;
@@ -121,10 +121,11 @@ Un idioma solo puede publicarse/indexarse cuando su traducción está realmente 
 Las rechazadas conservan el motivo de moderación. Solo las aprobadas se muestran y cuentan para la valoración media.
 
 ### Respuestas a reseñas (MVP)
-`borrador -> revisada -> publicada`
+`borrador -> publicada`
 
 El propietario contesta las reseñas aprobadas de su local desde su panel (sección «Reseñas»), una respuesta por reseña
-(decisión del titular, 06-11-2026). Antes de publicarse, la respuesta pasa por la misma moderación que las reseñas (§6).
+(decisión del titular, 06-11-2026). **Las respuestas no pasan por moderación:** se publican en cuanto el propietario las envía.
+Solo se aplican las excepciones legales de §3.2 (contenido ilegal o difamatorio, orden judicial, datos personales publicados por error).
 
 ### Fotos
 `pendiente -> aprobada | rechazada`
@@ -220,7 +221,7 @@ Las operaciones técnicas relevantes deben quedar auditadas.
 
 ### Frecuencias
 
-- **3 veces al día**: moderación de reseñas, respuestas de propietarios y fotos por tarea programada de Claude Code (decisión del titular, 01-11-2026).
+- **3 veces al día**: moderación de reseñas y fotos por tarea programada de Claude Code (decisión del titular, 01-11-2026).
 - Diario: backup de base de datos.
 - Semanal: Search Console, rendimiento y backups de fotos/configuración no secreta.
 - Mensual: seguridad, duplicidad, SEO, estado y crecimiento.
@@ -330,7 +331,7 @@ Revisar:
 - favoritos, disponibles sin conexión en el móvil (adelantado de la Fase 2, 01-11-2026);
 - acceso de propietarios al panel (rol «Propietario») y reclamación de su local con verificación de titularidad sin coste (adelantado de la Fase 2, 01-11-2026);
 - reservas gestionadas (§18 bis);
-- respuestas del propietario a las reseñas de su local, moderadas (§3; adelantado de la Fase 2, 06-11-2026);
+- respuestas del propietario a las reseñas de su local, sin moderación (§3; adelantado de la Fase 2, 06-11-2026);
 
 - lugares;
 - ciudades;
@@ -624,7 +625,7 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
 
 1. Acceso (una sola pantalla para todos los roles, §18): administración con «Continuar con Google» + código de la app
    de autenticación o con «Continuar con huella o cara»; propietarios y empleados con Google, email con código o huella o cara.
-2. **Escritorio, con la moderación de reseñas, respuestas de propietarios y fotos dentro** (no hay sección de moderación aparte).
+2. **Escritorio, con la moderación de reseñas y fotos dentro** (no hay sección de moderación aparte).
 3. Listado genérico (locales, ciudades, platos, guías).
 4. **Formulario de nuevo local / editar local, con todo en pestañas:** Información, ES, EN, FR, Fotos, Menú, Redirecciones e Historial.
    El menú y las redirecciones del local se gestionan aquí (no hay editor de menú aparte).
@@ -664,7 +665,8 @@ Barra lateral y cabecera del panel.
 - §18 bis: la reclamación del local (§12) es la vía por la que el propietario queda registrado.
 - Cabecera con la fecha real de la última actualización; registro de cambios separado por fecha (02-11 y 04-11) y entradas superadas marcadas, sin borrarlas.
 - Decisión del titular: el usuario puede cancelar su reserva cuando quiera, también si está pendiente (§18 bis).
-- Decisión del titular: el propietario contesta las reseñas de su local desde su panel; las respuestas pasan al MVP y se moderan como las reseñas (§3, §6, §12, §20).
+- Decisión del titular: el propietario contesta las reseñas de su local desde su panel; las respuestas pasan al MVP y se moderan como las reseñas (§3, §6, §12, §20). *(Superado: entrada siguiente.)*
+- Decisión del titular: las respuestas del propietario no pasan por moderación; se publican al enviarlas, salvo las excepciones legales de §3.2 (§3, §12).
 
 ### 04-11-2026 (decisiones del titular)
 
