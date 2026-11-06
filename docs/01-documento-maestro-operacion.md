@@ -64,6 +64,8 @@ Límites:
 - no contrata servicios ni genera gastos sin que el titular los contrate;
 - no expone secretos;
 - no borra contenido publicado (§3);
+- **no inventa nada** (decisión del titular, 06-11-2026): ni funciones, ni pantallas, ni casos, ni textos, ni datos que
+  el titular no haya pedido o aprobado. Si algo falta o no está claro, lo pregunta al titular antes de añadirlo;
 - todas sus acciones quedan registradas en la auditoría (§7) y deben poder revertirse.
 
 Claude Code solo actúa cuando hay una sesión abierta o una tarea programada; la moderación periódica se hace
@@ -605,7 +607,7 @@ Total: **29 piezas de diseño** (58 pantallas: móvil y ordenador), contando la 
 
 | # | Plantilla | Uso |
 |---|---|---|
-| 1 | Home | Portada en es/en/fr |
+| 1 | Home | Portada en es/en/fr. **Decisión del titular (06-11-2026):** lista desplegable de ciudades (primera opción «Ciudades») con el botón «Ver restaurantes», y guías. Sin buscador de platos ni de locales y sin los bloques «Ciudades · Ver más» ni «Qué buscas». «Ver restaurantes»: si el usuario está en Marruecos, muestra solo los restaurantes de la ciudad donde está; si no está en Marruecos, muestra el mensaje «Elige una ciudad» |
 | 2 | **Listado único** | Todo lo que es una lista: ciudades, ciudad + tipo de lugar, tipos de lugar, guías, platos y resultados de búsqueda. Se adapta el título, la introducción, el tipo de tarjeta y los filtros |
 | 3 | Info del local | Restaurantes, cafés y teterías, comida callejera y mercados; los bloques que no aplican se ocultan |
 | 4 | Menú | Carta del local, precios solo en MAD |
@@ -620,7 +622,8 @@ Total: **29 piezas de diseño** (58 pantallas: móvil y ordenador), contando la 
 
 ### Esqueleto de la web: 3 piezas
 
-Cabecera, pie de página (navegación secundaria) y barra inferior del móvil.
+Cabecera, pie de página (navegación secundaria) y barra inferior del móvil (solo **Inicio** y **Cuenta**, sin Buscar ni
+Explorar: decisión del titular, 06-11-2026).
 
 ### Panel: 12 plantillas
 
@@ -687,6 +690,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: reseñas sin límite total ni por local, con un máximo de 5 cada 24 horas por usuario como freno antispam (§3).
 - Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
 - Decisión del titular (06-11-2026): las pantallas de la web se diseñan con Claude Design por fases (estilo primero, que aprueba el titular); prompts en docs/17-prompt-claude-design.md y encargo actualizado en docs/16 (§19).
+- Decisión del titular (06-11-2026): orden de Claude Design: primero la Home (fase 1) y el panel (fase 2, en dos partes) para subirlos a internet; después el resto de la web (fases 3, 4 y 5). Las pantallas se programan con lo que exporte Claude Design (§19).
 - Decisión del titular (06-11-2026): la copia externa se guarda en su PC con el botón «Crear copia» del panel; completa, cifrada y sustituyendo a la anterior (§9, §20).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 

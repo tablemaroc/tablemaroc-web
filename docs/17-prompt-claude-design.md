@@ -4,7 +4,8 @@
 **Base:** `docs/16-encargo-claude-design.md` (el encargo completo) y los bocetos de `diseno/`.
 
 Las pantallas se piden **por fases**: primero el estilo (fase 1), que el titular aprueba; después el resto con ese estilo.
-Así, si el estilo no convence, solo se rehace una fase. El panel va aparte, después de la web (fases 5 y 6).
+Así, si el estilo no convence, solo se rehace una fase. **Orden decidido por el titular (06-11):** primero la **Home**
+(fase 1) y el **panel** (fase 2), para subirlos a internet; después el resto de la web (fases 3, 4 y 5).
 
 ---
 
@@ -73,7 +74,7 @@ FASE 1. Propón el sistema visual de Tablemaroc y aplícalo a la portada:
    cerrado temporalmente, Ramadán, sin conexión, «Hay una versión nueva · Actualizar»).
 3. Esqueleto: cabecera (logo, buscador, selector de idioma ES/EN/FR, acceso), pie de página como navegación secundaria
    (ciudades, tipos de lugar, guías, legales; sin «Política de cookies») y barra inferior del móvil
-   (Inicio, Buscar, Explorar, Cuenta).
+   (Inicio, Cuenta; sin Buscar ni Explorar: se busca desde el buscador de la Home).
 4. Home en móvil y ordenador, siguiendo el boceto.
 
 Entrega cada pieza en móvil (390 px) y ordenador (1280 px). Explica en pocas líneas por qué eliges la paleta y la tipografía.
@@ -83,12 +84,70 @@ Entrega cada pieza en móvil (390 px) y ordenador (1280 px). Explica en pocas l�
 
 ---
 
-## Fase 2: listado, info del local y menú (el corazón de la web)
+## Fase 2: el panel (parte A y parte B)
+
+El panel es grande: se pide en dos partes, en la misma conversación. Pide la parte B cuando apruebes la A.
+
+### Parte A: esqueleto, acceso, escritorio, listado y formulario del local
+
+Adjunta: `diseno/panel-esqueleto`, `diseno/login/administrador`, `diseno/login/propietario`, `diseno/panel-02-escritorio`,
+`diseno/panel-03-listado` y `diseno/panel-04-formulario-local`.
+
+```
+FASE 2 · PARTE A. Con el sistema visual aprobado en la fase 1, diseña el panel (apartado 6 del encargo).
+Es un único panel con tres roles: Administración, Propietario (solo su local) y Empleado (solo reservas de su local).
+Debe ser moderno, profesional, usable en el móvil, con modo claro y oscuro, y reutilizable en otros proyectos
+(marca, colores e idioma configurables con las variables CSS).
+
+En cada sección (Escritorio, Locales, Fotos, Redirecciones, Usuarios, Auditoría, Copias de seguridad, Reservas) hay un
+interruptor «Automático / Manual» y dos pestañas: «Automático» (qué hace solo y últimas ejecuciones) y «Manual»
+(acciones a mano). Sigue los bocetos 1-automatico y 2-manual de cada carpeta.
+
+1. Esqueleto: barra lateral (en el móvil se abre con ☰) y cabecera con búsqueda global (Ctrl+K).
+2. Acceso, siguiendo los bocetos de diseno/login/administrador y diseno/login/propietario: Google, email o huella o
+   cara. Administración: Google + código de la app, o huella o cara.
+3. Escritorio, con la moderación de reseñas y fotos dentro.
+4. Listado genérico (sirve para locales, ciudades, platos y guías).
+5. Nuevo / editar local, con las pestañas Información · ES · EN · FR · Fotos · Menú (archivar / reactivar platos) ·
+   Redirecciones · Historial.
+
+Mismo formato de entrega que la web. Las acciones (guardar, aprobar, rechazar, buscar, el interruptor) se marcan como
+«isla» y se dibujan sin lógica. Cada pantalla y cada pestaña en móvil y ordenador.
+```
+
+### Parte B: fotos, redirecciones, usuarios, auditoría, copias, ajustes, reservas y empleados
+
+Adjunta: `diseno/panel-05-fotos`, `diseno/panel-06-redirecciones`, `diseno/panel-07-usuarios`, `diseno/panel-08-auditoria`,
+`diseno/panel-09-copias-de-seguridad`, `diseno/panel-10-ajustes`, `diseno/panel-11-reservas` y `diseno/panel-12-empleados`.
+
+```
+FASE 2 · PARTE B. Con el mismo estilo del panel, diseña:
+
+1. Fotos: biblioteca.
+2. Redirecciones 301: vista general.
+3. Usuarios: incluye RGPD (exportar y borrar).
+4. Auditoría: con «Deshacer».
+5. Copias de seguridad: lista de copias, «Hacer copia ahora», «Descargar» y «Restaurar» (con confirmación escribiendo
+   RESTAURAR y código). «Crear copia» (copia externa en el PC: la primera vez se elige carpeta y contraseña de copia;
+   luego un clic, con barra de progreso) y «Restaurar desde archivo». Sin CSV.
+6. Ajustes.
+7. Reservas: vista de administración, del propietario y del empleado.
+8. Empleados: el propietario añade empleados (sin la palabra «invitar») y les quita el acceso.
+
+Cada pantalla y cada pestaña en móvil y ordenador.
+```
+
+> **Para el titular:** con la fase 1 y la fase 2 exportadas, programo la Home y el panel y los subo a tablemaroc.com
+> (sin indexar). Después sigues con las fases 3, 4 y 5 para el resto de la web.
+
+---
+
+## Fase 3: listado, info del local y menú (el corazón de la web)
 
 Adjunta: `diseno/web-02-listado`, `diseno/web-03-info-del-local` y `diseno/web-04-menu`.
 
 ```
-FASE 2. Con el estilo aprobado en la fase 1, diseña:
+FASE 3. Con el estilo aprobado en la fase 1, diseña:
 
 1. Listado único (sirve para ciudad, ciudad + tipo, tipos de lugar, guías, platos y resultados de búsqueda): título,
    introducción, filtros (tipo, ciudad, vegetariano, pago con tarjeta, terraza, abierto ahora), 20 resultados y
@@ -112,12 +171,12 @@ Cada pantalla y cada pestaña en móvil y ordenador.
 
 ---
 
-## Fase 3: plato típico, guía, escribir reseña y reserva
+## Fase 4: plato típico, guía, escribir reseña y reserva
 
 Adjunta: `diseno/web-05-plato-tipico`, `diseno/web-06-guia`, `diseno/web-08-escribir-resena` y `diseno/web-12-reserva`.
 
 ```
-FASE 3. Con el mismo estilo, diseña:
+FASE 4. Con el mismo estilo, diseña:
 
 1. Plato típico: pestañas «Dónde comerlo» (locales que lo sirven) y «Qué es».
 2. Guía: entradilla, autoría declarada y locales en bloques plegables.
@@ -133,13 +192,13 @@ Cada pantalla en móvil y ordenador.
 
 ---
 
-## Fase 4: acceso, mi cuenta, páginas de texto, errores y reclamar un local
+## Fase 5: acceso, mi cuenta, páginas de texto, errores y reclamar un local
 
 Adjunta: `diseno/login` (la carpeta `usuarios` y su `ENCARGO.md`), `diseno/web-09-mi-cuenta`, `diseno/web-10-pagina-de-texto`
 y `diseno/web-11-errores`.
 
 ```
-FASE 4. Con el mismo estilo, diseña:
+FASE 5. Con el mismo estilo, diseña:
 
 1. Acceso sin contraseñas (sigue el ENCARGO.md de la carpeta de login): Entrar (con botón «Crear cuenta»),
    «Continuar con email» (pedir email + casilla de Turnstile → escribir el código de 6 cifras → si no hay cuenta,
@@ -157,12 +216,3 @@ FASE 4. Con el mismo estilo, diseña:
 
 Cada pantalla en móvil y ordenador.
 ```
-
----
-
-## Fases 5 y 6: el panel (después de la web)
-
-Se pedirán cuando la web esté aprobada, con el mismo estilo adaptado al panel (`docs/16`, apartado 6, y las carpetas
-`diseno/panel-*` y `diseno/login/administrador` y `propietario`). Fase 5: esqueleto, acceso, escritorio con moderación,
-listado y formulario del local. Fase 6: fotos, redirecciones, usuarios, auditoría, copias de seguridad (con «Crear copia»
-y «Restaurar desde archivo»), ajustes, reservas y empleados.
