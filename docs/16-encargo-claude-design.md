@@ -106,7 +106,7 @@ Las reservas en automático se confirman solas si hay sitio.
 
 | # | Plantilla | Notas | Bocetos |
 |---|---|---|---|
-| 1 | Acceso | Google, email o huella o cara. Administración: Google + código de la app, o huella o cara | `diseno/login/administrador` y `diseno/login/propietario` |
+| 1 | Acceso | **Una sola pantalla para todos los roles** (doc 01 §20): Google, email o huella o cara. Administración: Google + código de la app, o huella o cara (con email, «Acceso no autorizado») | `diseno/login/ENCARGO.md` (apartado 3), con los bocetos de `administrador` y `propietario` |
 | 2 | Escritorio | Con la moderación de reseñas y fotos dentro | `diseno/panel-02-escritorio` |
 | 3 | Listado genérico | Locales, ciudades, platos, guías | `diseno/panel-03-listado` |
 | 4 | Nuevo / editar local | Pestañas: Información · ES · EN · FR · Fotos · Menú (archivar / reactivar platos) · Redirecciones · Historial | `diseno/panel-04-formulario-local` |

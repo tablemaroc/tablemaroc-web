@@ -59,9 +59,12 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 
 | Elemento | Valor |
 |---|---|
-| Fondo de la web | Azul medina `#D5E2EE` (antes crema `#F7F5F0` y yeso `#F2F4F3`) |
-| Tarjetas | Blanco `#FFFFFF` |
-| Texto | Verde muy oscuro `#0A3F35` (contraste 9:1) — **nada de negro** |
+| Fondo de la web | **Blanco liso `#FFFFFF`, sin foto**, en todas las pantallas web (06-11-2026; antes crema, yeso, azul medina, naranja arena, foto naranja, foto verde `#2B5B2E`, foto naranja sobre blanco y foto negra sobre blanco) |
+| Texto sobre el fondo | **Verde muy oscuro `#0A3F35`** (11,8:1 sobre blanco), también la cabecera; logo con arco verde de marca `#0F5C4D`. Sobre el verde de marca, blanco. Subrayados de pestañas y página actual en azafrán `#E0A23B` |
+| Cabecera y pie en móvil | **Arena `#F2D7B6`** (cabecera con logo, idioma y ☰; barra inferior Inicio · Cuenta), texto verde muy oscuro `#0A3F35`; el hueco del arco del logo, arena. En ordenador la cabecera sigue sin cambios (06-11-2026; antes crema `#F4EFE6`, descartado por parecerse demasiado al fondo blanco) |
+| Menú ☰, lista de idiomas y ventanas | **Arena `#F2D7B6`** de fondo (menú ☰ móvil, lista de idiomas en móvil y ordenador, ventana de Crea tu página / Contacto del administrador), texto verde muy oscuro `#0A3F35` (06-11-2026; antes blanco) |
+| Tarjetas | **Verde claro `#E3EFEB`** con borde fino, en todas las pantallas web (restaurantes, mejores restaurantes, guías, ciudades, reseñas, reservas, favoritos, desplegables de información); texto verde muy oscuro `#0A3F35` (06-11-2026; antes blanco `#FFFFFF`). Filtros, selector de ciudad, menús y botones siguen blancos |
+| Texto | Verde muy oscuro `#0A3F35` — **nada de negro** |
 | Fondos destacados | Verde de marca `#0F5C4D` con texto blanco (antes negros) |
 | Azafrán `#E0A23B` | Solo relleno y estrellas |
 | Arcilla `#9C3F17` | Cerrado y avisos |
@@ -72,7 +75,8 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 
 - **Móvil:** logo, idioma y **menú ☰**. Barra inferior solo **Inicio** y **Cuenta**.
 - **Menú ☰ (móvil):** Mi cuenta · Restaurantes · Ciudades · Guías · Sobre nosotros · Legales · Contacto del administrador ·
-  botón **Crea tu página**. Sin Platos típicos ni Cómo funcionan las reseñas.
+  botón **Crea tu página**. Sin Platos típicos ni Cómo funcionan las reseñas. Debajo, en el espacio libre, el **logo
+  grande** (arco y «tablemaroc») centrado; es decorativo y tocarlo cierra el menú como cualquier zona vacía (06-11-2026).
 - **Ordenador:** sin ☰; cabecera normal con Restaurantes · Ciudades · Guías · Sobre nosotros · Legales · Contacto del
   administrador · ES · Mi cuenta · Crea tu página.
 - **Idioma:** botón ES que abre Español · English · Français y cambia la etiqueta (ES/EN/FR). Los textos aún no se traducen.
@@ -96,7 +100,8 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 - Sin introducción de la ciudad.
 - Filtros: Abierto ahora · Vegetariano · Pago con tarjeta · Terraza.
 - **Todos los restaurantes con scroll**, sin «Ver más» (excepción aprobada a «una sola pantalla»).
-- Al bajar: «Restaurantes en [CIUDAD]» queda fijo arriba, pegado a la cabecera; «Cambiar ciudad» desaparece.
+- Título de la lista: **solo el nombre de la ciudad**, «[CIUDAD]» (06-11-2026; antes «Restaurantes en [CIUDAD]»).
+- Al bajar: el título «[CIUDAD]» queda fijo arriba, pegado a la cabecera; «Cambiar ciudad» desaparece.
 - Botón redondo verde **«Volver arriba»** que aparece al bajar.
 - Igual en la pantalla propia y en la lista dentro de la Home, en móvil y ordenador.
 
@@ -123,6 +128,46 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   - al pasar el dedo o el ratón por una opción del menú o de idiomas, esa opción se resalta.
 - Cualquier panel nuevo (filtros, avisos, ventanas) sigue esta regla y entra en este orden.
 
+### 4.6 bis Ciudades
+
+- Dos pestañas: **«Todas»** (las 27 de la A a la Z) y **«Más visitadas»**.
+- «Más visitadas», en este orden: **Marrakech, Agadir, Casablanca, Tánger, Fez**. Fuente: pernoctaciones en
+  alojamientos clasificados del Observatorio Nacional del Turismo (2024-2025), búsqueda del 06-11-2026.
+  Cada ciudad lleva a la lista de restaurantes de esa ciudad.
+
+### 4.7 Guías
+
+- Pantalla «Guías»: sin botón «Ver más» (móvil y ordenador).
+
+### 4.8 Panel (fase 2, parte A) — tanda 1, 06-11-2026
+
+- **Por tandas:** 1) esqueleto y escritorio; 2) acceso de administración y de propietario; 3) listado y formulario del local.
+  Cada tanda se revisa antes de seguir.
+- **Mismo estilo que la web:** fondo blanco, barra lateral y cabecera móvil en arena `#F2D7B6`, tarjetas verde claro
+  `#E3EFEB`, botones verde de marca, Literata en títulos, pestañas con subrayado azafrán. **Modo claro y oscuro** con
+  variables CSS (reutilizable en otros proyectos); se elige en Tweaks («modo»).
+- **Barra lateral por rol** (doc 01 §20): Administración (Escritorio · Contenido · Comunidad · Sistema), Propietario
+  («Mi local»: Escritorio, Reservas, Información, Menú, Fotos, Reseñas, Empleados) y Empleado (solo Reservas). Se elige en
+  Tweaks del esqueleto («rol»). En móvil se abre con ☰, a pantalla completa, con el logo grande abajo.
+- **Escritorio:** interruptor Automático / Manual y pestañas Automático / Manual (funcionan). En móvil, la moderación
+  tiene subpestañas Reseñas / Fotos. Aprobar, Rechazar, Siguiente, buscar y avisos están solo dibujados («isla»).
+- Datos de los bocetos sustituidos por marcadores ([HORA], [N], [USUARIO], [NOMBRE DEL RESTAURANTE], [TIPO DE VIAJE]).
+
+### 4.9 Panel (fase 2, parte A) — tanda 2: acceso, 06-11-2026
+
+- **Una sola pantalla de acceso para todos los roles** (doc 01 §20), no dos accesos separados como en `diseno/login/`.
+- **Mismo estilo que la web:** fondo blanco, tarjeta verde claro `#E3EFEB`, texto `#0A3F35`, botón principal verde de
+  marca, Literata en títulos, modo claro y oscuro (Tweaks «modo»). Sin cabecera de la web.
+- **7 pantallas**, en móvil y ordenador: 1) Acceso, con el título **«Tablemaroc · Panel»**, los 3 botones con el mismo peso y
+  la nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos»; 2) Continuar con email; 3) Continuar con
+  Google; 4) Continuar con huella o cara; 5) Código de la app («Segundo paso», solo Administración, después de Google);
+  6) Acceso no autorizado; 7) Activa tu acceso (primera vez, desde el email recibido; rol Propietario o Empleado en Tweaks).
+- **Administración que entra con email → «Acceso no autorizado»**. Se quita el botón «Ir al panel de locales» del boceto.
+- **Mensajes de error incluidos**, elegidos en Tweaks: email no válido, código incorrecto, código caducado, demasiados
+  intentos y huella o cara cancelada (también código de la app incorrecto o demasiados intentos). Los textos que no están
+  en `docs/18-textos/04-interfaz.md` quedan como marcador `[AVISO: …]`.
+- Iconos de email y llave dibujados en línea (sin emojis); «Continuar con Google» sin logo, como en el boceto.
+
 ## Bloque 5 · Pantallas en el lienzo
 
 | Pantalla | Móvil | Ordenador | Con Play |
@@ -134,6 +179,9 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Info del local (pestaña Info) | Sí | Sí | Ordenador |
 | Mi cuenta (Reseñas · Reservas · Favoritos · Datos) | Sí | Sí | Sí |
 | Sobre nosotros / Legales | Sí | Sí | Sí |
+| Panel · Esqueleto | Sí | Sí | Sí |
+| Panel 02 · Escritorio (Automático · Manual) | Sí | Sí | Sí |
+| Panel 01 · Acceso (7 pantallas: acceso, email, Google, huella o cara, código de la app, no autorizado, activa tu acceso) | Sí | Sí | Sí |
 
 ## Bloque 6 · Errores cometidos y lecciones
 
@@ -150,6 +198,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Una decisión (quitar la nota, quitar el negro) quedaba en una pantalla y no en otras. | Aplicar cada decisión en todas las pantallas a la vez (regla 6). |
 | Copias locales desfasadas respecto al lienzo. | Comparar huellas antes de publicar (regla 9). |
 | Al añadir «tocar fuera cierra», metí las acciones nuevas dentro de la lista de idiomas y no en la pantalla: los botones dejaron de funcionar («nada funciona»). La revisión de sintaxis no lo detectó. | Comprobar que cada acción usada existe ejecutando la pantalla (Bloque 3). Corregido en las 15 pantallas y en los generadores. |
+| Dije que había puesto la foto de fondo, pero el color de fondo de cada pantalla la tapaba: solo se veía naranja. | No dar por hecho un cambio visual sin comprobar qué lo puede anular; avisar de que no se ha visto en pantalla. Corregido. |
 | Con la lista de idiomas abierta, al abrir el menú ☰ la lista quedaba encima del menú. | Regla de capas (Bloque 4.6): un solo panel abierto y orden fijo de capas. Corregido en todas las pantallas. |
 
 ## Bloque 7 · Pendiente de decisión del titular
@@ -164,6 +213,9 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 - **Menú ☰, ubicación, botón de idioma y «Volver arriba»** usan JavaScript; el encargo pide casi sin JavaScript.
 - **Ciudades del Sáhara Occidental** (El Aaiún, Dajla), fuera de la lista.
 - **Mejores restaurantes:** cuántos y cómo se eligen.
+- **Acceso del panel:** textos de los avisos que faltan (email no válido, código caducado, huella o cara cancelada y
+  demasiados intentos con el código de la app). *(El encargo de login y los docs 16 y 17 ya dicen «una sola pantalla de
+  acceso», 06-11-2026.)*
 - **Pantallas que faltan:** menú del restaurante, reseñas, mapa, plato típico, escribir reseña, reserva, acceso,
   errores, reclamar un local y el panel.
 

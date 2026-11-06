@@ -14,7 +14,7 @@ Móvil: 900 × 2000 px. Ordenador: 1280 × 760 px. Cada carpeta tiene `movil/` y
 | `web-04-menu` | Menú completo (sin platos archivados) |
 | `web-05-plato-tipico` | Pestañas «Dónde comerlo» y «Qué es» |
 | `web-06-guia` | Guía editorial |
-| `login` | Encargo único (`ENCARGO.md`) y tres carpetas: `usuarios` (web), `administrador` y `propietario` (propietarios y empleados) |
+| `login` | Encargo único (`ENCARGO.md`) y tres carpetas: `usuarios` (web), `administrador` y `propietario` (bocetos de partida del acceso único del panel para todos los roles) |
 | `web-08-escribir-resena` | Escribir reseña y reseña enviada |
 | `web-09-mi-cuenta` | Reseñas, reservas, favoritos y datos |
 | `web-10-pagina-de-texto` | Legales, sobre nosotros, contacto |

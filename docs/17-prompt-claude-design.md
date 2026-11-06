@@ -90,7 +90,7 @@ El panel es grande: se pide en dos partes, en la misma conversación. Pide la pa
 
 ### Parte A: esqueleto, acceso, escritorio, listado y formulario del local
 
-Adjunta: `diseno/panel-esqueleto`, `diseno/login/administrador`, `diseno/login/propietario`, `diseno/panel-02-escritorio`,
+Adjunta: `diseno/panel-esqueleto`, `diseno/login/ENCARGO.md`, `diseno/login/administrador`, `diseno/login/propietario`, `diseno/panel-02-escritorio`,
 `diseno/panel-03-listado` y `diseno/panel-04-formulario-local`.
 
 ```
@@ -104,8 +104,9 @@ interruptor «Automático / Manual» y dos pestañas: «Automático» (qué hace
 (acciones a mano). Sigue los bocetos 1-automatico y 2-manual de cada carpeta.
 
 1. Esqueleto: barra lateral (en el móvil se abre con ☰) y cabecera con búsqueda global (Ctrl+K).
-2. Acceso, siguiendo los bocetos de diseno/login/administrador y diseno/login/propietario: Google, email o huella o
-   cara. Administración: Google + código de la app, o huella o cara.
+2. Acceso: una sola pantalla para todos los roles (apartado 3 de diseno/login/ENCARGO.md, con los bocetos de
+   diseno/login/administrador y diseno/login/propietario como partida): Google, email o huella o cara.
+   Administración: Google + código de la app, o huella o cara; si entra con email, «Acceso no autorizado».
 3. Escritorio, con la moderación de reseñas y fotos dentro.
 4. Listado genérico (sirve para locales, ciudades, platos y guías).
 5. Nuevo / editar local, con las pestañas Información · ES · EN · FR · Fotos · Menú (archivar / reactivar platos) ·

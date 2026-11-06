@@ -8,10 +8,10 @@ estructura en grises con datos ficticios: diseña el aspecto final respetando la
 | Carpeta | Para quién | Pantallas |
 |---|---|---|
 | `usuarios/` | Turistas que usan la web | 9 |
-| `administrador/` | Administración de Tablemaroc | 3 |
-| `propietario/` | Propietarios y empleados de los restaurantes | 5 |
+| `administrador/` + `propietario/` | **Acceso único del panel** para Administración, Propietarios y Empleados (apartado 3) | 7 |
 
-**Total: 17 pantallas × 2 (móvil y ordenador) = 34 imágenes.**
+**Total: 16 pantallas × 2 (móvil y ordenador) = 32 pantallas.** Las carpetas `administrador/` y `propietario/` son bocetos
+de partida del acceso único (decisión del titular, 06-11-2026).
 
 ---
 
@@ -50,34 +50,35 @@ Llevan la cabecera de la web (logo, buscar, idioma, cuenta) y, en móvil, la bar
 
 ---
 
-## 3. `administrador/` · Acceso de la administración (3 pantallas)
+## 3. Acceso del panel · una sola pantalla para todos los roles (7 pantallas)
 
-Sin cabecera ni barra de la web. Fondo neutro y tarjeta centrada. Solo cuentas autorizadas.
+Decisión del titular (06-11-2026; doc 01 §20): **un único acceso al panel** para Administración, Propietarios y Empleados.
+Las carpetas `administrador/` y `propietario/` se conservan solo como bocetos de partida; se diseñan juntas en estas
+7 pantallas. El sistema reconoce el rol (el empleado solo verá las reservas de su local).
 
-| # | Archivo | Pantalla | Contenido |
+Sin cabecera ni barra de la web. **Mismo estilo que la web:** fondo blanco, tarjeta verde claro centrada, botón principal
+verde de marca, Literata en títulos, modo claro y oscuro.
+
+| # | Pantalla | Contenido | Boceto de partida |
 |---|---|---|---|
-| 01 | `01-acceso` | Acceso | «Tablemaroc · Administración», **solo dos opciones**: «Continuar con Google» y «Continuar con huella o cara». Nota: con Google se pide después el código de la app; con huella o cara no |
-| 02 | `02-codigo-app` | Segundo paso | «Has entrado con Google como …», campo «Código de la app» (6 cifras), «Entrar», «‹ Otras opciones» |
-| 03 | `03-no-autorizado` | Acceso no autorizado | La cuenta no tiene acceso a la administración; botón «Ir al panel de locales» y «‹ Probar con otra cuenta» |
+| 01 | Acceso | «Tablemaroc · Panel», los 3 botones y la nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos» | `propietario/01-acceso` |
+| 02 | Continuar con email | Campo email, «Enviarme un código», campo código, «Entrar», «‹ Otras opciones» | `propietario/02-continuar-con-email` |
+| 03 | Continuar con Google | Elegir cuenta o «Usar otra cuenta de Google», «Entrar», aviso de datos compartidos y de que nunca vemos la contraseña de Google, «‹ Otras opciones» | `propietario/03-continuar-con-google` |
+| 04 | Continuar con huella o cara | Icono de llave, «Usar huella o cara», «Tu huella o tu cara nunca salen de tu dispositivo», «‹ Otras opciones» | `propietario/04-continuar-con-huella-o-cara` |
+| 05 | Segundo paso (código de la app) | Solo Administración, después de Google: «Has entrado con Google como …», campo «Código de la app» (6 cifras), «Entrar», «‹ Otras opciones» | `administrador/02-codigo-app` |
+| 06 | Acceso no autorizado | «Esta cuenta no tiene acceso al panel de Tablemaroc» y «‹ Probar con otra cuenta». Sin botón «Ir al panel de locales» | `administrador/03-no-autorizado` |
+| 07 | Activa tu acceso | Primera vez, desde el email recibido: local y rol (Propietario o Empleado), «Tu nombre», «Activar con Google / email / huella o cara», casilla de condiciones. Nunca se usa la palabra «invitar» | `propietario/05-activar-acceso` |
+
+Reglas del acceso único:
+
+- Propietarios y empleados entran con Google, email con código o huella o cara.
+- Administración entra con Google + código de la app (pantalla 05) o con huella o cara. **Si entra con email, ve
+  «Acceso no autorizado»** (pantalla 06).
+- Mensajes de error: los de las reglas comunes y, en la pantalla 05, código de la app incorrecto y demasiados intentos.
 
 ---
 
-## 4. `propietario/` · Acceso de propietarios y empleados (5 pantallas)
+## 4. Entregables
 
-Sin cabecera ni barra de la web. Fondo neutro y tarjeta centrada. Mismo acceso para propietarios y empleados; el sistema
-reconoce el rol (el empleado solo verá las reservas de su local).
-
-| # | Archivo | Pantalla | Contenido |
-|---|---|---|---|
-| 01 | `01-acceso` | Acceso | «Tablemaroc · Panel de locales», los 3 botones, nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos» |
-| 02 | `02-continuar-con-email` | Continuar con email | Igual que la de usuarios, en el estilo del panel |
-| 03 | `03-continuar-con-google` | Continuar con Google | Igual que la de usuarios, en el estilo del panel |
-| 04 | `04-continuar-con-huella-o-cara` | Continuar con huella o cara | Igual que la de usuarios, en el estilo del panel |
-| 05 | `05-activar-acceso` | Activa tu acceso | Primera vez, desde el email recibido: local y rol (Propietario o Empleado), «Tu nombre», «Activar con Google / email / huella o cara», casilla de condiciones. Nunca se usa la palabra «invitar» |
-
----
-
-## 5. Entregables
-
-Las 17 pantallas en móvil y ordenador con el diseño final, los mensajes de error y los componentes que usan
+Las 16 pantallas en móvil y ordenador con el diseño final, los mensajes de error y los componentes que usan
 (botón principal, botón secundario, campo de texto, campo de código, casilla, enlace, aviso, tarjeta de acceso del panel).
