@@ -21,6 +21,7 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 
 - Node.js 26 y `npm install` en la raíz.
 - **Microsoft Visual C++ Redistributable (x64)**: sin él no arrancan `workerd` (servidor local de Cloudflare) ni el build de Astro.
+  Instalado en este PC el 06-11-2026.
 
 ## Lo que hace el titular (maestro §2)
 
@@ -38,4 +39,5 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | `npm run db:migrate:local` | Aplica el esquema a la base D1 local |
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` | Build para Cloudflare |
+| `npx wrangler dev -c dist/server/wrangler.json --local --test-scheduled` | Prueba el build en local (`http://127.0.0.1:8787`); las tareas se lanzan con `/cdn-cgi/handler/scheduled?cron=30+2+*+*+*` |
 | `npm run db:migrate:remote` | Aplica el esquema en Cloudflare (lo lanza Claude Code tras crear el titular la base) |
