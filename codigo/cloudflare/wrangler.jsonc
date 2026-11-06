@@ -1,0 +1,43 @@
+// Tablemaroc en Cloudflare (maestro §18 ter). Sin account_id ni secretos: el titular crea la cuenta y las claves (§2).
+// Los IDs de D1 se rellenan cuando el titular crea la base (`wrangler d1 create tablemaroc`).
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "tablemaroc",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-11-04",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "observability": { "enabled": true },
+
+  // Base de datos (D1, SQLite). Migraciones en ./migrations.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tablemaroc",
+      "database_id": "PENDIENTE_TITULAR",
+      "migrations_dir": "./migrations"
+    }
+  ],
+
+  // R2: fotos (públicas a través del Worker) y copias de seguridad (privadas, §9).
+  "r2_buckets": [
+    { "binding": "FOTOS", "bucket_name": "tablemaroc-fotos" },
+    { "binding": "COPIAS", "bucket_name": "tablemaroc-copias" }
+  ],
+
+  // Tareas programadas (§6). Horas en UTC; Marruecos es UTC+1.
+  "triggers": {
+    "crons": [
+      "0 7,13,19 * * *", // moderación de reseñas y fotos, 3 veces al día (08:00, 14:00 y 20:00 en Marruecos)
+      "30 2 * * *",      // copia diaria de la base de datos a R2
+      "0 3 * * 1",       // semanal: copia de fotos y configuración no secreta
+      "0 4 1 * *"        // mensual: revisión de seguridad, duplicidad y SEO
+    ]
+  },
+
+  // Variables NO secretas. Los secretos (Turnstile, email transaccional, Google OAuth) van con `wrangler secret put`.
+  "vars": {
+    "SITE_URL": "https://tablemaroc.com",
+    "DEFAULT_LOCALE": "es"
+  }
+}

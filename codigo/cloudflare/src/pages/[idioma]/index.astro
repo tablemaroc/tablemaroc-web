@@ -1,0 +1,23 @@
+---
+// Página provisional SIN diseño (maestro §19): las plantillas llegan con el diseño aprobado de Claude Design.
+// Solo HTML mínimo para comprobar el despliegue en Cloudflare; no indexable.
+const { idioma } = Astro.params;
+if (!['es', 'en', 'fr'].includes(idioma ?? '')) return Astro.redirect('/es/', 302);
+const textos = {
+  es: 'Tablemaroc está en preparación.',
+  en: 'Tablemaroc is being prepared.',
+  fr: 'Tablemaroc est en préparation.',
+} as const;
+---
+<!doctype html>
+<html lang={idioma}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Tablemaroc</title>
+  </head>
+  <body>
+    <p>{textos[idioma as keyof typeof textos]}</p>
+  </body>
+</html>

@@ -7,7 +7,8 @@
   },
   "workspaces": [
     "codigo/frontend",
-    "codigo/backend"
+    "codigo/backend",
+    "codigo/cloudflare"
   ],
   "scripts": {
     "dev": "npm run dev -w @tablemaroc/frontend",
@@ -15,7 +16,7 @@
     "build": "npm run build -w @tablemaroc/frontend",
     "start": "npm run start -w @tablemaroc/frontend",
     "release": "npm run build && node codigo/frontend/scripts/package-release.mjs",
-    "typecheck": "tsc -p tsconfig.json && tsc -p codigo/frontend/tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p codigo/frontend/tsconfig.json && tsc -p codigo/cloudflare/tsconfig.json --noEmit",
     "test": "node --test codigo/testing/*.test.ts",
     "test:db": "bash codigo/database/tests/run.sh",
     "test:e2e": "node codigo/testing/e2e/sw.e2e.cjs && node codigo/testing/e2e/map.e2e.cjs && node codigo/testing/e2e/pages.e2e.cjs && node codigo/testing/e2e/auth.e2e.cjs && node codigo/testing/e2e/qa.e2e.cjs",

@@ -26,7 +26,7 @@ sobre cualquier documento anterior (incluidos `10`, `11`, `12`, `14` y `decision
 6. **Sin ningún tipo de ingreso:** sin afiliados, sin anuncios, sin destacados de pago y sin suscripciones.
    Nada altera puntuaciones, moderación ni orden orgánico.
 7. **Minimizar gastos:** se elige siempre la opción sin coste por uso cuando existe (sin SMS, sin APIs de mapas de pago).
-8. Se aplica privacidad por defecto conforme al marco legal aplicable (RGPD; Ley 09-08 cuando corresponda).
+8. Se aplica privacidad por defecto conforme al **RGPD y a la Ley 09-08 de Marruecos, las dos siempre** (decisión del titular, 06-11-2026).
 9. Los secretos no se guardan en Git ni en backups normales.
 10. Idiomas oficiales del producto: `es`, `en`, `fr`.
 11. Árabe retirado del producto: sin RTL y sin `hreflang ar`.
@@ -294,7 +294,9 @@ Sin SMS ni push.
 
 ## 10. Privacidad
 
-Usuarios europeos: se aplica el RGPD (y la Ley 09-08 cuando corresponda).
+Se aplican **siempre** el RGPD (usuarios europeos) y la **Ley 09-08 de Marruecos** (responsable en Marruecos; autoridad: CNDP),
+cumpliendo en cada punto la regla más exigente de las dos (decisión del titular, 06-11-2026). Los trámites ante la CNDP
+(declaración o autorización, y transferencia de datos a Cloudflare fuera de Marruecos) los confirma el asesor.
 
 Revisar:
 
@@ -576,8 +578,9 @@ No hay pedidos a domicilio (no forman parte del producto).
   «Ver más» o paginación.
 - **Formato de los bocetos** (decisión del titular, 01-11-2026): una imagen por pantalla o por pestaña, a pantalla completa y sin marco.
   Móvil: 900 × 2000 px (vertical). Ordenador: 1280 × 760 px. Esquema en grises con datos de ejemplo ficticios; el aspecto final lo da Claude Design.
-- El código del diseño antiguo se sustituye en la fase de desarrollo, cuando el nuevo diseño esté aprobado; mientras tanto no se
-  modifica (fase de planificación sin código). La web no está publicada, así que retirarlo no afecta al SEO; queda en el historial de Git.
+- **Paso a Cloudflare antes del diseño** (decisión del titular, 06-11-2026): se monta ya la base técnica en Cloudflare
+  (Astro, Workers, D1, R2, Cron Triggers, Turnstile) y se pasan los datos y la lógica, **sin plantillas visuales**.
+  Las plantillas del diseño antiguo (Next.js) no se modifican y se sustituyen cuando el nuevo diseño esté aprobado. La web no está publicada, así que retirarlo no afecta al SEO; queda en el historial de Git.
 
 ---
 
@@ -667,6 +670,8 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: el usuario puede cancelar su reserva cuando quiera, también si está pendiente (§18 bis).
 - Decisión del titular: el propietario contesta las reseñas de su local desde su panel; las respuestas pasan al MVP y se moderan como las reseñas (§3, §6, §12, §20). *(Superado: entrada siguiente.)*
 - Decisión del titular: las respuestas del propietario no pasan por moderación; se publican al enviarlas, salvo las excepciones legales de §3.2 (§3, §12).
+- Decisión del titular: RGPD y Ley 09-08 de Marruecos se aplican siempre, con la regla más exigente de las dos (§1, §10).
+- Decisión del titular: se pasa ya la base técnica a Cloudflare (datos y lógica), sin plantillas visuales hasta que se apruebe el diseño (§19).
 
 ### 04-11-2026 (decisiones del titular)
 

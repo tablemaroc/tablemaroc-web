@@ -1,8 +1,10 @@
 # Borrador de la política de privacidad
 
-**Estado: BORRADOR DE TRABAJO, no publicado.** Lo redactó Claude Code el 30-10-2026 a partir de lo que hace el código. No es asesoramiento legal: debe revisarlo un asesor antes de publicarse (maestro §10).
-Los huecos `[PENDIENTE: ...]` solo puede rellenarlos el titular. No se inventan.
-Cuando esté aprobado, se traduce a inglés y francés, se publica en `/privacidad` y se cambia `CONSENT_VERSION` en `codigo/backend/reviews/validate.ts`.
+**Estado: BORRADOR DE TRABAJO, no publicado.** Primera versión de Claude Code (30-10-2026); revisada el 06-11-2026 para
+aplicar **siempre el RGPD y la Ley 09-08 de Marruecos** (decisión del titular, maestro §1 y §10) y para reflejar el paso
+a Cloudflare, el login sin contraseña, las reservas y los favoritos. No es asesoramiento legal: debe revisarlo un asesor
+antes de publicarse (maestro §10). Los huecos `[PENDIENTE: ...]` solo puede rellenarlos el titular o el asesor. No se inventan.
+Cuando esté aprobado, se traduce a inglés y francés, se publica en `/es/privacidad/` (y equivalentes) y se sube la versión del consentimiento.
 
 ---
 
@@ -10,30 +12,41 @@ Cuando esté aprobado, se traduce a inglés y francés, se publica en `/privacid
 
 Última actualización: [PENDIENTE: fecha de publicación]
 
-### 1. Quién es el responsable
+### 1. Quién es el responsable y qué leyes aplicamos
 
 Responsable de tus datos: Raki Ahmed, persona física.
 Dirección: 33 rue Chiekh Ben Seddik, Tánger, Marruecos.
 Contacto para privacidad: moradvisor@gmail.com.
-[PENDIENTE: representante en la Unión Europea, si el asesor confirma que hace falta (RGPD, art. 27)].
+
+Aplicamos a la vez el **Reglamento General de Protección de Datos de la Unión Europea (RGPD)** y la **Ley 09-08 de Marruecos**
+sobre la protección de las personas físicas en el tratamiento de datos personales. Cuando las dos reglas difieren,
+seguimos la más protectora para ti.
+
+[PENDIENTE: número de declaración o autorización ante la CNDP, cuando se obtenga.]
+[PENDIENTE: representante en la Unión Europea, si el asesor confirma que hace falta (RGPD, art. 27).]
 
 ### 2. Qué datos tratamos y para qué
 
 | Situación | Datos | Para qué | Base legal |
 |---|---|---|---|
-| Visitas la web | Ninguna cuenta. El servidor recibe tu dirección IP y datos técnicos del navegador | Servir la página, seguridad y límite de intentos | [PENDIENTE: confirmar con asesor: interés legítimo] |
-| Creas una cuenta o entras con email, Google o Apple | Email y, con Google o Apple, los datos básicos de perfil que facilitan | Identificarte y mantener tu sesión | Ejecución del servicio que pides |
-| Escribes una reseña | Nombre visible, puntuación, comentario, fecha y lugar reseñado | Moderarla y publicarla | Consentimiento |
-| Subes fotos | Las fotos y su texto descriptivo | Moderarlas y mostrarlas con tu reseña | Consentimiento |
-| Das tu consentimiento | Finalidad, versión del texto y fecha | Poder demostrar que lo diste | Obligación de responsabilidad proactiva |
+| Visitas la web | No hace falta cuenta. Cloudflare recibe tu dirección IP y datos técnicos del navegador | Servir la página, proteger la web frente a ataques y abusos, y límite de intentos | [PENDIENTE: confirmar con asesor: interés legítimo] |
+| Entras o creas una cuenta con Google, con un código por email o con tu huella o cara | Email; con Google, el identificador de tu cuenta de Google; con huella o cara, una clave pública de tu dispositivo (tu huella o tu cara **nunca salen de tu dispositivo**) | Identificarte y mantener tu sesión | Ejecución del servicio que pides |
+| Escribes una reseña | Nombre visible, puntuación, comentario, fecha de visita, tipo de viaje y lugar reseñado | Moderarla y publicarla | Consentimiento |
+| Subes fotos | Las fotos, sin datos de ubicación (los quitamos) | Moderarlas y mostrarlas con tu reseña | Consentimiento |
+| Solicitas una reserva | Local, fecha, hora, número de personas, petición especial y tu nombre visible | Gestionar la reserva con el local y avisarte por email | Ejecución del servicio que pides |
+| Guardas favoritos | Locales guardados | Mostrártelos y tenerlos sin conexión | Ejecución del servicio que pides |
+| Tienes un local o trabajas en uno | Email, local y rol (propietario o empleado) | Darte acceso al panel de tu local | Ejecución del servicio que pides |
+| Das tu consentimiento | Finalidad, versión del texto y fecha | Poder demostrar que lo diste | Obligación legal de responsabilidad proactiva |
 
-Tu nombre visible y tus reseñas aprobadas son públicos. Tu email no se publica nunca.
+Tu nombre visible y tus reseñas aprobadas son públicos. Tu email y tu teléfono no se publican nunca.
+Las respuestas de los propietarios a las reseñas también son públicas.
 No uses en tu reseña datos de otras personas ni datos sensibles.
 
 ### 3. Lo que no hacemos
 
-No vendemos tus datos. No usamos publicidad ni analítica. [PENDIENTE: revisar si se añade analítica, docs/08 punto 6.]
-No usamos tu ubicación: el mapa muestra la del lugar, no la tuya.
+No vendemos tus datos. No usamos publicidad ni perfiles comerciales.
+La analítica es **sin cookies** y agregada (Cloudflare Web Analytics): no te identifica ni te sigue entre webs.
+No usamos tu ubicación: el mapa muestra la del lugar, no la tuya. No usamos SMS.
 
 ### 4. Con quién se comparten
 
@@ -41,43 +54,57 @@ Solo con proveedores que hacen funcionar la web:
 
 | Proveedor | Función | Ubicación |
 |---|---|---|
-| Supabase | Base de datos, cuentas y almacenamiento de fotos | Unión Europea (Fráncfort) |
-| Hostinger | Servidor de la web | [PENDIENTE: país del VPS] |
-| [PENDIENTE: proveedor de email] | Envío del enlace de acceso | [PENDIENTE] |
-| Apple, si se activa | Acceso con «Entrar con Apple» | [PENDIENTE: confirmar con asesor] |
-| Google | Acceso a tu cuenta con «Entrar con Google» | [PENDIENTE: confirmar con asesor: puede implicar transferencia fuera de la UE y de Marruecos] |
-| Google | Mapa de cada ficha. Solo se carga si pulsas «Ver mapa»; entonces Google recibe tu dirección IP | [PENDIENTE: confirmar con asesor: puede implicar transferencia fuera de la UE y de Marruecos] |
+| Cloudflare, Inc. | Alojamiento de la web, base de datos, fotos, copias de seguridad, protección antispam (Turnstile) y analítica sin cookies | Red mundial; [PENDIENTE: confirmar con asesor la región de los datos y las garantías de transferencia] |
+| [PENDIENTE: proveedor de email transaccional] | Envío de los códigos de acceso y de los avisos de reserva | [PENDIENTE] |
+| Google | Solo si eliges «Continuar con Google» | [PENDIENTE: confirmar con asesor: puede implicar transferencia fuera de la UE y de Marruecos] |
+| El local donde reservas | Recibe los datos de tu reserva para atenderla | Marruecos |
 
-[PENDIENTE: transferencias internacionales. El responsable está en Marruecos y los datos se alojan en la Unión Europea. Confirmar con asesor los trámites ante la CNDP.]
+El mapa usa datos de OpenStreetMap servidos **desde nuestro propio dominio**: ver el mapa no envía tus datos a terceros.
+El botón «Cómo llegar» abre la aplicación de mapas de tu dispositivo solo si lo pulsas.
+
+[PENDIENTE: transferencias internacionales. El responsable está en Marruecos y Cloudflare trata datos fuera de Marruecos.
+Confirmar con el asesor la autorización de transferencia ante la CNDP y las garantías del RGPD (cláusulas contractuales tipo o equivalentes).]
 
 ### 5. Cuánto tiempo los guardamos
 
-- Cuenta, perfil, reseñas, fotos y consentimientos: hasta que elimines tu cuenta. [PENDIENTE: confirmar]
+- Cuenta, reseñas, fotos, favoritos y consentimientos: hasta que elimines tu cuenta. [PENDIENTE: confirmar con asesor]
+- Reservas: se conservan como historial del local; al eliminar tu cuenta se desvinculan de ti y no guardan tus datos de contacto. [PENDIENTE: plazo máximo]
+- Códigos de acceso: caducan a los 10 minutos y no se guardan en claro.
+- Sesiones: 30 días como máximo.
 - Reseñas rechazadas: [PENDIENTE: plazo]
-- Registros técnicos del servidor: [PENDIENTE: plazo]
-- Copias de seguridad: hasta 3 meses aproximadamente, por rotación automática; lo que borres puede seguir en ellas hasta entonces. [PENDIENTE: confirmar al instalar las copias]
-
-Tras eliminar tu cuenta conservamos un registro interno de que se eliminó, sin tu email.
+- Registros técnicos de Cloudflare: [PENDIENTE: plazo según el plan contratado]
+- Copias de seguridad: 7 copias diarias, 4 semanales y 3 mensuales; lo que borres puede seguir en ellas hasta unos 3 meses. [PENDIENTE: confirmar al activar las copias]
 
 ### 6. Tus derechos
 
-Puedes acceder a tus datos, corregirlos, borrarlos, pedir su portabilidad, oponerte al tratamiento o limitarlo, y retirar tu consentimiento en cualquier momento. Retirarlo no afecta a lo ya hecho antes.
+Según el RGPD y la Ley 09-08 puedes acceder a tus datos, corregirlos, borrarlos, pedir su portabilidad, oponerte al
+tratamiento o limitarlo, y retirar tu consentimiento en cualquier momento. Retirarlo no afecta a lo ya hecho antes.
 
-Desde **Mi cuenta** puedes cambiar tu nombre, borrar tus reseñas, descargar tus datos y eliminar tu cuenta. Para lo demás, escribe a moradvisor@gmail.com.
+Desde **Mi cuenta** puedes cambiar tu nombre, borrar tus reseñas, **descargar tus datos** y **eliminar tu cuenta**.
+Para lo demás, escribe a moradvisor@gmail.com. Respondemos en el plazo legal más corto de los dos. [PENDIENTE: confirmar plazo con asesor]
 
-Si no estás conforme, puedes reclamar ante la Commission Nationale de contrôle de la protection des Données à caractère Personnel (CNDP) de Marruecos o, si vives en la Unión Europea, ante tu autoridad de protección de datos.
+Puedes reclamar ante la **Commission Nationale de contrôle de la protection des Données à caractère Personnel (CNDP)**
+de Marruecos y, si vives en la Unión Europea, ante tu autoridad de protección de datos.
 
 ### 7. Cookies y almacenamiento en tu dispositivo
 
-- **Cookie de sesión:** solo si entras en tu cuenta. Es necesaria para mantenerte identificado.
-- **Copia sin conexión:** tu navegador guarda los archivos de la web y hasta 20 páginas visitadas, para que funcione con mala cobertura. Se queda en tu dispositivo; no nos llega. Puedes borrarla desde los ajustes del navegador.
-- **Google Maps:** solo si pulsas «Ver mapa». Al cargarse puede usar sus propias cookies o almacenamiento. Sin pulsar, la web no contacta con Google. Los enlaces para abrir el lugar en una app de mapas llevan a Google u otra app solo si los pulsas.
+- **Cookie de sesión** (`__Host-tm_sesion`): solo si entras en tu cuenta. Es imprescindible para mantenerte identificado.
+- **Idioma elegido** (`tm_idioma`): recuerda el idioma que elegiste. Es imprescindible para mostrarte la web en tu idioma.
+- **Turnstile** (Cloudflare): comprobación antispam al enviar formularios. [PENDIENTE: confirmar con asesor si usa almacenamiento no imprescindible.]
+- **Copia sin conexión**: tu navegador guarda los archivos de la web, tus favoritos y hasta 20 páginas visitadas, para que funcione con mala cobertura. Se queda en tu dispositivo; no nos llega. Puedes borrarla desde los ajustes del navegador.
+
+No usamos cookies de publicidad ni de analítica, así que no mostramos aviso de cookies.
 
 ### 8. Edad mínima
 
-[PENDIENTE: edad mínima para crear una cuenta, a confirmar con asesor.]
+[PENDIENTE: edad mínima para crear una cuenta, a confirmar con asesor (RGPD art. 8 y Ley 09-08).]
 
-### 9. Cambios
+### 9. Seguridad
+
+Conexión cifrada (HTTPS), cabeceras de seguridad estrictas, sin contraseñas que robar, códigos de un solo uso,
+límites de intentos, segundo factor para la administración y registro de auditoría de los cambios.
+
+### 10. Cambios
 
 Si cambia esta política, publicaremos la nueva versión aquí con su fecha. Si el cambio afecta a lo que aceptaste, te pediremos de nuevo tu consentimiento.
 
@@ -85,18 +112,20 @@ Si cambia esta política, publicaremos la nueva versión aquí con su fecha. Si 
 
 ## Notas para el titular y su asesor (no se publican)
 
-### Qué dice el código hoy
-- **Sí existe:** exportar datos, eliminar cuenta, registro de consentimiento con versión y fecha, moderación previa.
-- **Mapa:** desde el 30-10-2026, Google Maps solo se carga al pulsar «Ver mapa», con un aviso breve junto al botón. Sin esa pulsación no hay contacto con Google; podría no hacer falta aviso de cookies (pregunta 4). La dirección y los enlaces se ven siempre.
-- **Copias de seguridad:** el plazo sale de la rotación prevista en `config/backups/` (7 diarias, 4 semanales y 3 mensuales), aún sin instalar.
-- **Registros de Nginx:** guardan la IP y aún no tienen plazo fijado.
+### Qué hace el código nuevo (codigo/cloudflare, 06-11-2026)
+- **Sí existe:** descarga de datos y borrado de la cuenta (`/api/cuenta/datos`), registro de consentimientos con versión y fecha,
+  moderación previa de reseñas y fotos, cabeceras de seguridad, cookie de sesión `__Host-` con `HttpOnly`, `Secure` y `SameSite=Lax`,
+  hash de códigos y sesiones, límites de intentos y auditoría de solo inserción.
+- **Pendiente:** proveedor de email, inicio de sesión con Google y con huella o cara, retirada del GPS de las fotos en el Worker
+  y copia fuera de Cloudflare.
+- Retirados respecto a la versión del 30-10-2026: Supabase, Hostinger, Apple y Google Maps.
 
 ### Preguntas para el asesor
-1. ¿Se aplica el RGPD, además de la Ley 09-08? La web se dirige a visitantes en español, inglés y francés; si se considera dirigida a personas en la UE, podría aplicarse (art. 3.2) y exigir representante (art. 27).
-2. ¿Qué trámites hacen falta ante la CNDP (declaración o autorización), incluida la transferencia a proveedores en la UE y Google?
+1. RGPD y Ley 09-08 se aplican siempre (decisión del titular). ¿Hace falta representante en la UE (RGPD art. 27)?
+2. ¿Qué trámites hacen falta ante la CNDP (declaración o autorización), incluida la transferencia de datos a Cloudflare y Google?
 3. ¿Es correcta la base legal de cada fila de la sección 2?
-4. ¿Hace falta aviso de cookies si el mapa solo se carga al pulsar?
-5. ¿Qué plazos de conservación recomienda?
+4. ¿Turnstile y la analítica sin cookies permiten prescindir del aviso de cookies?
+5. ¿Qué plazos de conservación recomienda (reservas, reseñas rechazadas, registros)?
 6. ¿Qué edad mínima corresponde?
 7. ¿Hacen falta además aviso legal y condiciones de uso? Hoy la web no tiene ninguno de los dos.
 
@@ -105,6 +134,4 @@ Son en su mayoría secundarias: confirmar siempre con el texto oficial.
 - CNDP: comunicado sobre la obligación de declarar, https://www.cndp.ma/wp-content/uploads/2023/11/CNDP-DEC-Communiqu_Version_franaise_20221220.pdf
 - CMS, resumen de la Ley 09-08: https://cms.law/fr/mar/legal-updates/flash-info-maroc-etat-des-lieux-de-la-protection-des-donnees-a-caractere-personnel-au-maroc-loi-n-09-08
 - Directrices 3/2018 del CEPD sobre ámbito territorial (copia): https://gdpr-text.com/en/guidelines/territorialscope/
-- Google, condiciones de Maps para el EEE: https://cloud.google.com/terms/maps-platform/eea
-- Google, política de consentimiento de usuarios de la UE: https://www.google.hu/about/company/user-consent-policy-help/
 - AEPD, guía de cookies: https://www.aepd.es/documento/guia-cookies.pdf
