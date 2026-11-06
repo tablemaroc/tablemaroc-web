@@ -43,7 +43,8 @@
   "vars": {
     "SITE_URL": "https://tablemaroc.com",
     "DEFAULT_LOCALE": "es",
-    "TURNSTILE_SITE_KEY": "0x4AAAAAAF1dPdAcEait930o",   // pública (va en la web); la secreta es TURNSTILE_SECRET
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAF1dPdAcEait930o",
+    "GOOGLE_CLIENT_ID": "1011726502370-6ukhkbq7em33kipgcj7n589im1f71qr8.apps.googleusercontent.com",   // público; el secreto es GOOGLE_CLIENT_SECRET
     "ENTORNO": "prueba"          // sin indexar hasta que el titular decida abrir la web; entonces "produccion"
   }
 }

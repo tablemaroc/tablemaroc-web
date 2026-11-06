@@ -61,7 +61,7 @@ Claves: el titular ejecuta `node scripts/crear-secretos.mjs` (genera, muestra un
 4. Crear los secretos con `npx wrangler secret put <NOMBRE>`: `SESSION_PEPPER`, `TURNSTILE_SECRET`, `TOTP_KEY`
    (32 bytes aleatorios en base64url) y, cuando toquen, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` y `EMAIL_API_KEY`.
    En Google Cloud, la URI de redirección autorizada es `https://tablemaroc.com/api/acceso/google/vuelta/`.
-   Los correos de administración van en la variable `ADMIN_EMAILS` (no es secreta).
+   Los correos de administración van en el secreto `ADMIN_EMAILS` (no es una clave, pero así no quedan emails en Git).
 5. Elegir el proveedor de email transaccional y dónde va la copia fuera de Cloudflare.
 
 ## Comandos (desde `codigo/cloudflare`)
