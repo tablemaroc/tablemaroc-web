@@ -1,6 +1,6 @@
 # Encargo de diseño para Claude Design
 
-**Fecha:** 01-11-2026 · **Fuente de autoridad:** `01-documento-maestro-operacion.md` (manda en caso de conflicto).
+**Fecha:** 01-11-2026, actualizado el 06-11-2026 (apartado 5 bis) · **Fuente de autoridad:** `01-documento-maestro-operacion.md` (manda en caso de conflicto).
 **Bocetos de estructura:** carpeta `diseno/` (un boceto por pantalla y pestaña, en móvil y ordenador).
 
 Este documento es el texto que se pega en Claude Design. Los bocetos de `diseno/` se adjuntan como referencia de
@@ -67,6 +67,34 @@ Sin SMS y sin login con Apple.
 **Mapa:** imagen estática con «Ver mapa» (OpenStreetMap, solo al pulsar) y botón «Cómo llegar» que abre la app de mapas del móvil.
 Sin Google Maps dentro de la web.
 
+## 5 bis. Decisiones posteriores que el diseño debe incluir (06-11-2026)
+
+Estas decisiones son posteriores a los bocetos. Donde un boceto no las muestre, manda este apartado.
+
+- **Reseñas sin límite:** una persona puede reseñar el mismo local en cada visita. Cada reseña muestra, si existe, la
+  **respuesta del local** (del propietario, debajo de la reseña). En «Mi cuenta → Reseñas» se ve el estado de cada una
+  (pendiente, publicada, no publicada con su motivo) y se puede editar (vuelve a revisión) o borrar.
+- **Reservas:** el usuario puede **cancelar** su reserva cuando quiera, esté pendiente o confirmada («Mi cuenta → Reservas»).
+  Estados visibles: pendiente de confirmar · confirmada · no disponible · cancelada. Sin pago.
+- **«Abierto ahora»** (hora de Marruecos) tiene estos estados: Abierto · Cerrado · Sin horario · **«Horario de Ramadán:
+  consultar»** (durante el Ramadán, si el local tiene aviso) · Cerrado temporalmente · Cerrado definitivamente.
+- **Local cerrado:** la info del local sigue visible con un aviso claro. Si está cerrado definitivamente, muestra
+  «Alternativas cercanas» y no muestra «Reservar».
+- **Antispam (Turnstile de Cloudflare):** una casilla pequeña de verificación en «Continuar con email», «Crear cuenta con
+  huella o cara» y «Escribir reseña». Reserva su espacio (unos 300 × 65 px) para que no haya saltos.
+- **Reclamar un local:** enlace discreto «¿Es tu local?» en la info del local → formulario corto para el dueño: elegir una
+  vía de verificación (email del dominio del local, teléfono público del local, visita al local o documento del negocio)
+  y una nota opcional. Solicitud enviada → la revisa Tablemaroc.
+- **Mi cuenta → Datos:** «Descargar mis datos» y «Borrar mi cuenta» (con confirmación). Nombre visible editable.
+- **Sin conexión (PWA):** página «Sin conexión» en es/en/fr; un indicador discreto «Sin conexión» cuando falla la red; los
+  **favoritos** se pueden ver sin conexión (nombre, dirección, indicaciones y «Cómo llegar»); aviso **«Hay una versión
+  nueva · Actualizar»** (nunca recarga sola).
+- **Fotos:** las de las reseñas muestran el nombre visible de su autor. Siempre con texto alternativo.
+- **Cookies:** solo las imprescindibles (sesión e idioma): **no hay aviso de cookies**.
+- **App instalable:** necesito el logo también como icono de app (192 × 192, 512 × 512 y una versión «maskable» con margen).
+- **Correos:** plantilla sencilla para el código de acceso y los avisos de reserva (texto, sin imágenes obligatorias, sin
+  enlaces de seguimiento), en es/en/fr.
+
 ## 6. Panel (12 plantillas + esqueleto)
 
 Un único panel con tres roles: **Administración**, **Propietario** (solo su local) y **Empleado** (solo reservas de su local).
@@ -85,7 +113,7 @@ Las reservas en automático se confirman solas si hay sitio.
 | 6 | Redirecciones 301 | Vista general | `diseno/panel-06-redirecciones` |
 | 7 | Usuarios | Incluye RGPD (exportar y borrar) | `diseno/panel-07-usuarios` |
 | 8 | Auditoría | Con «Deshacer» | `diseno/panel-08-auditoria` |
-| 9 | Copias de seguridad | Lista de copias, «Hacer copia ahora», «Descargar» y «Restaurar» (con confirmación escribiendo RESTAURAR y código). Sin CSV | `diseno/panel-09-copias-de-seguridad` |
+| 9 | Copias de seguridad | Lista de copias, «Hacer copia ahora», «Descargar» y «Restaurar» (con confirmación escribiendo RESTAURAR y código). **«Crear copia»** (copia externa en el PC: la primera vez se elige carpeta y contraseña de copia; luego un clic, con barra de progreso) y **«Restaurar desde archivo»**. Sin CSV | `diseno/panel-09-copias-de-seguridad` |
 | 10 | Ajustes | | `diseno/panel-10-ajustes` |
 | 11 | Reservas | Vista de administración, del propietario y del empleado | `diseno/panel-11-reservas` |
 | 12 | Empleados | El propietario añade empleados (sin la palabra «invitar») y les quita el acceso | `diseno/panel-12-empleados` |

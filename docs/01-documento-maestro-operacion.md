@@ -686,6 +686,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
 - Decisión del titular: reseñas sin límite total ni por local, con un máximo de 5 cada 24 horas por usuario como freno antispam (§3).
 - Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
+- Decisión del titular (06-11-2026): las pantallas de la web se diseñan con Claude Design por fases (estilo primero, que aprueba el titular); prompts en docs/17-prompt-claude-design.md y encargo actualizado en docs/16 (§19).
 - Decisión del titular (06-11-2026): la copia externa se guarda en su PC con el botón «Crear copia» del panel; completa, cifrada y sustituyendo a la anterior (§9, §20).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 
