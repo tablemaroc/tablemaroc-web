@@ -52,7 +52,7 @@ Solo:
 Hace todo lo demás:
 
 - crear, verificar, traducir, revisar y **publicar** contenido;
-- moderar reseñas y fotos (aprobar o rechazar con motivo);
+- moderar reseñas, respuestas de propietarios y fotos (aprobar o rechazar con motivo);
 - cambios de URL, siempre con redirección 301;
 - marcar locales como cerrados, fusionar duplicados y corregir datos (§3.1);
 - SEO, Quality Gate, sitemap y enlazado interno;
@@ -120,8 +120,11 @@ Un idioma solo puede publicarse/indexarse cuando su traducción está realmente 
 
 Las rechazadas conservan el motivo de moderación. Solo las aprobadas se muestran y cuentan para la valoración media.
 
-### Respuestas a reseñas (Fase 2)
+### Respuestas a reseñas (MVP)
 `borrador -> revisada -> publicada`
+
+El propietario contesta las reseñas aprobadas de su local desde su panel (sección «Reseñas»), una respuesta por reseña
+(decisión del titular, 06-11-2026). Antes de publicarse, la respuesta pasa por la misma moderación que las reseñas (§6).
 
 ### Fotos
 `pendiente -> aprobada | rechazada`
@@ -217,7 +220,7 @@ Las operaciones técnicas relevantes deben quedar auditadas.
 
 ### Frecuencias
 
-- **3 veces al día**: moderación de reseñas y fotos por tarea programada de Claude Code (decisión del titular, 01-11-2026).
+- **3 veces al día**: moderación de reseñas, respuestas de propietarios y fotos por tarea programada de Claude Code (decisión del titular, 01-11-2026).
 - Diario: backup de base de datos.
 - Semanal: Search Console, rendimiento y backups de fotos/configuración no secreta.
 - Mensual: seguridad, duplicidad, SEO, estado y crecimiento.
@@ -327,6 +330,7 @@ Revisar:
 - favoritos, disponibles sin conexión en el móvil (adelantado de la Fase 2, 01-11-2026);
 - acceso de propietarios al panel (rol «Propietario») y reclamación de su local con verificación de titularidad sin coste (adelantado de la Fase 2, 01-11-2026);
 - reservas gestionadas (§18 bis);
+- respuestas del propietario a las reseñas de su local, moderadas (§3; adelantado de la Fase 2, 06-11-2026);
 
 - lugares;
 - ciudades;
@@ -347,7 +351,6 @@ Revisar:
 
 ### Fase 2
 
-- respuestas a reseñas publicadas;
 - recetas si se aprueban;
 - más idiomas si se decide;
 - seguimiento avanzado.
@@ -482,9 +485,9 @@ Decisión del titular (01-11-2026): **se recuperan las reservas**, que se había
 1. El usuario, con su cuenta, elige fecha, hora, número de personas y una petición especial opcional, y pulsa «Solicitar reserva». Sin pago.
 2. Con el panel en **automático**, la reserva **se confirma sola** si hay sitio según los ajustes del local; si no encaja, queda **pendiente de confirmar** (decisión del titular, 02-11-2026).
 3. Las pendientes (o todas, con el panel en **manual**): **el propietario o un empleado la confirma o la marca como «No disponible»** desde el **panel** (la misma plantilla del panel de administración, con el rol «Propietario»: solo ve su local).
-4. El usuario recibe el aviso **por email** (sin SMS) y ve el estado en «Mi cuenta → Mis reservas». Puede cancelarla.
+4. El usuario recibe el aviso **por email** (sin SMS) y ve el estado en «Mi cuenta → Mis reservas». **Puede cancelarla cuando quiera**, esté pendiente o confirmada (decisión del titular, 06-11-2026).
 
-Estados: `pendiente -> confirmada | no disponible`; `confirmada -> cancelada`. Las reservas no se borran (historial).
+Estados: `pendiente -> confirmada | no disponible | cancelada`; `confirmada -> cancelada`. Las reservas no se borran (historial).
 Ajustes del propietario: acepta reservas sí/no, franjas horarias, máximo de personas y días cerrados.
 
 Decisiones del titular (01-11-2026):
@@ -621,7 +624,7 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
 
 1. Acceso (una sola pantalla para todos los roles, §18): administración con «Continuar con Google» + código de la app
    de autenticación o con «Continuar con huella o cara»; propietarios y empleados con Google, email con código o huella o cara.
-2. **Escritorio, con la moderación de reseñas y fotos dentro** (no hay sección de moderación aparte).
+2. **Escritorio, con la moderación de reseñas, respuestas de propietarios y fotos dentro** (no hay sección de moderación aparte).
 3. Listado genérico (locales, ciudades, platos, guías).
 4. **Formulario de nuevo local / editar local, con todo en pestañas:** Información, ES, EN, FR, Fotos, Menú, Redirecciones e Historial.
    El menú y las redirecciones del local se gestionan aquí (no hay editor de menú aparte).
@@ -639,7 +642,8 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
 11. **Reservas** (decisión del titular, 01-11-2026: el panel del propietario va dentro de la plantilla del panel):
     - rol **Administración**: reservas de todos los locales, con filtros por ciudad y local;
     - rol **Propietario**: el mismo panel, pero su barra lateral solo muestra «Mi local» (Escritorio, Reservas, Información, Menú,
-      Fotos, Reseñas, Empleados) y solo ve los datos de su local. Confirma o marca «No disponible» y gestiona los ajustes de reservas.
+      Fotos, Reseñas, Empleados) y solo ve los datos de su local. Confirma o marca «No disponible» y gestiona los ajustes de reservas. En «Reseñas» ve las
+      reseñas aprobadas de su local y las contesta (§3).
     - rol **Empleado**: el mismo panel con una sola sección, **Reservas**, de su local: ver, confirmar y «No disponible». Nada más.
 12. **Empleados** (solo propietario): añadir empleados por email (quedan «pendientes de activar» hasta que activan su acceso), reenviar o anular y quitar el acceso. En la interfaz no se usa la palabra «invitar».
 
@@ -659,6 +663,8 @@ Barra lateral y cabecera del panel.
 - §16: «propio servidor» sustituido por R2 / nuestro dominio en Cloudflare, de acuerdo con §18 ter.
 - §18 bis: la reclamación del local (§12) es la vía por la que el propietario queda registrado.
 - Cabecera con la fecha real de la última actualización; registro de cambios separado por fecha (02-11 y 04-11) y entradas superadas marcadas, sin borrarlas.
+- Decisión del titular: el usuario puede cancelar su reserva cuando quiera, también si está pendiente (§18 bis).
+- Decisión del titular: el propietario contesta las reseñas de su local desde su panel; las respuestas pasan al MVP y se moderan como las reseñas (§3, §6, §12, §20).
 
 ### 04-11-2026 (decisiones del titular)
 
