@@ -26,7 +26,7 @@ Así, si el estilo no convence, solo se rehace una fase. **Orden decidido por el
 ## Prompt inicial (pégalo una vez, al empezar)
 
 ```
-Vas a diseñar la web de Tablemaroc, una guía de restaurantes, cafés y teterías, comida callejera y mercados de Marruecos
+Vas a diseñar la web de Tablemaroc, una guía solo de restaurantes de Marruecos
 para turistas europeos. Te adjunto el encargo completo (16-encargo-claude-design.md) y los bocetos de estructura en gris.
 
 Reglas que mandan sobre todo lo demás:
@@ -73,7 +73,7 @@ FASE 1. Propón el sistema visual de Tablemaroc y aplícalo a la portada:
    texto, estrellas, insignias de datos rápidos (vegetariano, tarjeta, terraza, idiomas ES·EN·FR), avisos (información,
    cerrado temporalmente, Ramadán, sin conexión, «Hay una versión nueva · Actualizar»).
 3. Esqueleto: cabecera (logo, buscador, selector de idioma ES/EN/FR, acceso), pie de página como navegación secundaria
-   (ciudades, tipos de lugar, guías, legales; sin «Política de cookies») y barra inferior del móvil
+   (ciudades, guías, legales; sin «Política de cookies») y barra inferior del móvil
    (Inicio, Cuenta; sin Buscar ni Explorar: se busca desde el buscador de la Home).
 4. Home en móvil y ordenador, siguiendo el boceto.
 
@@ -149,8 +149,8 @@ Adjunta: `diseno/web-02-listado`, `diseno/web-03-info-del-local` y `diseno/web-0
 ```
 FASE 3. Con el estilo aprobado en la fase 1, diseña:
 
-1. Listado único (sirve para ciudad, ciudad + tipo, tipos de lugar, guías, platos y resultados de búsqueda): título,
-   introducción, filtros (tipo, ciudad, vegetariano, pago con tarjeta, terraza, abierto ahora), 20 resultados y
+1. Listado único (sirve para ciudades, restaurantes de una ciudad, guías, platos y resultados de búsqueda): título,
+   filtros (abierto ahora, vegetariano, pago con tarjeta, terraza), 20 resultados y
    «Ver más». Las 4 pestañas del boceto de búsqueda (Todo, Locales, Platos, Guías). Estado «sin resultados».
 2. Info del local, con su parte de arriba (foto de la entrada, nombre, nota y nº de reseñas, ♡ guardar, estado de
    apertura, botones Reservar · Cómo llegar · Llamar, datos rápidos) y las pestañas Info · Menú · Reseñas · Mapa.
@@ -162,7 +162,6 @@ FASE 3. Con el estilo aprobado en la fase 1, diseña:
    - Pestaña Mapa: imagen estática, botón «Ver mapa» (mapa interactivo solo al pulsar, crédito «© OpenStreetMap»),
      dirección e indicaciones en texto y «Cómo llegar».
    - Bloque «Cerca de aquí» y enlace discreto «¿Es tu local?».
-   - Variante para comida callejera y mercados (se ocultan los bloques que no aplican, p. ej. Menú o Reservar).
 3. Menú: categorías plegables, precio en MAD, «Precio pendiente» cuando no esté verificado, alérgenos solo si
    existen, fecha de verificación. Sin platos agotados ni etiqueta «Agotado».
 

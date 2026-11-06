@@ -4,7 +4,10 @@
 **Última actualización:** 06-11-2026 (ver «Registro de cambios» al final).  
 **Autoridad:** máxima autoridad operativa documental.
 
-**Vocabulario:** la página de cada local (restaurante, café, puesto o mercado) se llama **«info del local»**, no «ficha»,
+**Alcance (decisión del titular, 06-11-2026):** Tablemaroc es una guía **solo de restaurantes**; sin cafés y teterías,
+comida callejera ni mercados.
+
+**Vocabulario:** la página de cada restaurante se llama **«info del local»**, no «ficha»,
 en la documentación y en la interfaz de la web y del panel. Donde un documento anterior diga «ficha», se entiende «info del local».
 
 Si otra orden o documento contradice este documento, Claude Code no ejecuta la parte contradictoria:
@@ -580,7 +583,7 @@ No hay pedidos a domicilio (no forman parte del producto).
   (paleta arena y terracota, Fraunces y Manrope, logo de estrella), las plantillas actuales, la cabecera, el pie de página y sus enlaces.
 - El nuevo diseño se encarga a Claude Design y debe cumplir este documento: público europeo, es/en/fr, solo MAD, sin barrios,
   sin ingresos, login sin contraseña (Google, email con código y passkey), mapa sin coste y botón «Cómo llegar».
-- El pie de página y los enlaces se rediseñan como navegación secundaria útil para el SEO (§4.4): ciudades y tipos de lugar,
+- El pie de página y los enlaces se rediseñan como navegación secundaria útil para el SEO (§4.4): ciudades y guías,
   enlaces legales, sin «Política de cookies» si no se usan cookies no imprescindibles.
 - **Una sola pantalla por plantilla, en móvil y en ordenador** (decisión del titular, 01-11-2026): cada plantilla muestra lo esencial sin scroll largo.
   En ordenador se aprovecha el ancho (columnas) para que quepa en una pantalla.
@@ -608,8 +611,8 @@ Total: **29 piezas de diseño** (58 pantallas: móvil y ordenador), contando la 
 | # | Plantilla | Uso |
 |---|---|---|
 | 1 | Home | Portada en es/en/fr. **Decisión del titular (06-11-2026):** lista desplegable de ciudades (primera opción «Ciudades») con el botón «Ver restaurantes», y guías. Sin buscador de platos ni de locales y sin los bloques «Ciudades · Ver más» ni «Qué buscas». «Ver restaurantes»: si el usuario está en Marruecos, muestra solo los restaurantes de la ciudad donde está; si no está en Marruecos, muestra el mensaje «Elige una ciudad» |
-| 2 | **Listado único** | Todo lo que es una lista: ciudades, ciudad + tipo de lugar, tipos de lugar, guías, platos y resultados de búsqueda. Se adapta el título, la introducción, el tipo de tarjeta y los filtros |
-| 3 | Info del local | Restaurantes, cafés y teterías, comida callejera y mercados; los bloques que no aplican se ocultan |
+| 2 | **Listado único** | Todo lo que es una lista: ciudades, restaurantes de una ciudad, guías, platos y resultados de búsqueda. Se adapta el título, la introducción, el tipo de tarjeta y los filtros |
+| 3 | Info del local | Solo restaurantes (decisión del titular, 06-11-2026); los bloques que no aplican se ocultan |
 | 4 | Menú | Carta del local, precios solo en MAD |
 | 5 | Plato típico | Un plato y dónde comerlo |
 | 6 | Guía | Artículos editoriales |

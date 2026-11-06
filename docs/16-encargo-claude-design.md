@@ -10,7 +10,8 @@ estructura: Claude Design define el aspecto (colores, tipografía, logo, iconos)
 
 ## 1. Qué es Tablemaroc
 
-Guía de restaurantes, cafés y teterías, comida callejera y mercados de Marruecos para **turistas europeos**.
+Guía **solo de restaurantes** de Marruecos para **turistas europeos** (sin cafés y teterías, comida callejera ni
+mercados: decisión del titular, 06-11-2026).
 Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados y sin ningún tipo de ingreso.
 
 ## 2. Usuario y contexto de uso
@@ -44,7 +45,7 @@ Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados 
 
 | # | Plantilla | Pantallas / pestañas | Bocetos |
 |---|---|---|---|
-| 1 | Home | Buscador, ciudades, tipos de lugar, guías | `diseno/web-01-home` |
+| 1 | Home | Lista de ciudades con «Ver restaurantes», mejores restaurantes y guías (ver doc 01 §20) | `diseno/web-01-home` |
 | 2 | Listado único | Ciudad · ciudad + tipo · guías · platos · búsqueda (Todo, Locales, Platos, Guías) | `diseno/web-02-listado` |
 | 3 | Info del local | Arriba: foto, nombre, nota, ♡ guardar, «Abierto · cierra a las…», botones **Reservar · Cómo llegar · Llamar**, datos rápidos. Pestañas: **Info · Menú · Reseñas · Mapa** | `diseno/web-03-info-del-local` |
 | 4 | Menú | Secciones plegables, precio en MAD, «Precio pendiente», fecha de verificación | `diseno/web-04-menu` |
@@ -56,7 +57,7 @@ Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados 
 | 10 | Página de texto | Legales, sobre nosotros, cómo funcionan las reseñas, contacto | `diseno/web-10-pagina-de-texto` |
 | 11 | Error y estados | 404 · 500 · sin conexión · mantenimiento | `diseno/web-11-errores` |
 | 12 | Reserva | Formulario · solicitud enviada · confirmada | `diseno/web-12-reserva` |
-| — | Esqueleto | Cabecera · pie de página (navegación secundaria) · barra inferior del móvil (Inicio, Buscar, Explorar, Cuenta) | `diseno/web-esqueleto` |
+| — | Esqueleto | Cabecera · pie de página (navegación secundaria) · barra inferior del móvil (Inicio, Cuenta; sin Buscar ni Explorar desde el 06-11-2026: se busca desde el buscador de la Home) | `diseno/web-esqueleto` |
 
 **Datos rápidos aprobados de un local:** vegetariano, pago con tarjeta, terraza, idiomas del personal (ES · EN · FR),
 aviso de horario de Ramadán, foto de la entrada, «Cerca de aquí».
