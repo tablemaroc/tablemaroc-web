@@ -3,33 +3,16 @@
 // Antes hace una copia automática del estado actual. No borra nada (ver restaurarBase).
 // Con la sección «Copias» en Manual se puede restaurar igualmente: siempre lo hace una persona.
 import { env } from 'cloudflare:workers';
-import type { AuthenticationResponseJSON } from '@simplewebauthn/server';
-import { descifrar, json, leerJson, totpValido } from '../../../../../lib/acceso';
+import { json, leerJson } from '../../../../../lib/acceso';
+import { confirmarRestauracion, type Confirmacion } from '../../../../../lib/confirmar';
 import { copiarBase, restaurarBase, validarVolcado } from '../../../../../lib/copias';
 import { auditar } from '../../../../../lib/db';
 import { panel, SOLO_ADMIN } from '../../../../../lib/panel';
-import { verificarHuella } from '../../../../../lib/passkeys';
-import { permitir } from '../../../../../lib/sesion';
 
 export const POST = panel(SOLO_ADMIN, async ({ params, request }, c) => {
-  if (c.origen === 'claude_code') return json({ error: 'Restaurar lo hace una persona desde el panel' }, 403);
-  if (!(await permitir(env.DB, `restaurar:${c.u.id}`, 5, 900))) return json({ error: 'Demasiados intentos. Espera 15 minutos' }, 429);
-  const b = await leerJson<{ confirmacion: string; codigo: string; reto: string; respuesta: AuthenticationResponseJSON }>(request);
-  if (b.confirmacion !== 'RESTAURAR') return json({ error: 'Escribe RESTAURAR para confirmar' }, 400);
-
-  // Segundo paso: código de la app o huella o cara de esta misma cuenta.
-  let confirmado = false;
-  if (b.codigo) {
-    const f = await env.DB.prepare('SELECT totp_secret_enc FROM users WHERE id = ?').bind(c.u.id).first<{ totp_secret_enc: string | null }>();
-    confirmado = !!f?.totp_secret_enc && (await totpValido(await descifrar(env, f.totp_secret_enc), String(b.codigo)));
-  } else if (b.reto) {
-    const v = await verificarHuella(request, env.DB, b.reto, b.respuesta);
-    confirmado = v.ok && v.userId === c.u.id;
-  }
-  if (!confirmado) {
-    await auditar(env.DB, { actor: c.actor, origen: c.origen, entidadTipo: 'config', entidadId: `copia:${params.id}`, accion: 'restaurar_rechazado' }).run();
-    return json({ error: 'Hace falta el código de la app o tu huella o cara' }, 401);
-  }
+  const b = await leerJson<Confirmacion>(request);
+  const no = await confirmarRestauracion(env, request, c, b, `copia:${params.id}`);
+  if (no) return no;
 
   const copia = await env.DB.prepare(`SELECT r2_key FROM backups WHERE id = ? AND status = 'ok' AND contents IN ('base_de_datos','completa')`)
     .bind(params.id).first<{ r2_key: string | null }>();

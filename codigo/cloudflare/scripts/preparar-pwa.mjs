@@ -39,6 +39,7 @@ sw = inyectar(sw, 'MENU_SEGMENT', MENU_SEGMENT);
 writeFileSync(join(pub, 'sw.js'), sw);
 writeFileSync(join(pub, 'registrar-sw.js'), readFileSync(join(pwa, 'registrar-sw.js')));
 writeFileSync(join(pub, 'sin-conexion.html'), readFileSync(join(pwa, 'sin-conexion.html')));
+writeFileSync(join(pub, 'copia-pc.js'), readFileSync(join(pwa, 'copia-pc.js')));   // «Crear copia» del panel (§9)
 
 writeFileSync(join(pub, 'manifest.webmanifest'), JSON.stringify({
   name: 'Tablemaroc', short_name: 'Tablemaroc',
@@ -55,7 +56,7 @@ writeFileSync(join(pub, 'manifest.webmanifest'), JSON.stringify({
 // Cabeceras de los estáticos (Cloudflare los sirve sin pasar por el Worker): las mismas de seguridad que el Worker.
 const cab = Object.entries(SECURITY_HEADERS).map(([k, v]) => `  ${k}: ${v}`).join('\n');
 writeFileSync(join(pub, '_headers'), ['# Generado por scripts/preparar-pwa.mjs desde src/lib/seguridad.ts', '/*', cab, '',
-  '/sw.js', '  Cache-Control: no-cache', '  Service-Worker-Allowed: /', '', '/registrar-sw.js', '  Cache-Control: no-cache', '',
+  '/sw.js', '  Cache-Control: no-cache', '  Service-Worker-Allowed: /', '', '/registrar-sw.js', '  Cache-Control: no-cache', '', '/copia-pc.js', '  Cache-Control: no-cache', '',
   '/manifest.webmanifest', '  Content-Type: application/manifest+json', ''].join('\n'));
 
 // Iconos provisionales: cuadrado gris con «TM». Solo se generan si faltan (no cambian en cada build).

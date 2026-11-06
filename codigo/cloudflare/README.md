@@ -35,7 +35,8 @@ sigue en `codigo/frontend` y `codigo/backend` hasta que se sustituya.
 | Abierto ahora (hora de Marruecos y Ramadán) y Cerca de aquí | `src/lib/horario.ts` |
 | sitemap.xml (solo indexables, hreflang es/en/fr + x-default) y robots.txt | `src/lib/seo.ts` |
 | PWA: Service Worker (Cache-First, Network-First + IndexedDB 20 LRU, favoritos sin conexión), manifiesto, «Sin conexión» | `pwa/` (fuente), `scripts/preparar-pwa.mjs` (genera `public/`) |
-| Pruebas | `codigo/testing/cloudflare.test.ts`; PWA en Chromium: `npm run test:e2e:pwa` |
+| Copia externa en el PC: «Crear copia» y «Restaurar desde archivo» (completa, cifrada AES-GCM, sustituye a la anterior) | `pwa/copia-pc.js` (navegador), `src/pages/api/panel/copias/exportar.ts`, `foto.ts`, `restaurar-archivo.ts`, `src/lib/confirmar.ts` |
+| Pruebas | `codigo/testing/cloudflare.test.ts`; PWA en Chromium: `npm run test:e2e:pwa`; copia en el PC: `codigo/testing/e2e/copia-pc.e2e.cjs` (con el Worker local) |
 
 El panel es, por ahora, **solo API** (sin pantallas, maestro §19). Claude Code lo usa con una cuenta de administración
 y la cabecera `X-Origen: claude_code`, que queda en la auditoría. Restaurar copias solo lo hace una persona.

@@ -14,10 +14,12 @@ export default {
     const produccion = env.ENTORNO === 'produccion';
     // www.tablemaroc.com → tablemaroc.com (una sola dirección para la web; 301 para no duplicar contenido en buscadores).
     // Y siempre por HTTPS: http:// → https:// (HSTS hace el resto en las visitas siguientes).
-    const local = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
-    if (url.hostname.startsWith('www.') || (url.protocol === 'http:' && !local)) {
-      if (url.hostname.startsWith('www.')) url.hostname = url.hostname.slice(4);
-      if (!local) url.protocol = 'https:';
+    // Solo cuando la web es la real con HTTPS (SITE_URL): en local, wrangler dev hace creer al Worker que la petición llega
+    // por http a tablemaroc.com, y redirigir ahí crearía un bucle.
+    const sitio = new URL(env.SITE_URL);
+    if (sitio.protocol === 'https:' && (url.hostname === `www.${sitio.hostname}` || (url.hostname === sitio.hostname && url.protocol === 'http:'))) {
+      url.hostname = sitio.hostname;
+      url.protocol = 'https:';
       return withSecurityHeaders(Response.redirect(url.toString(), 301));
     }
     const fin = (res: Response) => {

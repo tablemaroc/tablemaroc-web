@@ -285,10 +285,14 @@ Sin SMS ni push.
 
 ## 9. Backups
 
-- Base de datos (D1): diario, exportado a R2 y, además, fuera de Cloudflare.
+- Base de datos (D1): diario, exportado a R2.
+- **Copia externa en el PC del titular** (decisión del titular, 06-11-2026): botón «Crear copia» del panel. Copia **completa**
+  (base de datos + fotos), **cifrada** en el propio navegador con la contraseña de copia del titular, y guardada en una carpeta
+  de su PC elegida una vez. Cada copia **sustituye a la anterior** (un solo archivo). Se restaura desde el panel con
+  «Restaurar desde archivo». La contraseña de copia va en el gestor de contraseñas del titular: sin ella no se puede restaurar.
 - Fotos y configuración no secreta: semanal.
 - Retención propuesta: 7 diarias, 4 semanales y 3 mensuales.
-- Copias externas y cifradas.
+- Copias externas y cifradas (la del PC, cifrada con AES-GCM; la contraseña nunca sale del navegador).
 - Secretos reales: gestor seguro del titular; nunca en backup normal.
 - Puede conservarse un inventario de secretos, nunca sus valores.
 - Restauración documentada.
@@ -536,7 +540,7 @@ Pendiente del titular:
 - Plan: empezar en el gratuito y pasar al de pago de Workers (unos 5 $/mes) cuando los límites lo pidan.
 - ~~Proveedor de email transaccional~~ → **Brevo, plan gratuito (300 emails al día)**, elegido por el titular el 05-11-2026: API transaccional, sin listas de contactos.
 - Procesado de fotos (convertir a WebP/AVIF y quitar el GPS): dentro de los Workers o con el servicio de imágenes de pago.
-- Copia de seguridad extra **fuera de Cloudflare** (recomendada).
+- ~~Copia de seguridad extra fuera de Cloudflare~~ → en el PC del titular con «Crear copia» (decisión del 06-11-2026, §9).
 - **Hostinger descartado** (decisión del titular, 02-11-2026).
 
 ---
@@ -645,6 +649,8 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
      y estado; aviso en el escritorio si una falla. Las automáticas siguen §9 (base de datos a diario; fotos y configuración
      no secreta cada semana); las manuales son completas (base de datos + fotos);
    - botones «Hacer copia ahora», «Descargar» y **«Restaurar»**;
+   - botón **«Crear copia»** (copia externa en el PC del titular, §9): completa, cifrada, sustituye a la anterior; y
+     **«Restaurar desde archivo»** para volver a cargarla (mismas confirmaciones que «Restaurar»);
    - restaurar pide escribir RESTAURAR y el código de la app (o huella o cara), y antes hace una copia automática del estado actual.
 10. Ajustes.
 11. **Reservas** (decisión del titular, 01-11-2026: el panel del propietario va dentro de la plantilla del panel):
@@ -680,6 +686,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: los textos ES/EN/FR de la info del local los escribe solo administración, no el propietario (§20).
 - Decisión del titular: reseñas sin límite total ni por local, con un máximo de 5 cada 24 horas por usuario como freno antispam (§3).
 - Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
+- Decisión del titular (06-11-2026): la copia externa se guarda en su PC con el botón «Crear copia» del panel; completa, cifrada y sustituyendo a la anterior (§9, §20).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 
 ### 04-11-2026 (decisiones del titular)
@@ -731,7 +738,7 @@ Barra lateral y cabecera del panel.
 
 ### Pendiente de decisión del titular
 
-- Stack (§18 ter): plan de Cloudflare y dónde se guarda la copia fuera de Cloudflare. (Email: Brevo, decidido; fotos: WebP sin GPS, hecho.)
+- Stack (§18 ter): plan de Cloudflare. (Email: Brevo; fotos: WebP sin GPS; copia externa: PC del titular. Decididos.)
 
 ### 29-10-2026
 
