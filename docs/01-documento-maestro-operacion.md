@@ -1,7 +1,7 @@
 # Documento maestro de operación de Tablemaroc
 
 **Estado:** vigente, se actualiza con cada decisión del titular.  
-**Última actualización:** 01-11-2026 (ver «Registro de cambios» al final).  
+**Última actualización:** 06-11-2026 (ver «Registro de cambios» al final).  
 **Autoridad:** máxima autoridad operativa documental.
 
 **Vocabulario:** la página de cada local (restaurante, café, puesto o mercado) se llama **«info del local»**, no «ficha»,
@@ -424,8 +424,8 @@ Sin API de Google Maps ni de ningún mapa de pago.
 
 | Pieza | Regla |
 |---|---|
-| Mapa estático | Imagen generada una sola vez al publicar el lugar y servida desde el propio servidor; reserva su espacio (sin CLS). |
-| Mapa interactivo | Solo si el usuario pulsa «Ver mapa». MapLibre con mapas de OpenStreetMap alojados en el propio servidor o en un servicio gratuito. Crédito «© OpenStreetMap» visible. |
+| Mapa estático | Imagen generada una sola vez al publicar el lugar, guardada en R2 y servida desde nuestro dominio en Cloudflare (§18 ter); reserva su espacio (sin CLS). |
+| Mapa interactivo | Solo si el usuario pulsa «Ver mapa». MapLibre con mapas de OpenStreetMap alojados en R2 (nuestro dominio en Cloudflare) o en un servicio gratuito. Crédito «© OpenStreetMap» visible. |
 | Botón «Cómo llegar» | Enlace gratuito que abre la aplicación de mapas del usuario (Google Maps o Apple Maps) con las coordenadas del lugar; sin API. |
 | Indicaciones en texto y foto de la entrada | Siempre visibles bajo el mapa. |
 | Sin conexión | Dirección e indicaciones en texto disponibles; indicador de conectividad. |
@@ -490,7 +490,8 @@ Ajustes del propietario: acepta reservas sí/no, franjas horarias, máximo de pe
 Decisiones del titular (01-11-2026):
 - solo reciben reservas los locales que marquen **«Acepto reservas»** (los demás no muestran el botón «Reservar»);
 - el acceso de propietarios al panel se **adelanta al MVP**;
-- **todos los locales tienen propietario registrado**: el propietario confirma las reservas de su local;
+- **todos los locales tienen propietario registrado**: el propietario confirma las reservas de su local. El propietario
+  queda registrado al reclamar su local y verificar la titularidad sin coste (§12); la reclamación es la vía de alta del propietario;
 - **el titular se encarga de las reservas** en la práctica: supervisión, incidencias y contacto con los restaurantes.
 
 
@@ -595,7 +596,7 @@ Total: **29 piezas de diseño** (58 pantallas: móvil y ordenador), contando la 
 | 4 | Menú | Carta del local, precios solo en MAD |
 | 5 | Plato típico | Un plato y dónde comerlo |
 | 6 | Guía | Artículos editoriales |
-| 7 | Acceso | Entrar (con botón «Crear cuenta»), Continuar con email (código), Continuar con Google, Continuar con passkey, Crear cuenta, crear con Google (elegir cuenta + último paso) y crear con passkey (datos + confirmación con huella o cara) |
+| 7 | Acceso | Entrar (con botón «Crear cuenta»), Continuar con email (código), Continuar con Google, Continuar con huella o cara, Crear cuenta, crear con Google (elegir cuenta + último paso) y crear con huella o cara (datos + confirmación con huella o cara) |
 | 8 | Escribir reseña | Estrellas, texto, fecha de visita, tipo de viaje (pareja, familia, amigos, solo), fotos |
 | 9 | Mi cuenta | Reseñas, reservas, favoritos y datos (descargar o borrar la cuenta) |
 | 10 | Página de texto | Legales, sobre nosotros, cómo funcionan las reseñas, contacto |
@@ -618,7 +619,8 @@ Copias de seguridad y Reservas. Sin modo automático: Ajustes, Empleados, el for
 **Reservas en automático: se confirman solas si hay sitio** según los ajustes del local (horas, máximo de personas, días
 cerrados); las que no encajan pasan a «Manual» para el propietario o el empleado.
 
-1. Acceso: solo «Continuar con Google» y después el segundo factor.
+1. Acceso (una sola pantalla para todos los roles, §18): administración con «Continuar con Google» + código de la app
+   de autenticación o con «Continuar con huella o cara»; propietarios y empleados con Google, email con código o huella o cara.
 2. **Escritorio, con la moderación de reseñas y fotos dentro** (no hay sección de moderación aparte).
 3. Listado genérico (locales, ciudades, platos, guías).
 4. **Formulario de nuevo local / editar local, con todo en pestañas:** Información, ES, EN, FR, Fotos, Menú, Redirecciones e Historial.
@@ -628,8 +630,9 @@ cerrados); las que no encajan pasan a «Manual» para el propietario o el emplea
 7. Usuarios (RGPD).
 8. Auditoría.
 9. **Copias de seguridad** (solo administración; sin CSV, decisión del titular, 02-11-2026):
-   - lista de copias (automáticas diarias y manuales) con fecha, contenido (base de datos + fotos), tamaño, dónde se guarda
-     (Cloudflare y fuera de Cloudflare) y estado; aviso en el escritorio si una falla;
+   - lista de copias (automáticas y manuales) con fecha, contenido, tamaño, dónde se guarda (Cloudflare y fuera de Cloudflare)
+     y estado; aviso en el escritorio si una falla. Las automáticas siguen §9 (base de datos a diario; fotos y configuración
+     no secreta cada semana); las manuales son completas (base de datos + fotos);
    - botones «Hacer copia ahora», «Descargar» y **«Restaurar»**;
    - restaurar pide escribir RESTAURAR y el código de la app (o huella o cara), y antes hace una copia automática del estado actual.
 10. Ajustes.
@@ -648,15 +651,34 @@ Barra lateral y cabecera del panel.
 
 ## Registro de cambios
 
+### 06-11-2026 (corrección de incoherencias internas, aprobada por el titular)
+
+- §20, acceso al panel: alineado con §18 (administración con Google + código de la app o huella o cara; propietarios y empleados con Google, email con código o huella o cara).
+- §20, plantilla Acceso: «Continuar con passkey» pasa a «Continuar con huella o cara», como exige §18.
+- §20, Copias de seguridad: las automáticas siguen la frecuencia de §9 (base de datos diaria; fotos y configuración semanal); las manuales son completas.
+- §16: «propio servidor» sustituido por R2 / nuestro dominio en Cloudflare, de acuerdo con §18 ter.
+- §18 bis: la reclamación del local (§12) es la vía por la que el propietario queda registrado.
+- Cabecera con la fecha real de la última actualización; registro de cambios separado por fecha (02-11 y 04-11) y entradas superadas marcadas, sin borrarlas.
+
+### 04-11-2026 (decisiones del titular)
+
+- Arquitectura de islas de Astro: contenido en HTML puro y solo 7 islas interactivas (reservar, favoritos, reseña, login, ver mapa, abierto ahora, buscador) (§18 ter).
+
+### 02-11-2026 (decisiones del titular)
+
+- Cloudflare confirmado y Hostinger descartado por el titular. Sin CSV: el panel tiene «Copias de seguridad» con hacer, descargar y restaurar (§5, §20).
+- Panel: interruptor «Automático / Manual» y pestañas en cada sección; reservas confirmadas automáticamente si hay sitio (§20).
+- **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
+
 ### 01-11-2026 (decisiones del titular)
 
 - Responsabilidades: el titular solo contrata servicios de pago y gestiona claves; Claude Code hace el resto, incluida la publicación y la moderación.
 - Nunca borrar contenido publicado: modificar, fusionar con 301 o marcar como cerrado; excepciones legales mínimas.
 - Sin ningún tipo de ingreso: retirados afiliados, anuncios, destacados de pago y monetización.
 - Barrios y zonas eliminados por completo.
-- Login sin SMS: usuarios con email + contraseña, Google y passkeys; propietarios solo con email + contraseña (y passkeys).
+- Login sin SMS: usuarios con email + contraseña, Google y passkeys; propietarios solo con email + contraseña (y passkeys). *(Superado: login sin contraseñas, §18.)*
 - Mapas sin coste por uso: mapa estático, MapLibre/OpenStreetMap bajo demanda y botón «Cómo llegar» por enlace.
-- Moderación por tarea programada varias veces al día (número pendiente).
+- Moderación por tarea programada varias veces al día (número pendiente). *(Fijado después en 3 veces al día, §6.)*
 - Público principal: turistas europeos.
 - Este documento se actualiza con cada decisión del titular.
 - Diseño antiguo descartado (fase 1 de Claude Design, plantillas, cabecera, pie y enlaces); nuevo diseño con Claude Design (§19).
@@ -668,16 +690,12 @@ Barra lateral y cabecera del panel.
 - Datos aprobados de la info del local: vegetariano, tarjeta, terraza, idiomas del personal, aviso de Ramadán, foto de la entrada y «Cerca de aquí» (§20).
 - Bocetos: una imagen por pantalla o pestaña, a pantalla completa (§19).
 - Platos agotados: se archivan, no aparecen en la web y no se borran (§3).
-- Login del panel: solo «Continuar con Google», siempre con segundo factor (§18).
-- Login sin contraseñas en toda la plataforma y SMS activado: Google, email con código, SMS con código y passkey (§18). Proveedor de SMS pendiente del titular.
+- Login del panel: solo «Continuar con Google», siempre con segundo factor (§18). *(Superado: huella o cara también para administración; propietarios y empleados con Google, email con código o huella o cara, §18.)*
+- Login sin contraseñas en toda la plataforma y SMS activado: Google, email con código, SMS con código y passkey (§18). Proveedor de SMS pendiente del titular. *(Superado: SMS retirado, entrada siguiente.)*
 - SMS retirado: no es necesario para las reseñas; cuentas con Google, email con código y passkey (§18).
 - Reservas: solo locales con «Acepto reservas»; acceso de propietarios al panel en el MVP (Google, email con código o passkey); todos los locales tienen propietario registrado, que confirma las reservas; el titular se encarga del tema de las reservas (§2, §18 bis).
 - Passkey: botón «Continuar con huella o cara» (§18).
 - Huella o cara también para propietarios y administración (§18).
-- Cloudflare confirmado y Hostinger descartado por el titular (02-11-2026). Sin CSV: el panel tiene «Copias de seguridad» con hacer, descargar y restaurar (§5, §20).
-- Arquitectura de islas de Astro: contenido en HTML puro y solo 7 islas interactivas (reservar, favoritos, reseña, login, ver mapa, abierto ahora, buscador) (§18 ter).
-- Panel: interruptor «Automático / Manual» y pestañas en cada sección; reservas confirmadas automáticamente si hay sitio (§20).
-- **Stack: todo en Cloudflare** (Astro en Workers/Pages, D1, R2, Cron Triggers, Turnstile, CDN, DNS) (§18 ter). Sustituye al VPS de Hostinger.
 - Encargo para Claude Design preparado en `docs/16-encargo-claude-design.md`, con los bocetos de `diseno/`.
 - Rol Empleado en el panel: solo reservas de su local (ver, confirmar, «No disponible»); los añade el propietario (§18, §20).
 - Moderación automática 3 veces al día (§6).
@@ -685,9 +703,9 @@ Barra lateral y cabecera del panel.
 - Favoritos en el MVP, disponibles sin conexión; nueva pestaña «Favoritos» en «Mi cuenta» y botón ♡ en la info del local (§12).
 - Panel único con roles: el propietario usa la misma plantilla del panel, limitada a su local; la sección Reservas está en el panel (§20).
 - Reservas recuperadas con la opción gestionada: solicita el usuario, confirma el propietario, aviso por email (§18 bis).
-- Web: botón «Crear cuenta» en la pantalla Entrar, con pantalla propia (§18). Panel: solo Google (§18).
-- Panel: moderación dentro del escritorio; nuevo local con información, fotos, menú y redirecciones en pestañas (§20). Inventario: 26 piezas, 52 pantallas.
-- Inventario de diseño: 28 piezas, con un único listado para todas las listas, incluidas ciudades y búsqueda (§20).
+- Web: botón «Crear cuenta» en la pantalla Entrar, con pantalla propia (§18). Panel: solo Google (§18). *(La parte del panel está superada: ver §18 y §20.)*
+- Panel: moderación dentro del escritorio; nuevo local con información, fotos, menú y redirecciones en pestañas (§20). Inventario: 26 piezas, 52 pantallas. *(Inventario superado: 29 piezas, §20.)*
+- Inventario de diseño: 28 piezas, con un único listado para todas las listas, incluidas ciudades y búsqueda (§20). *(Inventario superado: 29 piezas, §20.)*
 
 ### Pendiente de decisión del titular
 
