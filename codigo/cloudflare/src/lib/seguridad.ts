@@ -25,7 +25,8 @@ export const SECURITY_HEADERS: Readonly<Record<string, string>> = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()',
+  // geolocation=(self): «Ver restaurantes» sin ciudad elegida busca la ciudad más cercana (Bloque 4.4, aprobado por el titular).
+  'Permissions-Policy': 'geolocation=(self), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()',
   'Cross-Origin-Opener-Policy': 'same-origin',
   'Cross-Origin-Resource-Policy': 'same-origin',
 };

@@ -1,0 +1,18 @@
+---
+// 5 estrellas (azafrán = llena). Sin reseñas aprobadas: «Aún sin reseñas» (docs/18-textos), nunca estrellas vacías.
+import { T, formatoNota, type Idioma } from '../lib/textos';
+interface Props { media: number | null; idioma: Idioma; pequenas?: boolean; conNota?: boolean }
+const { media, idioma, pequenas = false, conNota = false } = Astro.props;
+const t = T[idioma];
+const llenas = media === null ? 0 : Math.round(media);
+const nota = media === null ? '' : formatoNota(media, idioma);
+const estrella = 'm12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z';
+---
+{media === null
+  ? <span>{t.sinResenas}</span>
+  : <span class:list={['estrellas', { pequenas }]} role="img" aria-label={t.estrellas(nota)}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class={i <= llenas ? 'llena' : 'vacia'} d={estrella} /></svg>
+      ))}
+      {conNota && <strong class="nota" aria-hidden="true">{nota}</strong>}
+    </span>}

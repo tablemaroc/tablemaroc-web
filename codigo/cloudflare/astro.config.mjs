@@ -20,4 +20,6 @@ export default defineConfig({
     routing: { prefixDefaultLocale: true, redirectToDefaultLocale: false },
   },
   trailingSlash: 'always',
+  // Ningún script ni recurso incrustado en la página: la política de seguridad (CSP) solo permite scripts propios en archivo.
+  vite: { build: { assetsInlineLimit: 0 } },
 });

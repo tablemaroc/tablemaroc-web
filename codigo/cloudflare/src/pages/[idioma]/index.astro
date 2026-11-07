@@ -1,27 +1,88 @@
 ---
-// Página provisional SIN diseño (maestro §19): las plantillas llegan con el diseño aprobado de Claude Design.
-// Solo HTML mínimo para comprobar el despliegue en Cloudflare; no indexable.
+// Home (lo exportado de Claude Design: «Web 01 · Home · móvil» y «Web 08 · Home · ordenador»; documento maestro de
+// Claude Design, Bloque 4.4). Sin título ni buscador: lista de ciudades + «Ver restaurantes», «Mejores restaurantes»
+// (los elige el titular) y «Guías» sin «Ver más».
+// «Ver restaurantes» lleva a la pantalla «Restaurantes de una ciudad» (la misma lista que el diseño muestra dentro de la Home).
+import { env } from 'cloudflare:workers';
+import Web from '../../layouts/Web.astro';
+import Estrellas from '../../componentes/Estrellas.astro';
+import { T, esIdioma } from '../../lib/textos';
+import { CIUDADES } from '../../lib/ciudades';
+import { guiasPortada, mejoresRestaurantes } from '../../lib/portada';
+import { SEGMENTS } from '../../../../shared/routes';
+
 const { idioma } = Astro.params;
-if (!['es', 'en', 'fr'].includes(idioma ?? '')) return Astro.redirect('/es/', 302);
-const textos = {
-  es: 'Tablemaroc está en preparación.',
-  en: 'Tablemaroc is being prepared.',
-  fr: 'Tablemaroc est en préparation.',
-} as const;
+if (!esIdioma(idioma)) return Astro.redirect('/es/', 302);
+const t = T[idioma];
+const [mejores, guias] = await Promise.all([mejoresRestaurantes(env.DB, idioma), guiasPortada(env.DB, idioma)]);
+// País de la visita según Cloudflare (no se guarda): para saber si está en Marruecos sin pedir permiso.
+const pais = Astro.request.headers.get('CF-IPCountry') ?? '';
+const rutaCiudad = `/${idioma}/${SEGMENTS['ciudades-y-barrios'][idioma]}/{ciudad}/${SEGMENTS.restaurantes[idioma]}/`;
+const coordenadas = JSON.stringify(CIUDADES.filter((c) => c.lat !== null && c.lng !== null).map((c) => [c.slug, c.lat, c.lng]));
+const flecha = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const info = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5M12 16h0"/></svg>';
 ---
-<!doctype html>
-<html lang={idioma}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <title>Tablemaroc</title>
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#555555" />
-    <link rel="icon" href="/icons/icon-192.png" />
-    <script is:inline src="/registrar-sw.js" defer></script>
-  </head>
-  <body>
-    <p>{textos[idioma as keyof typeof textos]}</p>
-  </body>
-</html>
+<Web idioma={idioma} titulo={t.tituloHome} actual="inicio" rutasIdioma={{ es: '/es/', en: '/en/', fr: '/fr/' }}>
+  <main class="contenido home">
+    <form class="elegir-ciudad" role="search" aria-label={t.elegirCiudad} data-elegir-ciudad
+      data-pais={pais} data-ruta={rutaCiudad} data-coordenadas={coordenadas}
+      data-aviso-fuera={t.avisoFuera} data-aviso-sin-ubicacion={t.avisoSinUbicacion}>
+      <label for="f-ciudad" class="oculto">{t.ciudad}</label>
+      <select id="f-ciudad" name="ciudad" aria-describedby="aviso-ciudad" data-ciudad>
+        <option value="">{t.opcionCiudades}</option>
+        {CIUDADES.map((c) => <option value={c.slug}>{c.nombre}</option>)}
+      </select>
+      <div id="aviso-ciudad" class="aviso" role="alert" data-aviso hidden>
+        <Fragment set:html={info} />
+        <div><strong>{t.eligeUnaCiudad}</strong><br /><span data-aviso-texto></span></div>
+      </div>
+      <button type="submit" class="boton-principal">{t.verRestaurantes}<Fragment set:html={flecha} /></button>
+    </form>
+
+    <div class="bloques">
+      {mejores.length > 0 && (
+        <section class="bloque" aria-labelledby="h-mejores">
+          <h2 id="h-mejores" class="titulo-seccion">{t.mejoresRestaurantes}</h2>
+          <div class="mejores">
+            <ul class="fila-mejores" aria-label={t.mejoresRestaurantes} data-fila-mejores>
+              {mejores.map((m) => (
+                <li>
+                  <a class="tarjeta-mejor" href={m.ruta ?? undefined}>
+                    <div class="foto">{m.foto && <img src={m.foto} alt="" width="520" height="240" loading="lazy" decoding="async" />}</div>
+                    <div class="texto">
+                      <span class="nombre">{m.nombre}</span>
+                      <span class="dato">{m.ciudad}</span>
+                      {m.mejorPlato && <span class="dato">{t.mejorPlato} <strong>{m.mejorPlato}</strong></span>}
+                      <Estrellas media={m.media} idioma={idioma} conNota />
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {mejores.length > 1 && (
+              <button type="button" class="flecha-mejores" data-siguiente-mejor aria-label={t.verMasRestaurantes}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            )}
+          </div>
+        </section>
+      )}
+
+      {guias.length > 0 && (
+        <section class="bloque" aria-labelledby="h-guias">
+          <h2 id="h-guias" class="titulo-seccion">{t.guias}</h2>
+          <ul class="lista-guias">
+            {guias.map((g) => (
+              <li>
+                <a class="tarjeta-guia" href={g.ruta ?? undefined}>
+                  <div class="foto">{g.foto && <img src={g.foto} alt="" width="160" height="100" loading="lazy" decoding="async" />}</div>
+                  <div class="texto"><span class="nombre">{g.titulo}</span><span class="dato">{t.guia} · {t.nRestaurantes(g.restaurantes)}</span></div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </main>
+</Web>

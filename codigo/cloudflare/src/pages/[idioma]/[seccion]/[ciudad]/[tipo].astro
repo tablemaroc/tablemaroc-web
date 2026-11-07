@@ -1,0 +1,75 @@
+---
+// Restaurantes de una ciudad: /es/ciudades/{ciudad}/restaurantes/ (lo exportado de Claude Design: «Web 02 · móvil» y
+// «Web 01 · ordenador»; documento maestro de Claude Design, Bloque 4.5).
+// Título = solo el nombre de la ciudad, fijo arriba al bajar. Filtros: Abierto ahora · Vegetariano · Pago con tarjeta ·
+// Terraza. Todos los restaurantes con scroll, sin «Ver más». Botón «Volver arriba» al bajar.
+import { env } from 'cloudflare:workers';
+import Web from '../../../../layouts/Web.astro';
+import Estrellas from '../../../../componentes/Estrellas.astro';
+import { T, esIdioma, type Idioma } from '../../../../lib/textos';
+import { ciudadPorSlug } from '../../../../lib/ciudades';
+import { listado } from '../../../../lib/publico';
+import { SEGMENTS } from '../../../../../../shared/routes';
+
+const { idioma, seccion, ciudad, tipo } = Astro.params;
+const valida = esIdioma(idioma) && seccion === SEGMENTS['ciudades-y-barrios'][idioma] && tipo === SEGMENTS.restaurantes[idioma];
+const fila = valida ? await env.DB.prepare(
+  `SELECT c.id, coalesce((SELECT title FROM translations WHERE entity_type = 'city' AND entity_id = c.id AND locale = ? AND status = 'publicada'),
+                         (SELECT title FROM translations WHERE entity_type = 'city' AND entity_id = c.id AND locale = 'es' AND status = 'publicada')) AS nombre
+   FROM cities c WHERE c.slug = ?`,
+).bind(idioma, ciudad).first<{ id: string; nombre: string | null }>() : null;
+const conocida = valida ? ciudadPorSlug(String(ciudad)) : null;
+if (!valida || (!fila && !conocida)) return new Response(null, { status: 404 });
+
+const i = idioma as Idioma;
+const t = T[i];
+const nombreCiudad = fila?.nombre ?? conocida!.nombre;
+const u = Astro.url.searchParams;
+const activo = { abierto: u.get('abierto') === '1', vegetariano: u.get('vegetariano') === '1', tarjeta: u.get('tarjeta') === '1', terraza: u.get('terraza') === '1' };
+const origen = u.get('origen') === 'ubicacion' ? 'ubicacion' : u.get('origen') === 'elegida' ? 'elegida' : null;
+const hayFiltro = Object.values(activo).some(Boolean);
+
+const res = fila ? await listado(env.DB, {
+  que: 'locales', idioma: i, pagina: 1, q: '', ciudad: String(ciudad), tipo: 'restaurantes', porPagina: 2000,
+  abierto: activo.abierto || undefined, vegetariano: activo.vegetariano || undefined,
+  tarjeta: activo.tarjeta || undefined, terraza: activo.terraza || undefined,
+}) : { resultados: [] as Record<string, unknown>[] };
+type Fila = { nombre: string; ruta: string | null; foto: string | null; media: number | null; resenas: number; price_range: number | null; abiertoAhora?: string };
+const restaurantes = res.resultados as unknown as Fila[];
+
+// Cada filtro es un enlace que lo activa o lo quita (funciona también sin JavaScript).
+const enlaceFiltro = (k: keyof typeof activo) => {
+  const q = new URLSearchParams(u);
+  if (activo[k]) q.delete(k); else q.set(k, '1');
+  const s = q.toString();
+  return `${Astro.url.pathname}${s ? `?${s}` : ''}`;
+};
+const filtros: [keyof typeof activo, string][] = [['abierto', t.abiertoAhora], ['vegetariano', t.vegetariano], ['tarjeta', t.pagoConTarjeta], ['terraza', t.terraza]];
+const ruta = (l: Idioma) => `/${l}/${SEGMENTS['ciudades-y-barrios'][l]}/${ciudad}/${SEGMENTS.restaurantes[l]}/`;
+const atras = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+const pin = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>';
+---
+<Web idioma={i} titulo={`${nombreCiudad} · Tablemaroc`} actual="restaurantes" rutasIdioma={{ es: ruta('es'), en: ruta('en'), fr: ruta('fr') }}>
+  <main class="contenido lista-ciudad">
+    <a class="volver" href={`/${i}/`}><Fragment set:html={atras} />{t.cambiarCiudad}</a>
+    <h1 class="titulo-fijo">{nombreCiudad}</h1>
+    {origen && <span class="origen"><Fragment set:html={pin} />{origen === 'ubicacion' ? t.segunTuUbicacion : t.ciudadElegida}</span>}
+    <div class="fila-chips" role="group" aria-label={t.filtros}>
+      {filtros.map(([k, texto]) => <a class="chip" role="button" href={enlaceFiltro(k)} aria-pressed={activo[k] ? 'true' : 'false'}>{texto}</a>)}
+    </div>
+    {restaurantes.length === 0
+      ? <p class="vacio">{hayFiltro ? t.sinFiltros : t.sinRestaurantes}</p>
+      : <ul class="lista-restaurantes">
+          {restaurantes.map((r) => (
+            <li class="tarjeta-restaurante">
+              <div class="foto">{r.foto && <img src={r.foto} alt="" width="300" height="150" loading="lazy" decoding="async" />}</div>
+              <div class="texto">
+                <a class="nombre" href={r.ruta ?? undefined}>{r.nombre}</a>
+                <span class="dato">{t.restaurante}{r.price_range && <> · <span class="precio" role="img" aria-label={t.precio(r.price_range)}>{'●'.repeat(r.price_range)}{'○'.repeat(4 - r.price_range)}</span></>}</span>
+                <span class="dato"><Estrellas media={r.resenas ? r.media : null} idioma={i} pequenas />{r.abiertoAhora && <strong>● {t.estado[r.abiertoAhora]}</strong>}</span>
+              </div>
+            </li>
+          ))}
+        </ul>}
+  </main>
+</Web>

@@ -6,5 +6,5 @@
     "types": ["@cloudflare/workers-types", "node"]
   },
   "include": ["src", "env.d.ts", ".astro/types.d.ts", "../testing/cloudflare.test.ts"],
-  "exclude": ["dist"]
+  "exclude": ["dist", "src/scripts"]
 }

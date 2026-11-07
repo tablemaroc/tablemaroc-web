@@ -133,6 +133,8 @@ const ENTIDAD: Record<QueListar, { tabla: string; tipo: string }> = {
 export type Filtros = {
   que: QueListar; idioma: Idioma; pagina: number; q: string;
   ciudad?: string; tipo?: string; vegetariano?: boolean; tarjeta?: boolean; terraza?: boolean; abierto?: boolean;
+  /** Solo para las plantillas: «Restaurantes de una ciudad» muestra todos con scroll, sin «Ver más» (Bloque 4.5). */
+  porPagina?: number;
 };
 
 export function leerFiltros(u: URLSearchParams): Filtros | null {
@@ -159,7 +161,7 @@ export async function listado(db: D1Database, f: Filtros, ahora = new Date()) {
     if (f.vegetariano) where.push(`EXISTS (SELECT 1 FROM place_specialties ps JOIN specialties s ON s.id = ps.specialty_id WHERE ps.place_id = e.id AND s.slug = 'vegetariano')`);
   }
   const extra = f.que === 'locales'
-    ? `, pt.slug AS tipo, c.slug AS ciudad, e.opening_hours, e.open_status, e.lat, e.lng,
+    ? `, pt.slug AS tipo, c.slug AS ciudad, e.opening_hours, e.open_status, e.lat, e.lng, e.price_range,
        (SELECT round(avg(rating), 1) FROM reviews WHERE place_id = e.id AND status = 'aprobada') AS media,
        (SELECT count(*) FROM reviews WHERE place_id = e.id AND status = 'aprobada') AS resenas,
        (SELECT r2_key FROM photos WHERE place_id = e.id AND status = 'aprobada' ORDER BY is_entrance DESC, created_at LIMIT 1) AS foto`
@@ -184,12 +186,13 @@ export async function listado(db: D1Database, f: Filtros, ahora = new Date()) {
   const conEstado = r.map((x) => f.que === 'locales'
     ? { ...x, abiertoAhora: abiertoAhora(x.opening_hours, marruecos, { aperturaLocal: x.open_status, ramadan, avisoRamadan: !!x.aviso_ramadan }) } : x);
   const finales = f.abierto ? conEstado.filter((x) => (x as { abiertoAhora?: string }).abiertoAhora === 'abierto') : conEstado;
-  const pagina = finales.slice((f.pagina - 1) * POR_PAGINA, f.pagina * POR_PAGINA).map((x) => {
+  const n = f.porPagina ?? POR_PAGINA;
+  const pagina = finales.slice((f.pagina - 1) * n, f.pagina * n).map((x) => {
     const { opening_hours: _h, aviso_ramadan: _a, ...resto } = x as Record<string, unknown>;
     return {
       ...resto, foto: x.foto ? `/${x.foto}` : null,
       ruta: rutaPublica(f.que, f.idioma, String(x.slug), x.tipo as string | undefined),
     };
   });
-  return { total: finales.length, pagina: f.pagina, porPagina: POR_PAGINA, hayMas: f.pagina * POR_PAGINA < finales.length, resultados: pagina };
+  return { total: finales.length, pagina: f.pagina, porPagina: n, hayMas: f.pagina * n < finales.length, resultados: pagina };
 }

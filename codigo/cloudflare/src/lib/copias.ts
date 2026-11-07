@@ -12,7 +12,7 @@ export const TABLAS_COPIA = [
   'reviews', 'review_replies', 'photos', 'photo_translations',
   'menus', 'menu_categories', 'menu_items', 'menu_translations',
   'reservation_settings', 'reservations', 'favorites',
-  'redirects', 'audit_log', 'panel_modes',
+  'redirects', 'audit_log', 'panel_modes', 'site_settings',
 ] as const;
 
 const NO_SE_COPIAN = new Set(['sessions', 'email_codes', 'rate_limits', 'job_runs', 'backups']);

@@ -1,0 +1,137 @@
+---
+// Esqueleto de la web (lo exportado de Claude Design: cabecera, menú ☰, idioma, ventana de contacto y barra inferior).
+// Reglas del documento maestro de Claude Design, Bloque 4.3 y 4.6: un solo panel flotante abierto a la vez, tocar fuera
+// cierra, orden de capas (título fijo 3 · «Volver arriba» 5 · idiomas 20 · menú y ventanas 30) y «dónde estoy».
+// Sin pie de página: está por diseñar (Bloque 7). Fuera de producción, nada se indexa (§18 ter).
+import '../estilos/web.css';
+import { env } from 'cloudflare:workers';
+import { T, type Idioma } from '../lib/textos';
+import { SEGMENTS } from '../../../shared/routes';
+
+type Actual = 'inicio' | 'restaurantes' | 'ciudades' | 'guias' | 'mi-cuenta' | 'sobre-nosotros' | 'legales' | null;
+interface Props { idioma: Idioma; titulo: string; actual: Actual; rutasIdioma: Record<Idioma, string> }
+const { idioma, titulo, actual, rutasIdioma } = Astro.props;
+const t = T[idioma];
+const produccion = env.ENTORNO === 'produccion';
+// Datos de contacto del administrador: los rellena el titular desde el panel (Ajustes). Vacío → marcador.
+const contacto = (await env.DB.prepare("SELECT value FROM site_settings WHERE key = 'admin_contact'").first<{ value: string }>().catch(() => null))?.value?.trim() || t.datosContacto;
+
+// Rutas de las secciones (las pantallas que aún no están programadas devuelven 404 hasta que lleguen).
+const r = {
+  inicio: `/${idioma}/`,
+  restaurantes: `/${idioma}/${SEGMENTS.restaurantes[idioma]}/`,
+  ciudades: `/${idioma}/${SEGMENTS['ciudades-y-barrios'][idioma]}/`,
+  guias: `/${idioma}/${SEGMENTS['guias-gastronomicas'][idioma]}/`,
+  miCuenta: `/${idioma}/mi-cuenta/`,
+  sobreNosotros: `/${idioma}/${t.slugSobreNosotros}/`,
+  legales: `/${idioma}/${t.slugLegales}/`,
+};
+const actualSi = (k: Actual) => (actual === k ? 'page' : undefined);
+const idiomas: [Idioma, string, string][] = [['es', 'ES', 'Español'], ['en', 'EN', 'English'], ['fr', 'FR', 'Français']];
+const nombreIdioma = { es: 'español', en: 'English', fr: 'français' }[idioma];
+
+const logo = (tam: number) => `<svg width="${tam}" height="${tam}" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 46V22C8 11.5 15 4 24 4s16 7.5 16 18v24z" fill="#0F5C4D"/><path class="hueco" d="M15 46V25c0-6 4-10.5 9-10.5s9 4.5 9 10.5v21z"/><circle cx="24" cy="33" r="5" fill="#E0A23B"/></svg>`;
+const check = '<svg class="marca-actual" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+const cerrar = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+const persona = (w: string) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1-4 4-6 7.5-6s6.5 2 7.5 6"/></svg>`;
+const atras = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+---
+<!doctype html>
+<html lang={idioma}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {!produccion && <meta name="robots" content="noindex, nofollow" />}
+    <title>{titulo}</title>
+    <link rel="preload" href="/fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#F2D7B6" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <script is:inline src="/registrar-sw.js" defer></script>
+  </head>
+  <body data-titulo-crea={t.creaTuPagina} data-titulo-contacto={t.contacto}>
+    <header class="cabecera">
+      <div class="cabecera-dentro">
+        <a class="logo" href={r.inicio} aria-label={t.logoInicio}><Fragment set:html={logo(26)} /><span>tablemaroc</span></a>
+        <nav class="nav-principal" aria-label={t.principal}>
+          <a class="fuerte" href={r.restaurantes} aria-current={actualSi('restaurantes')}>{t.restaurantes}</a>
+          <a class="fuerte" href={r.ciudades} aria-current={actualSi('ciudades')}>{t.ciudades}</a>
+          <a class="fuerte" href={r.guias} aria-current={actualSi('guias')}>{t.guias}</a>
+          <a href={r.sobreNosotros} aria-current={actualSi('sobre-nosotros')}>{t.sobreNosotros}</a>
+          <a href={r.legales} aria-current={actualSi('legales')}>{t.legales}</a>
+          <button type="button" data-abrir-contacto="contacto">{t.contacto}</button>
+        </nav>
+        <div class="cabecera-acciones">
+          <span class="idioma">
+            <button type="button" class="idioma-boton" data-idioma-boton aria-haspopup="listbox" aria-expanded="false"
+              aria-controls="lista-idiomas" aria-label={`${t.idioma}: ${nombreIdioma}`}>{idioma.toUpperCase()}</button>
+            <div class="idioma-fondo" data-idioma-fondo hidden></div>
+            <ul id="lista-idiomas" class="idioma-lista con-barra" aria-label={t.idioma} data-idioma-lista hidden>
+              {idiomas.map(([c, corto, nombre]) => (
+                <li><a class="opcion" href={rutasIdioma[c]} hreflang={c} lang={c} data-idioma={c} aria-current={c === idioma ? 'true' : undefined}>
+                  <span>{nombre}</span><Fragment set:html={check} /><span class="oculto">{corto}</span></a></li>
+              ))}
+            </ul>
+          </span>
+          <a class="mi-cuenta solo-ordenador" href={r.miCuenta} aria-current={actualSi('mi-cuenta')}><Fragment set:html={persona('1.9').replace('width="24" height="24"', 'width="20" height="20"')} />{t.miCuenta}</a>
+          <button type="button" class="boton-principal pequeno solo-ordenador" data-abrir-contacto="crea">{t.creaTuPagina}</button>
+          <button type="button" class="boton-icono solo-movil" data-menu-abrir aria-label={t.abrirMenu} aria-expanded="false" aria-controls="menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <slot />
+
+    <button type="button" class="volver-arriba" data-volver-arriba aria-label={t.volverArriba} hidden>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+    </button>
+
+    <nav class="barra-inferior" aria-label={t.navegacionPrincipal}>
+      <a href={r.inicio} aria-current={actualSi('inicio')}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7" /><path d="M6 9.5v10.5h12V9.5" /></svg>{t.inicio}</a>
+      <a href={r.miCuenta} aria-current={actualSi('mi-cuenta')}><Fragment set:html={persona('1.75')} />{t.cuenta}</a>
+    </nav>
+
+    <!-- Menú ☰ del móvil: a pantalla completa, con el logo grande abajo. Tocar una zona vacía lo cierra. -->
+    <div id="menu" class="menu" role="dialog" aria-modal="true" aria-label={t.menu} data-menu hidden>
+      <div class="menu-cabecera">
+        <span>{t.menu}</span>
+        <button type="button" class="boton-icono" data-menu-cerrar aria-label={t.cerrarMenu}><Fragment set:html={cerrar} /></button>
+      </div>
+      <nav class="menu-lista con-barra" aria-label={t.todoTablemaroc} data-menu-vacio data-menu-lista>
+        <a class="item-menu fuerte" href={r.miCuenta} aria-current={actualSi('mi-cuenta')}>{t.miCuenta}<Fragment set:html={check} /></a>
+        <a class="item-menu fuerte" href={r.restaurantes} aria-current={actualSi('restaurantes')}>{t.restaurantes}<Fragment set:html={check} /></a>
+        <a class="item-menu fuerte" href={r.ciudades} aria-current={actualSi('ciudades')}>{t.ciudades}<Fragment set:html={check} /></a>
+        <a class="item-menu fuerte" href={r.guias} aria-current={actualSi('guias')}>{t.guias}<Fragment set:html={check} /></a>
+        <a class="item-menu" href={r.sobreNosotros} aria-current={actualSi('sobre-nosotros')}>{t.sobreNosotros}<Fragment set:html={check} /></a>
+        <a class="item-menu" href={r.legales} aria-current={actualSi('legales')}>{t.legales}<Fragment set:html={check} /></a>
+        <button type="button" class="item-menu" data-menu-contacto="contacto">{t.contacto}</button>
+        <button type="button" class="boton-principal" data-menu-contacto="crea">{t.creaTuPagina}</button>
+        <div class="menu-logo" aria-hidden="true"><Fragment set:html={logo(88).replace('class="hueco"', 'fill="#F2D7B6"')} /><span>tablemaroc</span></div>
+      </nav>
+      <div class="menu-contacto" data-menu-vacio data-menu-panel hidden>
+        <button type="button" class="volver" data-menu-volver><Fragment set:html={atras} />{t.menu}</button>
+        <h2 class="titulo-contacto" data-titulo-contacto>{t.contacto}</h2>
+        <p class="texto-contacto" data-solo-crea>{t.paraCrearTuPagina}</p>
+        <div class="datos-contacto"><strong>{t.administrador}</strong><span class="texto-contacto-admin">{contacto}</span></div>
+      </div>
+    </div>
+
+    <!-- Ventana «Crea tu página» / «Contacto del administrador» (ordenador). Tocar el fondo oscuro la cierra. -->
+    <div class="ventana-fondo" data-ventana hidden>
+      <div class="ventana" role="dialog" aria-modal="true" aria-labelledby="t-contacto">
+        <div class="ventana-titulo">
+          <h2 id="t-contacto" class="titulo-contacto" data-titulo-contacto>{t.contacto}</h2>
+          <button type="button" class="boton-icono" data-ventana-cerrar aria-label={t.cerrar}><Fragment set:html={cerrar} /></button>
+        </div>
+        <p class="texto-contacto" data-solo-crea>{t.paraCrearTuPagina}</p>
+        <div class="datos-contacto"><strong>{t.administrador}</strong><span class="texto-contacto-admin">{contacto}</span></div>
+      </div>
+    </div>
+
+    <script>
+      import '../scripts/web.ts';
+    </script>
+  </body>
+</html>

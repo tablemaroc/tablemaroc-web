@@ -41,6 +41,18 @@ writeFileSync(join(pub, 'registrar-sw.js'), readFileSync(join(pwa, 'registrar-sw
 writeFileSync(join(pub, 'sin-conexion.html'), readFileSync(join(pwa, 'sin-conexion.html')));
 writeFileSync(join(pub, 'copia-pc.js'), readFileSync(join(pwa, 'copia-pc.js')));   // «Crear copia» del panel (§9)
 
+// Letra Literata (licencia libre OFL 1.1) alojada en tablemaroc.com, sin conexión con Google (decisión del titular, 07-11-2026).
+// Solo los alfabetos latino y latino extendido (es, en, fr). Viene del paquete @fontsource-variable/literata.
+{
+  const { createRequire } = await import('node:module');
+  const dir = dirname(createRequire(import.meta.url).resolve('@fontsource-variable/literata/package.json'));
+  mkdirSync(join(pub, 'fonts'), { recursive: true });
+  for (const sub of ['latin', 'latin-ext']) {
+    writeFileSync(join(pub, 'fonts', `literata-${sub}.woff2`), readFileSync(join(dir, 'files', `literata-${sub}-wght-normal.woff2`)));
+  }
+  writeFileSync(join(pub, 'fonts', 'LICENCIA-LITERATA.txt'), readFileSync(join(dir, 'LICENSE')));
+}
+
 writeFileSync(join(pub, 'manifest.webmanifest'), JSON.stringify({
   name: 'Tablemaroc', short_name: 'Tablemaroc',
   description: 'Guía gastronómica de Marruecos · Food guide to Morocco · Guide gastronomique du Maroc',
@@ -57,7 +69,8 @@ writeFileSync(join(pub, 'manifest.webmanifest'), JSON.stringify({
 const cab = Object.entries(SECURITY_HEADERS).map(([k, v]) => `  ${k}: ${v}`).join('\n');
 writeFileSync(join(pub, '_headers'), ['# Generado por scripts/preparar-pwa.mjs desde src/lib/seguridad.ts', '/*', cab, '',
   '/sw.js', '  Cache-Control: no-cache', '  Service-Worker-Allowed: /', '', '/registrar-sw.js', '  Cache-Control: no-cache', '', '/copia-pc.js', '  Cache-Control: no-cache', '',
-  '/manifest.webmanifest', '  Content-Type: application/manifest+json', ''].join('\n'));
+  '/manifest.webmanifest', '  Content-Type: application/manifest+json', '',
+  '/fonts/*', '  Cache-Control: public, max-age=31536000, immutable', ''].join('\n'));
 
 // Iconos provisionales: cuadrado gris con «TM». Solo se generan si faltan (no cambian en cada build).
 const iconos = [['icon-192.png', 192, false], ['icon-512.png', 512, false], ['icon-maskable-512.png', 512, true]];
