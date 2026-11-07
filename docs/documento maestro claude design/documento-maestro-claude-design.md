@@ -169,6 +169,9 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   intentos y huella o cara cancelada (también código de la app incorrecto o demasiados intentos). Los textos que no están
   en `docs/18-textos/04-interfaz.md` quedan como marcador `[AVISO: …]`.
 - Iconos de email y llave dibujados en línea (sin emojis); «Continuar con Google» sin logo, como en el boceto.
+- **Enlace «Privacidad»** (decisión del titular, 07-11-2026) en las 7 pantallas de acceso, móvil y ordenador, en el
+  mismo sitio: abajo del todo de la tarjeta, centrado y en letra pequeña (13 px). Lleva a la pantalla web Sobre
+  nosotros / Legales. **El panel no lleva pie de página.**
 
 ### 4.10 Decisiones del 07-11-2026 (para programar la Home)
 
