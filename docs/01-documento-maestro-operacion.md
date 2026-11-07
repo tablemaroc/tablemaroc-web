@@ -695,7 +695,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
 - Decisión del titular (06-11-2026): las pantallas de la web se diseñan con Claude Design por fases (estilo primero, que aprueba el titular); prompts en docs/17-prompt-claude-design.md y encargo actualizado en docs/16 (§19).
 - Decisión del titular (06-11-2026): orden de Claude Design: primero la Home (fase 1) y el panel (fase 2, en dos partes) para subirlos a internet; después el resto de la web (fases 3, 4 y 5). Las pantallas se programan con lo que exporte Claude Design (§19).
-- Decisión del titular (07-11-2026): «Mejores restaurantes» de la Home los elige el titular (marca por restaurante); logo con arco aprobado; letra Literata alojada en tablemaroc.com; JavaScript donde haga falta (§19). El pie de página se diseña antes de subir la Home; los datos de contacto del administrador los rellena el titular desde el panel.
+- Decisión del titular (07-11-2026): «Mejores restaurantes» de la Home los elige el titular desde el panel (formulario del local, pestaña Información: marca, orden y mejor plato); logo con arco aprobado; letra Literata alojada en tablemaroc.com; JavaScript donde haga falta (§19). El pie de página se diseña antes de subir la Home; los datos de contacto del administrador los rellena el titular desde el panel.
 - Decisión del titular (06-11-2026): la copia externa se guarda en su PC con el botón «Crear copia» del panel; completa, cifrada y sustituyendo a la anterior (§9, §20).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 

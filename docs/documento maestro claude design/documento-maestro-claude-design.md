@@ -171,7 +171,9 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 ### 4.10 Decisiones del 07-11-2026 (para programar la Home)
 
 - **Mejores restaurantes:** los elige el titular. Cada restaurante lleva la marca «Sale en Mejores restaurantes» (con su
-  orden); salen todos los marcados. Hasta que el panel esté diseñado, el titular dice cuáles y Claude Code los marca.
+  orden); salen todos los marcados. El titular los marca **desde el panel**: en el formulario del local, pestaña
+  Información (solo Administración), con «Sale en Mejores restaurantes», su orden y el «Mejor plato» elegido del menú
+  del local (docs 16 y 17, fase 2 parte A).
 - **Logo:** se usa el del diseño (arco). Se quita «sin arcos» del doc 17.
 - **Letra Literata:** alojada en tablemaroc.com (woff2 propio), sin conexión con Google.
 - **JavaScript:** se acepta en todo lo necesario (menú ☰, idioma, «Volver arriba», ubicación…).

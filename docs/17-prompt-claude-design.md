@@ -110,7 +110,8 @@ interruptor «Automático / Manual» y dos pestañas: «Automático» (qué hace
 3. Escritorio, con la moderación de reseñas y fotos dentro.
 4. Listado genérico (sirve para locales, ciudades, platos y guías).
 5. Nuevo / editar local, con las pestañas Información · ES · EN · FR · Fotos · Menú (archivar / reactivar platos) ·
-   Redirecciones · Historial.
+   Redirecciones · Historial. En Información, solo para Administración: «Sale en Mejores restaurantes» (sí/no), su
+   orden en la Home y el «Mejor plato», elegido de los platos del menú del local.
 
 Mismo formato de entrega que la web. Las acciones (guardar, aprobar, rechazar, buscar, el interruptor) se marcan como
 «isla» y se dibujan sin lógica. Cada pantalla y cada pestaña en móvil y ordenador.
