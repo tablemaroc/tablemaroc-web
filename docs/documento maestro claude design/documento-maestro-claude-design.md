@@ -1,6 +1,6 @@
 # Documento maestro de Claude Design · Tablemaroc
 
-**Creado:** 06-11-2026 · **Última revisión:** 06-11-2026 · **Dueño:** el titular · **Lo aplica:** Claude.
+**Creado:** 06-11-2026 · **Última revisión:** 07-11-2026 · **Dueño:** el titular · **Lo aplica:** Claude.
 **Lienzo de diseño:** https://claude.ai/artifact/A97NGeZkwn7V87tnsxwn2i («Tablemaroc — Sistema de diseño»).
 
 Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si algo choca con
@@ -179,8 +179,28 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   necesita ese campo (Ajustes).
 - **Pie de página: sí** (decisión del titular, 07-11-2026). Hay que diseñarlo antes de subir la Home, en todas las
   pantallas web (móvil y ordenador), como navegación secundaria: ciudades, guías y legales, sin «Política de cookies».
+  Diseñado el mismo día: ver 4.11.
   *(Claude lo apuntó por error como «sin pie de página»; corregido el mismo día.)*
 - **Restaurantes de una ciudad:** se programa junto con la Home.
+
+### 4.11 Pie de página (decisión del titular, 07-11-2026)
+
+- **En las 16 pantallas web** (móvil y ordenador), al final del contenido. **Todas las pantallas web se desplazan**
+  para llegar al pie (excepción a «una sola pantalla», como en 4.5). En móvil va encima de la barra Inicio · Cuenta.
+- **Contenido** (textos del doc 18, `03-home-listados-esqueleto.md`, ajustados por el titular):
+  - **Ciudades:** Marrakech · Agadir · Casablanca · Tánger · Fez (las «Más visitadas», 4.6 bis), que llevan a
+    Restaurantes de una ciudad, y **«Ver todas las ciudades»**, que lleva a Ciudades.
+  - **Descubre:** solo **«Guías gastronómicas»** → Guías (sin Platos típicos).
+  - **Tablemaroc:** Sobre nosotros · Contacto del administrador · Crea tu página (en lugar de «¿Es tu local?»).
+  - **Legal:** Aviso legal · Privacidad · Condiciones → pantalla Sobre nosotros / Legales. Sin «Política de cookies».
+  - **Línea final:** «Sin publicidad ni contenido patrocinado. Precios en dírhams (MAD).»
+  - Fuera del pie: Cafés y teterías, Comida callejera, Mercados y zocos, Platos típicos y Cómo funcionan las reseñas.
+- **Estilo:** fondo arena `#F2D7B6`, texto verde muy oscuro `#0A3F35`, títulos de columna en Literata. Móvil: a todo el
+  ancho, dos columnas (Ciudades | Descubre y Tablemaroc) y debajo Legal y la línea final. Ordenador: caja redondeada
+  dentro del ancho de 1120 px, tres columnas y debajo Legal y la línea final. Enlaces de 44 px de alto.
+- **Contacto del administrador / Crea tu página del pie:** en móvil abren el menú ☰ en esa ventana; en ordenador abren
+  la ventana de contacto (añadida a las pantallas de ordenador que no la tenían, igual que la de la Home). En «Info del
+  local» móvil (sin menú ☰ ni Play) esos dos botones son solo dibujo.
 
 ## Bloque 5 · Pantallas en el lienzo
 
@@ -193,6 +213,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Info del local (pestaña Info) | Sí | Sí | Ordenador |
 | Mi cuenta (Reseñas · Reservas · Favoritos · Datos) | Sí | Sí | Sí |
 | Sobre nosotros / Legales | Sí | Sí | Sí |
+| Pie de página (dentro de las 16 pantallas web, 07-11-2026) | Sí | Sí | Sí, salvo Info del local móvil |
 | Panel · Esqueleto | Sí | Sí | Sí |
 | Panel 02 · Escritorio (Automático · Manual) | Sí | Sí | Sí |
 | Panel 01 · Acceso (7 pantallas: acceso, email, Google, huella o cara, código de la app, no autorizado, activa tu acceso) | Sí | Sí | Sí |
@@ -219,7 +240,6 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 ## Bloque 7 · Pendiente de decisión del titular
 
 - **Traducción** de los textos al cambiar de idioma.
-- **Pie de página** sin diseñar todavía (aprobado que exista, 07-11-2026).
 - **Doc 01, §19:** sigue diciendo «las listas largas se cortan con Ver más o paginación»; choca con el scroll aprobado.
 - **Docs 16 y 17:** la fila de la Home y las fases aún describen parte de la Home anterior.
 - **Ciudades del Sáhara Occidental** (El Aaiún, Dajla), fuera de la lista.
