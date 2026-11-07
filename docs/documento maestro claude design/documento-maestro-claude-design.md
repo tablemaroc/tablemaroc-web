@@ -187,18 +187,15 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 
 - **En las 16 pantallas web** (móvil y ordenador), al final del contenido. **Todas las pantallas web se desplazan**
   para llegar al pie (excepción a «una sola pantalla», como en 4.5). En móvil va encima de la barra Inicio · Cuenta.
-- **Contenido** (textos del doc 18, `03-home-listados-esqueleto.md`, ajustados por el titular):
-  - **Ciudades:** Marrakech · Agadir · Casablanca · Tánger · Fez (las «Más visitadas», 4.6 bis), que llevan a
-    Restaurantes de una ciudad, y **«Ver todas las ciudades»**, que lleva a Ciudades.
-  - **Descubre:** solo **«Guías gastronómicas»** → Guías (sin Platos típicos).
-  - **Tablemaroc:** Sobre nosotros · Contacto del administrador · Crea tu página (en lugar de «¿Es tu local?»).
-  - **Legal:** Aviso legal · Privacidad · Condiciones → pantalla Sobre nosotros / Legales. Sin «Política de cookies».
-  - **Línea final:** «Sin publicidad ni contenido patrocinado. Precios en dírhams (MAD).»
-  - Fuera del pie: Cafés y teterías, Comida callejera, Mercados y zocos, Platos típicos y Cómo funcionan las reseñas.
-- **Estilo:** fondo arena `#F2D7B6`, texto verde muy oscuro `#0A3F35`, títulos de columna en Literata. Móvil: a todo el
-  ancho, dos columnas (Ciudades | Descubre y Tablemaroc) y debajo Legal y la línea final. Ordenador: caja redondeada
-  dentro del ancho de 1120 px, tres columnas y debajo Legal y la línea final. Enlaces de 44 px de alto.
-- **Contacto del administrador / Crea tu página del pie:** en móvil abren el menú ☰ en esa ventana; en ordenador abren
+- **Solo lo necesario** (el titular, 07-11-2026, sobre una primera versión con columnas de ciudades y guías):
+  **Sobre nosotros · Aviso legal · Privacidad · Condiciones · Contactar · Crea tu página**. Sin títulos de columna,
+  sin ciudades ni guías, sin la línea «Sin publicidad…» y sin «Política de cookies».
+  - Sobre nosotros, Aviso legal, Privacidad y Condiciones → pantalla Sobre nosotros / Legales.
+  - **«Contactar»** solo en el pie; el menú ☰ y la cabecera siguen con «Contacto del administrador».
+- **Estilo:** fondo arena `#F2D7B6`, texto verde muy oscuro `#0A3F35`, una fila de enlaces que salta de línea si no
+  cabe. Móvil: a todo el ancho. Ordenador: caja redondeada dentro del ancho de 1120 px, enlaces centrados. Enlaces de
+  44 px de alto.
+- **Contactar / Crea tu página del pie:** en móvil abren el menú ☰ en esa ventana; en ordenador abren
   la ventana de contacto (añadida a las pantallas de ordenador que no la tenían, igual que la de la Home). En «Info del
   local» móvil (sin menú ☰ ni Play) esos dos botones son solo dibujo.
 
