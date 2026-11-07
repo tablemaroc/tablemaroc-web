@@ -117,7 +117,7 @@ Logo · buscador · idioma (ES · EN · FR) · Entrar / Mi cuenta.
 
 Inicio · Cuenta — Home · Account — Accueil · Compte.
 
-### Pie de página (sin uso: no hay pie de página desde el 07-11-2026, decisión del titular)
+### Pie de página (navegación secundaria, §4.4)
 
 | Columna | es | en | fr |
 |---|---|---|---|

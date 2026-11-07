@@ -57,7 +57,7 @@ Idiomas: **español (base), inglés y francés**. Sin publicidad, sin afiliados 
 | 10 | Página de texto | Legales, sobre nosotros, cómo funcionan las reseñas, contacto | `diseno/web-10-pagina-de-texto` |
 | 11 | Error y estados | 404 · 500 · sin conexión · mantenimiento | `diseno/web-11-errores` |
 | 12 | Reserva | Formulario · solicitud enviada · confirmada | `diseno/web-12-reserva` |
-| — | Esqueleto | Cabecera (menú ☰ en el móvil) · sin pie de página (07-11-2026) · barra inferior del móvil (Inicio, Cuenta; sin Buscar ni Explorar desde el 06-11-2026: se busca desde el buscador de la Home) | `diseno/web-esqueleto` |
+| — | Esqueleto | Cabecera (menú ☰ en el móvil) · pie de página (navegación secundaria) · barra inferior del móvil (Inicio, Cuenta; sin Buscar ni Explorar desde el 06-11-2026: se busca desde el buscador de la Home) | `diseno/web-esqueleto` |
 
 **Datos rápidos aprobados de un local:** vegetariano, pago con tarjeta, terraza, idiomas del personal (ES · EN · FR),
 aviso de horario de Ramadán, foto de la entrada, «Cerca de aquí».

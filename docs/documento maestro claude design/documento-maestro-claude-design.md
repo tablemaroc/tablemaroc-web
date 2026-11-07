@@ -177,8 +177,9 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 - **JavaScript:** se acepta en todo lo necesario (menú ☰, idioma, «Volver arriba», ubicación…).
 - **Contacto del administrador:** lo rellena el titular **desde el panel**; en el diseño queda el marcador. El panel
   necesita ese campo (Ajustes).
-- **Sin pie de página** (decisión del titular, 07-11-2026, sustituye a «diseñarlo antes de subir la Home»): la
-  navegación va en el menú ☰ (móvil) y en la cabecera (ordenador).
+- **Pie de página: sí** (decisión del titular, 07-11-2026). Hay que diseñarlo antes de subir la Home, en todas las
+  pantallas web (móvil y ordenador), como navegación secundaria: ciudades, guías y legales, sin «Política de cookies».
+  *(Claude lo apuntó por error como «sin pie de página»; corregido el mismo día.)*
 - **Restaurantes de una ciudad:** se programa junto con la Home.
 
 ## Bloque 5 · Pantallas en el lienzo
@@ -212,11 +213,13 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Copias locales desfasadas respecto al lienzo. | Comparar huellas antes de publicar (regla 9). |
 | Al añadir «tocar fuera cierra», metí las acciones nuevas dentro de la lista de idiomas y no en la pantalla: los botones dejaron de funcionar («nada funciona»). La revisión de sintaxis no lo detectó. | Comprobar que cada acción usada existe ejecutando la pantalla (Bloque 3). Corregido en las 15 pantallas y en los generadores. |
 | Dije que había puesto la foto de fondo, pero el color de fondo de cada pantalla la tapaba: solo se veía naranja. | No dar por hecho un cambio visual sin comprobar qué lo puede anular; avisar de que no se ha visto en pantalla. Corregido. |
+| Entendí «no hace falta pie de página, hazlo» como «quitar el pie» y lo apunté y subí así; el titular quería el pie. | Ante una frase que admite dos lecturas, preguntar antes de cambiar documentos (regla 4). Corregido. |
 | Con la lista de idiomas abierta, al abrir el menú ☰ la lista quedaba encima del menú. | Regla de capas (Bloque 4.6): un solo panel abierto y orden fijo de capas. Corregido en todas las pantallas. |
 
 ## Bloque 7 · Pendiente de decisión del titular
 
 - **Traducción** de los textos al cambiar de idioma.
+- **Pie de página** sin diseñar todavía (aprobado que exista, 07-11-2026).
 - **Doc 01, §19:** sigue diciendo «las listas largas se cortan con Ver más o paginación»; choca con el scroll aprobado.
 - **Docs 16 y 17:** la fila de la Home y las fases aún describen parte de la Home anterior.
 - **Ciudades del Sáhara Occidental** (El Aaiún, Dajla), fuera de la lista.
