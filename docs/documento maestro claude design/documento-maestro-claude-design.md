@@ -202,6 +202,11 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   sin ciudades ni guías, sin la línea «Sin publicidad…» y sin «Política de cookies».
   - Sobre nosotros, Aviso legal, Privacidad y Condiciones → pantalla Sobre nosotros / Legales.
   - **«Contactar»** solo en el pie; el menú ☰ y la cabecera siguen con «Contacto del administrador».
+  - **Móvil** (decisión del titular, 07-11-2026): sin «Crea tu página» en el pie (sigue en el menú ☰). Quedan Sobre
+    nosotros · Aviso legal · Privacidad · Condiciones · Contactar. El ordenador sigue con los seis.
+- **Pantalla Sobre nosotros / Legales: todo junto** (decisión del titular, 07-11-2026). Una sola pantalla con el título
+  «Sobre nosotros · Legales» y cuatro apartados con marcador `[TEXTO]`: Sobre nosotros, Aviso legal, Privacidad y
+  Condiciones. Todos los enlaces llevan a esa pantalla (antes el título decía siempre «Sobre nosotros»).
 - **Estilo:** fondo arena `#F2D7B6`, texto verde muy oscuro `#0A3F35`, una fila de enlaces que salta de línea si no
   cabe. Móvil: a todo el ancho. Ordenador: caja redondeada dentro del ancho de 1120 px, enlaces centrados. Enlaces de
   44 px de alto.
