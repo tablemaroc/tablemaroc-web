@@ -205,6 +205,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   - **Móvil** (decisión del titular, 07-11-2026): solo **Sobre nosotros · Privacidad · Contactar**. Sin «Crea tu
     página» (sigue en el menú ☰), «Aviso legal» ni «Condiciones» (sus textos siguen en la pantalla Sobre nosotros ·
     Legales, a la que también lleva «Legales» del menú ☰). El ordenador sigue con los seis.
+    En una fila: **Sobre nosotros a la izquierda, Privacidad en el centro y Contactar a la derecha**.
 - **Pantalla Sobre nosotros / Legales: todo junto** (decisión del titular, 07-11-2026). Una sola pantalla con el título
   «Sobre nosotros · Legales» y cuatro apartados con marcador `[TEXTO]`: Sobre nosotros, Aviso legal, Privacidad y
   Condiciones. Todos los enlaces llevan a esa pantalla (antes el título decía siempre «Sobre nosotros»).
