@@ -179,8 +179,10 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 - **Logo:** se usa el del diseño (arco). Se quita «sin arcos» del doc 17.
 - **Letra Literata:** alojada en tablemaroc.com (woff2 propio), sin conexión con Google.
 - **JavaScript:** se acepta en todo lo necesario (menú ☰, idioma, «Volver arriba», ubicación…).
-- **Contacto del administrador:** lo rellena el titular **desde el panel**; en el diseño queda el marcador. El panel
-  necesita ese campo (Ajustes).
+- **Contacto del administrador:** lo rellena el titular **desde el panel**. El panel necesita ese campo (Ajustes).
+  En el diseño, la ventana de contacto de las pantallas web muestra ya el nombre, el email y el teléfono del titular
+  (decisión del titular, 07-11-2026; antes, el marcador `[DATOS DE CONTACTO DEL ADMINISTRADOR]`). Los datos no se
+  copian en estos documentos.
 - **Pie de página: sí** (decisión del titular, 07-11-2026). Hay que diseñarlo antes de subir la Home, en todas las
   pantallas web (móvil y ordenador), como navegación secundaria: ciudades, guías y legales, sin «Política de cookies».
   Diseñado el mismo día: ver 4.11.
