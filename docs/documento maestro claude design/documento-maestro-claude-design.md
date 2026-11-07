@@ -218,6 +218,25 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   la ventana de contacto (añadida a las pantallas de ordenador que no la tenían, igual que la de la Home). En «Info del
   local» móvil (sin menú ☰ ni Play) esos dos botones son solo dibujo.
 
+### 4.12 Acceso de la web (usuarios) y menú ☰ (decisiones del titular, 07-11-2026)
+
+- **Pantallas** (móvil y ordenador, con cabecera, menú ☰, pie y barra inferior con «Cuenta» activa): Entrar · Crear
+  cuenta · Continuar con email · Continuar con Google · Continuar con huella o cara. Textos de
+  `docs/18-textos/04-interfaz.md` §5; lo que falta, del ENCARGO de `diseno/login` o como marcador `[AVISO: …]`.
+  - **Entrar:** «Entrar en Tablemaroc», «Sin contraseñas. Elige cómo entrar.», los 3 botones con el mismo peso y
+    «¿No tienes cuenta?» con el botón «Crear cuenta».
+  - **Crear cuenta:** «Elige cómo quieres crearla:» (Con Google · Con email · Con huella o cara) y «‹ Ya tengo cuenta: entrar».
+  - **Email:** email + casilla antispam de Turnstile (hueco de 300 × 65 px) → código de 6 cifras → si no hay cuenta,
+    nombre visible y aceptar condiciones → «Crear cuenta».
+  - **Google:** elegir cuenta → si no hay cuenta, «Último paso» (nombre visible y aceptar).
+  - **Huella o cara:** «Usar huella o cara»; sin cuenta, nombre visible, «Email (para recuperar la cuenta)» y aceptar →
+    «Activar huella o cara». Nunca «passkey» en la interfaz.
+  - **Enlace «Privacidad»** abajo de la tarjeta, centrado y en letra pequeña, como en el acceso del panel.
+  - Sin contraseñas, sin «recuperar contraseña», sin SMS y sin Apple. «Cuenta» y los errores se simulan en Tweaks.
+- **«Cuenta» (barra móvil) y «Mi cuenta» (menú ☰ y cabecera) llevan a Entrar** en todas las pantallas web; al entrar o
+  crear la cuenta se llega a Mi cuenta.
+- **Menú ☰ (móvil):** al abrirse ya no tapa la barra inferior; Inicio y Cuenta siguen visibles.
+
 ## Bloque 5 · Pantallas en el lienzo
 
 | Pantalla | Móvil | Ordenador | Con Play |
@@ -230,6 +249,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Mi cuenta (Reseñas · Reservas · Favoritos · Datos) | Sí | Sí | Sí |
 | Sobre nosotros / Legales | Sí | Sí | Sí |
 | Pie de página (dentro de las 16 pantallas web, 07-11-2026) | Sí | Sí | Sí, salvo Info del local móvil |
+| Web 11 · Acceso de usuarios (Entrar, Crear cuenta, email, Google, huella o cara) | Sí | Sí | Sí |
 | Panel · Esqueleto | Sí | Sí | Sí |
 | Panel 02 · Escritorio (Automático · Manual) | Sí | Sí | Sí |
 | Panel 01 · Acceso (7 pantallas: acceso, email, Google, huella o cara, código de la app, no autorizado, activa tu acceso) | Sí | Sí | Sí |
