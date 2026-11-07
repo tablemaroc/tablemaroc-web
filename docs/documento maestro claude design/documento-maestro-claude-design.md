@@ -162,6 +162,8 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   la nota «¿Es tu primera vez? Activa tu acceso desde el email que te enviamos»; 2) Continuar con email; 3) Continuar con
   Google; 4) Continuar con huella o cara; 5) Código de la app («Segundo paso», solo Administración, después de Google);
   6) Acceso no autorizado; 7) Activa tu acceso (primera vez, desde el email recibido; rol Propietario o Empleado en Tweaks).
+- **Enlace «Privacidad»** pequeño en la pantalla de acceso del panel, porque ahí se escribe el email (decisión del
+  titular, 07-11-2026). **El panel no lleva pie de página** (es privado y no se indexa; se navega con la barra lateral).
 - **Administración que entra con email → «Acceso no autorizado»**. Se quita el botón «Ir al panel de locales» del boceto.
 - **Mensajes de error incluidos**, elegidos en Tweaks: email no válido, código incorrecto, código caducado, demasiados
   intentos y huella o cara cancelada (también código de la app incorrecto o demasiados intentos). Los textos que no están

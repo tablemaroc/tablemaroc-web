@@ -107,6 +107,7 @@ interruptor «Automático / Manual» y dos pestañas: «Automático» (qué hace
 2. Acceso: una sola pantalla para todos los roles (apartado 3 de diseno/login/ENCARGO.md, con los bocetos de
    diseno/login/administrador y diseno/login/propietario como partida): Google, email o huella o cara.
    Administración: Google + código de la app, o huella o cara; si entra con email, «Acceso no autorizado».
+   Un enlace pequeño a «Privacidad» en la pantalla de acceso (ahí se escribe el email). El panel no lleva pie de página.
 3. Escritorio, con la moderación de reseñas y fotos dentro.
 4. Listado genérico (sirve para locales, ciudades, platos y guías).
 5. Nuevo / editar local, con las pestañas Información · ES · EN · FR · Fotos · Menú (archivar / reactivar platos) ·
