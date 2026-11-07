@@ -66,6 +66,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Tarjetas | **Verde claro `#E3EFEB`** con borde fino, en todas las pantallas web (restaurantes, mejores restaurantes, guías, ciudades, reseñas, reservas, favoritos, desplegables de información); texto verde muy oscuro `#0A3F35` (06-11-2026; antes blanco `#FFFFFF`). Filtros, selector de ciudad, menús y botones siguen blancos |
 | Texto | Verde muy oscuro `#0A3F35` — **nada de negro** |
 | Fondos destacados | Verde de marca `#0F5C4D` con texto blanco (antes negros) |
+| Botones verdes (web) | **Verde `#1B7A66`** con texto blanco (contraste 5,2:1) en todos los botones verdes de las 16 pantallas web: Crea tu página, Ver restaurantes, Reservar, Volver arriba, filtro activo… (decisión del titular, 07-11-2026; antes `#0F5C4D`, que se veía demasiado oscuro). El logo, el punto de «Abierto» y el panel siguen con `#0F5C4D` |
 | Azafrán `#E0A23B` | Solo relleno y estrellas |
 | Arcilla `#9C3F17` | Cerrado y avisos |
 | Tipografía | Literata como única fuente web; el resto, fuentes del sistema |
