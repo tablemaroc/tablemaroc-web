@@ -237,6 +237,23 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   crear la cuenta se llega a Mi cuenta.
 - **Menú ☰ (móvil):** al abrirse ya no tapa la barra inferior; Inicio y Cuenta siguen visibles.
 
+### 4.13 Reseñas «como Google Business» (decisión del titular, 07-11-2026)
+
+- **Referencia:** capturas del formulario de reseñas de Google que dio el titular. Se toman las preguntas, no su
+  aspecto: el diseño sigue el estilo de Tablemaroc (cajas verde claro, botones blancos, verde de marca).
+- **Escribir reseña** (móvil y ordenador): «Tu reseña de [NOMBRE DEL RESTAURANTE]» → ¿Qué nota le das? (5 estrellas,
+  con Malo · Flojo · Correcto · Muy bueno · Excelente) → notas de **Comida, Servicio y Ambiente** → texto (hasta 2000
+  caracteres) → ¿Cuándo fuiste? → ¿Con quién viajabas? → fotos (hasta 3, con casilla de derechos) → **¿Qué pediste?**
+  (Desayuno · Brunch · Comida · Cena · Otro) → **¿Cuánto dinero gastaste por persona?** (tramos de 1-50 MAD a Más de
+  500 MAD) → **¿Cuánto tiempo has esperado para conseguir una mesa?** → **¿Para grupos de qué tamaño es más adecuado
+  este sitio?** (varias opciones) → **Añade más detalles** (comida vegetariana, restricciones alimentarias,
+  aparcamiento, admisión de niños, acceso para sillas de ruedas) → «Enviar reseña» → mensaje de gracias. Se mantienen
+  la fecha de visita y el tipo de viaje ya aprobados. Aviso de límite de 5 reseñas en 24 h en Tweaks.
+- **Pestaña Reseñas** de la página del restaurante: «Reseñas de viajeros», nota media y número, notas medias de
+  Comida, Servicio y Ambiente, «Escribir una reseña», «Todas las reseñas se leen antes de publicarse.» y tarjetas con
+  nombre visible, estrellas, visita y tipo de viaje, notas, lo que pidió, gasto y espera, texto, fotos, idioma y
+  «Respuesta del local». Las pestañas Info y Reseñas se enlazan entre sí.
+
 ## Bloque 5 · Pantallas en el lienzo
 
 | Pantalla | Móvil | Ordenador | Con Play |
@@ -250,6 +267,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Sobre nosotros / Legales | Sí | Sí | Sí |
 | Pie de página (dentro de las 16 pantallas web, 07-11-2026) | Sí | Sí | Sí, salvo Info del local móvil |
 | Web 11 · Acceso de usuarios (Entrar, Crear cuenta, email, Google, huella o cara) | Sí | Sí | Sí |
+| Info del local · pestaña Reseñas · Web 08 · Escribir reseña | Sí | Sí | Sí |
 | Panel · Esqueleto | Sí | Sí | Sí |
 | Panel 02 · Escritorio (Automático · Manual) | Sí | Sí | Sí |
 | Panel 01 · Acceso (7 pantallas: acceso, email, Google, huella o cara, código de la app, no autorizado, activa tu acceso) | Sí | Sí | Sí |
@@ -282,8 +300,12 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 - **Acceso del panel:** textos de los avisos que faltan (email no válido, código caducado, huella o cara cancelada y
   demasiados intentos con el código de la app). *(El encargo de login y los docs 16 y 17 ya dicen «una sola pantalla de
   acceso», 06-11-2026.)*
-- **Pantallas que faltan:** menú del restaurante, reseñas, mapa, plato típico, escribir reseña, reserva, acceso,
-  errores, reclamar un local y el panel.
+- **Pantallas que faltan:** menú del restaurante, mapa, plato típico, reserva, errores, reclamar un local y el panel
+  (tanda 3 y parte B).
+- **Reseñas «como Google Business» (4.13):** llevarlas a los docs 01 (§3 y §20), 16 y 18 y al modelo de datos (notas de
+  Comida, Servicio y Ambiente; qué pediste; gasto por persona; espera; tamaño de grupo; más detalles). Falta decidir las
+  opciones de cada desplegable de «más detalles» (ahora `[OPCIONES]`), los textos en inglés y francés, y dónde va el
+  «texto alternativo» obligatorio de cada foto.
 
 ## Bloque 8 · Documentos relacionados
 
