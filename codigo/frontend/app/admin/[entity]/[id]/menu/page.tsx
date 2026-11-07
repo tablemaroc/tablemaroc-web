@@ -73,7 +73,7 @@ export default async function MenuEditor({ params }: { params: Promise<{ entity:
         {data.menu?.status === 'publicado' && (
           <>
             <h3>Código QR</h3>
-            <p className={styles.muted}>Apunta a la dirección definitiva de platemaroc.com: funcionará cuando la web esté publicada.</p>
+            <p className={styles.muted}>Apunta a la dirección definitiva de tablemaroc.com: funcionará cuando la web esté publicada.</p>
             <p className={styles.inline}>
               {LOCALES.map((l) => <a key={l} className={styles.secondaryLink} href={`/admin/lugares/${id}/menu/qr?lang=${l}`} download={`menu-${place.slug}-${l}.png`}>QR {l.toUpperCase()}</a>)}
             </p>

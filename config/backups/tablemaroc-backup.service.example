@@ -1,0 +1,9 @@
+[Unit]
+Description=Copia de seguridad de la base de datos de Tablemaroc
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=deploy
+ExecStart=/srv/tablemaroc/scripts/backup-db.sh /etc/tablemaroc/backup.env

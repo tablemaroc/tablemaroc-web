@@ -12,7 +12,7 @@ const FRONTEND = path.join(__dirname, '../../frontend');
 
 function startServer() {
   const child = spawn('npx', ['next', 'dev', '-p', String(PORT)], {
-    cwd: FRONTEND, shell: true, stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, PLATEMAROC_DEMO_DATA: '1' },
+    cwd: FRONTEND, shell: true, stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, TABLEMAROC_DEMO_DATA: '1' },
   });
   child.stdout.on('data', () => {});
   child.stderr.on('data', (d) => process.stderr.write(d));

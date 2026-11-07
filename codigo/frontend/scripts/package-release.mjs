@@ -20,7 +20,7 @@ cpSync(standalone, out, { recursive: true, verbatimSymlinks: true });
 cpSync(join(frontend, '.next/static'), join(out, app, '.next/static'), { recursive: true });
 cpSync(join(frontend, 'public'), join(out, app, 'public'), { recursive: true });
 
-// Red de seguridad: standalone copia los .env que encuentra, y los secretos del servidor viven en /etc/platemaroc/app.env.
+// Red de seguridad: standalone copia los .env que encuentra, y los secretos del servidor viven en /etc/tablemaroc/app.env.
 for (const name of ['.env', '.env.local', '.env.test.local', '.env.production', '.env.production.local']) {
   rmSync(join(out, app, name), { force: true });
   rmSync(join(out, name), { force: true });

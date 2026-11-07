@@ -23,7 +23,7 @@ export default async function Mfa({ searchParams }: { searchParams: Promise<Reco
     return (
       <main className={styles.main}>
         <h1 className={styles.title}>Verificación en dos pasos</h1>
-        <p>Abre tu app de códigos y escribe el número de Platemaroc.</p>
+        <p>Abre tu app de códigos y escribe el número de Tablemaroc.</p>
         <MfaForm factorId={verified.id} next={next} />
       </main>
     );

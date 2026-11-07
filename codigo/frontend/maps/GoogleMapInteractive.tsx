@@ -8,7 +8,7 @@ import type { MapControls } from './MapFallback';
  * Sin clave (NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) o si el SDK falla → onError → fallback inmediato.
  */
 declare global {
-  interface Window { google?: any; __platemarocMapsReady?: () => void }
+  interface Window { google?: any; __tablemarocMapsReady?: () => void }
 }
 
 let sdk: Promise<void> | null = null;
@@ -16,9 +16,9 @@ let sdk: Promise<void> | null = null;
 function loadSdk(apiKey: string): Promise<void> {
   if (window.google?.maps?.Map) return Promise.resolve();
   sdk ??= new Promise<void>((resolve, reject) => {
-    window.__platemarocMapsReady = () => resolve();
+    window.__tablemarocMapsReady = () => resolve();
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&loading=async&callback=__platemarocMapsReady`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&loading=async&callback=__tablemarocMapsReady`;
     script.async = true;
     script.onerror = () => { sdk = null; reject(new Error('Google Maps no ha cargado')); };
     document.head.appendChild(script);

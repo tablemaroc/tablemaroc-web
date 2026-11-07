@@ -1,7 +1,7 @@
-# Decisiones de Platemaroc
+# Decisiones de Tablemaroc
 
 ## Marca
-- Nombre: Platemaroc. Dominio: platemaroc.com (disponible; marcas y redes revisadas por el titular).
+- Nombre: Tablemaroc. Dominio: tablemaroc.com (disponible; marcas y redes revisadas por el titular).
 - Enfoque nacional: Marruecos.
 
 ## Producto

@@ -29,21 +29,21 @@ FILES=("$HERE"/migrations/propuesta-v2/*.sql "$HERE"/policies-rls/*.sql)
 [ "$SEED" = 1 ] && FILES+=("$HERE"/seeders/*.sql)
 
 if [ "$DRY" = 0 ]; then
-  "${P[@]}" -c "set client_min_messages = warning" -c "create schema if not exists platemaroc_meta" -c "revoke all on schema platemaroc_meta from public" \
-    -c "create table if not exists platemaroc_meta.applied_files (file text primary key, sha256 text not null, applied_at timestamptz not null default now())"
+  "${P[@]}" -c "set client_min_messages = warning" -c "create schema if not exists tablemaroc_meta" -c "revoke all on schema tablemaroc_meta from public" \
+    -c "create table if not exists tablemaroc_meta.applied_files (file text primary key, sha256 text not null, applied_at timestamptz not null default now())"
 fi
-HAS_LOG="$("${P[@]}" -At -c "select to_regclass('platemaroc_meta.applied_files') is not null")"
+HAS_LOG="$("${P[@]}" -At -c "select to_regclass('tablemaroc_meta.applied_files') is not null")"
 
 pending=0
 for f in "${FILES[@]}"; do
   rel="${f#"$HERE"/}"; sum="$(sha256sum "$f" | cut -d' ' -f1)"
   done_sum=""
-  [ "$HAS_LOG" = t ] && done_sum="$("${P[@]}" -At -c "select sha256 from platemaroc_meta.applied_files where file = '$rel'")"
+  [ "$HAS_LOG" = t ] && done_sum="$("${P[@]}" -At -c "select sha256 from tablemaroc_meta.applied_files where file = '$rel'")"
   if [ "$done_sum" = "$sum" ]; then echo "ya aplicado  $rel"; continue; fi
   if [ -n "$done_sum" ]; then echo "ERROR: $rel cambió después de aplicarse. Crea un archivo nuevo con el cambio." >&2; exit 1; fi
   pending=$((pending + 1))
   if [ "$DRY" = 1 ]; then echo "pendiente    $rel"; continue; fi
-  { cat "$f"; printf "\ninsert into platemaroc_meta.applied_files (file, sha256) values ('%s', '%s');\n" "$rel" "$sum"; } \
+  { cat "$f"; printf "\ninsert into tablemaroc_meta.applied_files (file, sha256) values ('%s', '%s');\n" "$rel" "$sum"; } \
     | "${P[@]}" --single-transaction -f -
   echo "aplicado     $rel"
 done

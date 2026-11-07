@@ -1,9 +1,0 @@
-[Unit]
-Description=Copia de seguridad de la base de datos de Platemaroc
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=oneshot
-User=deploy
-ExecStart=/srv/platemaroc/scripts/backup-db.sh /etc/platemaroc/backup.env

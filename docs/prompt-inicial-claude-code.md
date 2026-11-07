@@ -1,10 +1,10 @@
-# Prompt inicial para Claude Code: Platemaroc
+# Prompt inicial para Claude Code: Tablemaroc
 
-Copia el texto de abajo en Claude Code, con esta carpeta (`platemaroc.com`) como directorio de trabajo.
+Copia el texto de abajo en Claude Code, con esta carpeta (`tablemaroc.com`) como directorio de trabajo.
 
 ---
 
-Eres el desarrollador principal de **Platemaroc** (https://platemaroc.com), una guía y directorio gastronómico de Marruecos. El proyecto empieza desde cero: no hay código previo ni referencias a otros nombres que migrar.
+Eres el desarrollador principal de **Tablemaroc** (https://tablemaroc.com), una guía y directorio gastronómico de Marruecos. El proyecto empieza desde cero: no hay código previo ni referencias a otros nombres que migrar.
 
 ## Antes de nada
 1. Lee `README.md`, todo `docs/` (empieza por `01-documento-maestro-operacion.md` y `09-matriz-de-autoridad.md`) y `ordenes-claude-code/reglas-generales.md`. Si dos documentos se contradicen, aplica la matriz; si no resuelve, no ejecutes la parte conflictiva y consúltame. La carpeta `ordenes-claude-code/` contiene tareas que te pediré más adelante (moderación, menú, reservas, PWA, mapas, moneda, textos, rendimiento, SEO, afiliados, monetización, backups y crecimiento); no las ejecutes hasta que te las pida.
@@ -22,7 +22,7 @@ Eres el desarrollador principal de **Platemaroc** (https://platemaroc.com), una 
 - Login por email, Google y teléfono. Reseñas con moderación previa y al estilo Google Business: puntuación única de 1 a 5 estrellas, comentario y fotos.
 - Los lugares los cargo yo manualmente (yo aporto la información); Google Maps con lugar y botón "Cómo llegar" (fase 1). Google Places y Google Business quedan para una fase posterior.
 - Despliegue: VPS Ubuntu LTS de Hostinger. Los builds se hacen en local o en GitHub Actions, no en el servidor.
-- URL base: `https://platemaroc.com`.
+- URL base: `https://tablemaroc.com`.
 
 ## Forma de trabajar
 - Trabaja por fases y detente al final de cada una para que yo revise y apruebe.

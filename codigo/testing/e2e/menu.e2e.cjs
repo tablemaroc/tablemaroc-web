@@ -10,7 +10,7 @@ const { resetFactors, passMfa, syncClock } = require('./mfa-helper.cjs');
 const FRONTEND = path.join(__dirname, '../../frontend');
 const PORT = 3104;
 const BASE = `http://localhost:${PORT}`;
-const ADMIN = 'e2e-admin@platemaroc-e2e.test', USER = 'e2e-user@platemaroc-e2e.test';
+const ADMIN = 'e2e-admin@tablemaroc-e2e.test', USER = 'e2e-user@tablemaroc-e2e.test';
 
 function readEnv(file) {
   if (!fs.existsSync(file)) return {};

@@ -1,6 +1,6 @@
-# Platemaroc
+# Tablemaroc
 
-Directorio y guía gastronómica de Marruecos. Dominio: https://platemaroc.com
+Directorio y guía gastronómica de Marruecos. Dominio: https://tablemaroc.com
 
 Estado: **web construida, sin publicar.** Fases 0 a 6 hechas y Fase 7 preparada en el repositorio. Ya existen plantillas en `/es/`, `/en/` y `/fr/`, panel con dos pasos, reseñas moderadas, menú digital, Quality Gate, buscador, identidad visual «Té a la menta» y modo sin conexión.
 
@@ -30,7 +30,7 @@ Requisitos: Node.js 26 (versión de `.nvmrc`; mínimo 22.18) y Git. Las claves v
 - Mobile-First absoluto, Core Web Vitals (LCP, INP, CLS) y HTTPS estricto.
 - Control automatizado de indexabilidad con Quality Gate (`is_indexable`).
 - Idiomas oficiales: español (`es`), inglés (`en`) y francés (`fr`), con URLs `/es/`, `/en/`, `/fr/`. El árabe y el RTL están retirados. Cada idioma se indexa solo cuando su traducción está realmente preparada.
-- Menú digital en el MVP. Sin reservas.
+- Menú digital en el MVP. Reservas recuperadas el 01-11-2026 (gestionadas: solicita el usuario y confirma el propietario; ver `docs/01-documento-maestro-operacion.md` §18 bis).
 - PWA y mobile-first para redes inestables, fallback de mapas con carga diferida y precios exclusivamente en MAD.
 
 ## Stack y servicios
@@ -40,13 +40,13 @@ Requisitos: Node.js 26 (versión de `.nvmrc`; mínimo 22.18) y Git. Las claves v
 - Backend separado del frontend.
 - Google Maps (mapa y "Cómo llegar"). Carga de lugares manual; Google Places y Google Business en una fase posterior (las carpetas de integración quedan reservadas).
 - Reseñas al estilo Google Business: puntuación de 1 a 5 estrellas, comentario y fotos, con moderación previa.
-- Alojamiento: VPS KVM 1 de Hostinger con Ubuntu LTS limpio. Sin exportación estática.
+- Alojamiento: **todo en Cloudflare** (decisión del 02-11-2026; ver `docs/01-documento-maestro-operacion.md` §18 ter). El código actual (Next.js + Supabase) se sustituirá en la fase de desarrollo.
 - Desarrollo con Claude Code desde Windows y repositorio en GitHub.
 
 ## Estructura
 
 ```
-platemaroc.com/
+tablemaroc.com/
 ├── codigo/
 │   ├── backend/            api, auth, reviews, admin-moderation, integrations (google-places, google-business, google-maps)
 │   ├── frontend/           app, components, maps, i18n, admin-panel

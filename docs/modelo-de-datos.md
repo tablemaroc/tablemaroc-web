@@ -1,4 +1,4 @@
-# Modelo de datos de Platemaroc (borrador conceptual)
+# Modelo de datos de Tablemaroc (borrador conceptual)
 
 Documento de planificación: describe entidades, campos y relaciones. No es SQL ni código definitivo.
 
@@ -64,7 +64,7 @@ Una fila por entidad e idioma.
 - La valoración media del lugar y el número de reseñas se calculan solo con reseñas aprobadas.
 
 ### respuesta_de_propietario (a cargo de Claude Code, fase posterior)
-- id, reseña, texto, fecha, autor (Platemaroc en nombre del local, o el propietario si algún día tiene cuenta verificada)
+- id, reseña, texto, fecha, autor (Tablemaroc en nombre del local, o el propietario si algún día tiene cuenta verificada)
 - Las respuestas se publican en nombre del local: el titular confirma que todos los locales de la web han dado su autorización.
 
 ### foto

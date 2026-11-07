@@ -8,7 +8,7 @@ export const TTL_MS = 60_000;
 const MAX_ENTRIES = 5000;
 
 interface Entry { at: number; value: Promise<unknown> }
-const store = ((globalThis as unknown as { __platemarocCache?: Map<string, Entry> }).__platemarocCache ??= new Map<string, Entry>());
+const store = ((globalThis as unknown as { __tablemarocCache?: Map<string, Entry> }).__tablemarocCache ??= new Map<string, Entry>());
 
 export function cached<T>(key: string, load: () => Promise<T>, now = Date.now()): Promise<T> {
   const hit = store.get(key);

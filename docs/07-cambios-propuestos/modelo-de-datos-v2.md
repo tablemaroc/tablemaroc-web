@@ -52,7 +52,7 @@ La implementación exacta debe validarse contra el esquema real antes de aplicar
 
 ## Menú: precios (solo MAD)
 
-Los `menu_items` almacenan el precio en `price_mad`. Platemaroc usa exclusivamente MAD: no existe campo genérico
+Los `menu_items` almacenan el precio en `price_mad`. Tablemaroc usa exclusivamente MAD: no existe campo genérico
 de moneda en `menu_items` ni conversiones a otras monedas (`docs/12-especificacion-precios-mad.md`).
 
 ## Fichas y mapas

@@ -1,5 +1,5 @@
 {
-  "name": "@platemaroc/backend",
+  "name": "@tablemaroc/backend",
   "private": true,
   "description": "Lógica de servidor (auditoría, reseñas, Supabase). Solo se ejecuta en el servidor; nunca en el navegador.",
   "dependencies": {

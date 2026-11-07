@@ -24,9 +24,13 @@
 | Mapas/geolocalización | `11-protocolo-fallback-mapas.md` + `revisar-fallback-mapas.md` + `codigo/frontend/maps/` | Aplicar fallback estructural y pruebas definidas |
 | Precios menú | `12-especificacion-precios-mad.md` + `revisar-precios-mad.md` + `codigo/shared/price.ts` | Solo MAD; sin conversiones |
 
+## Prioridad de las decisiones del 01-11-2026
+
+Las decisiones del titular del 01-11-2026, recogidas en `01-documento-maestro-operacion.md` (responsabilidades, no borrar contenido publicado, sin ingresos, barrios eliminados, login sin SMS, mapas sin coste por uso), prevalecen sobre cualquier documento, orden o código anterior que las contradiga. El código actual que aún las contradiga (barrios, Google Maps, aprobación por el titular) se adaptará en la fase de desarrollo.
+
 ## Prioridad de las decisiones técnicas del 29-10-2026
 
-Las decisiones del paquete `platemaroc-ajustes-tecnicos-2026-10-29` (solo MAD; carga diferida del mapa; IndexedDB máx. 20 con LRU; cachés versionadas del Service Worker) tienen prioridad sobre cualquier especificación anterior que contemple moneda dual o carga inmediata del mapa.
+Las decisiones del paquete `tablemaroc-ajustes-tecnicos-2026-10-29` (solo MAD; carga diferida del mapa; IndexedDB máx. 20 con LRU; cachés versionadas del Service Worker) tienen prioridad sobre cualquier especificación anterior que contemple moneda dual o carga inmediata del mapa.
 
 ## Regla de conflicto
 

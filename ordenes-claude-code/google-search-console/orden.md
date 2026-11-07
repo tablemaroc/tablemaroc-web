@@ -1,10 +1,10 @@
 # Orden: usar Google Search Console
 
 ## Objetivo
-Analizar cómo ve y posiciona Google a Platemaroc, detectar problemas de indexación y proponer acciones.
+Analizar cómo ve y posiciona Google a Tablemaroc, detectar problemas de indexación y proponer acciones.
 
 ## Requisitos previos (los prepara el titular)
-1. La web debe estar publicada en `https://platemaroc.com`.
+1. La web debe estar publicada en `https://tablemaroc.com`.
 2. El titular verifica el dominio en Google Search Console como propiedad de dominio. Suele hacerse añadiendo un registro DNS en el panel de dominios de Hostinger; Claude Code le guiará paso a paso.
 3. Los datos se entregan con informes descargados (CSV): el titular exporta los informes desde Search Console (rendimiento, páginas indexadas, sitemaps y Core Web Vitals) y los deja en la carpeta `resultados/`. Claude Code le indica qué informes descargar y cómo. Más adelante se podrá valorar un acceso automático por API; las credenciales nunca se guardan en el repositorio.
 4. Si falta alguno de estos requisitos, dilo y detente.

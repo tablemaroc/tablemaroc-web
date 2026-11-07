@@ -39,3 +39,17 @@ designo web/
 
 # Generado por codigo/frontend/scripts/prepare-sw.mjs (la fuente es public/sw.js)
 codigo/frontend/public/sw.js
+
+# Cloudflare (estado local de Wrangler y tipos generados de Astro)
+.wrangler/
+.astro/
+.dev.vars*
+
+# PWA generada por scripts/preparar-pwa.mjs (la fuente está en pwa/)
+codigo/cloudflare/public/sw.js
+codigo/cloudflare/public/registrar-sw.js
+codigo/cloudflare/public/sin-conexion.html
+codigo/cloudflare/public/manifest.webmanifest
+codigo/cloudflare/public/fonts/
+codigo/cloudflare/public/_headers
+codigo/cloudflare/public/copia-pc.js

@@ -11,7 +11,7 @@ const BASE = `http://localhost:${PORT}`;
 const PAGES = ['/es', '/en/restaurants', '/es/restaurantes/demo-restaurante', '/fr/restaurants/demo-restaurante/menu', '/es/platos-tipicos/demo-plato', '/en/food-guides/demo-guia', '/fr/villes/demo-ciudad', '/auth/entrar?lang=es', '/privacidad?lang=fr'];
 
 function startServer() {
-  const c = spawn('npx', ['next', 'dev', '-p', String(PORT)], { cwd: path.join(__dirname, '../../frontend'), shell: true, stdio: ['ignore', 'ignore', 'pipe'], env: { ...process.env, PLATEMAROC_DEMO_DATA: '1' } });
+  const c = spawn('npx', ['next', 'dev', '-p', String(PORT)], { cwd: path.join(__dirname, '../../frontend'), shell: true, stdio: ['ignore', 'ignore', 'pipe'], env: { ...process.env, TABLEMAROC_DEMO_DATA: '1' } });
   c.stderr.on('data', (d) => { if (!/DEP|Warning/.test(d)) process.stderr.write(d); });
   return c;
 }

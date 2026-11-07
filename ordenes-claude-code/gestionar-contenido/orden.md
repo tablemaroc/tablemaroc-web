@@ -1,7 +1,7 @@
 # Orden: escribir, editar, generar y subir contenido (sin eliminar)
 
 ## Objetivo
-Gestionar el contenido de Platemaroc (lugares, platos, guías, ciudades, barrios y traducciones) de forma ordenada y segura.
+Gestionar el contenido de Tablemaroc (lugares, platos, guías, ciudades, barrios y traducciones) de forma ordenada y segura.
 
 ## Antes de empezar
 - Lee `reglas-generales.md` y `docs/modelo-de-datos.md`.

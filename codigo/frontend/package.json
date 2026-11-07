@@ -1,5 +1,5 @@
 {
-  "name": "@platemaroc/frontend",
+  "name": "@tablemaroc/frontend",
   "private": true,
   "scripts": {
     "dev": "node scripts/prepare-sw.mjs && next dev",

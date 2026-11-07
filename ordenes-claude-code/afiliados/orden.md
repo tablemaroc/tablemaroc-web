@@ -16,7 +16,7 @@ Encontrar y comparar programas de afiliados coherentes con una web de gastronom�
 ## Pasos
 1. Busca los programas vigentes (no uses listas antiguas) y confirma en su web oficial las condiciones actuales.
 2. Para cada uno, anota: comisión, duración de la cookie, pago mínimo y forma de cobro, países admitidos (¿acepta cuentas desde España o Marruecos?), requisitos de aprobación y restricciones de uso.
-3. Valora el encaje con el contenido y con el público de Platemaroc, y el riesgo para la confianza del lector.
+3. Valora el encaje con el contenido y con el público de Tablemaroc, y el riesgo para la confianza del lector.
 4. Redacta la forma correcta de etiquetar los enlaces: aviso claro y visible, y atributo de enlace patrocinado (`rel="sponsored"`).
 5. Señala los asuntos legales y fiscales para consultar con un asesor (el titular debe confirmarlos).
 

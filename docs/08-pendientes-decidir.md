@@ -34,12 +34,12 @@ Fase 7, parte 2 (instalar el servidor): APLAZADA por el titular (30-10-2026). No
 17. Reactivar el proveedor Email en Supabase (el titular lo desactivó) y elegir servicio de envío antes de abrir altas: el de Supabase tiene un límite muy bajo.
 
 ## Dominios propios de restaurantes (30-10-2026)
-18. El titular quiere, en el futuro, que el dominio de un restaurante muestre su página alojada en Platemaroc (opción A), siempre con el dominio del propio restaurante y su permiso. Comprar dominios con nombres de negocios queda descartado. Necesita servidor en marcha, certificados por dominio, una canónica clara para no duplicar la ficha y revisar con el asesor el acuerdo con cada restaurante.
+18. El titular quiere, en el futuro, que el dominio de un restaurante muestre su página alojada en Tablemaroc (opción A), siempre con el dominio del propio restaurante y su permiso. Comprar dominios con nombres de negocios queda descartado. Necesita servidor en marcha, certificados por dominio, una canónica clara para no duplicar la ficha y revisar con el asesor el acuerdo con cada restaurante.
 
 ## Al lanzar la web (pedido por el titular, 30-10-2026)
 - Antes de lanzar, cerrar las altas también en Supabase (**Allow new users to sign up**): primero en el proyecto de pruebas, luego en el real. Dos intentos del 30-10-2026 no se aplicaron (`disable_signup` siguió en `false`); causa sin averiguar, aplazado por el titular. Para abrir las altas después hay que encender esa opción además de `PUBLIC_SIGNUP_ENABLED`.
-- Google Cloud: añadir `https://platemaroc.com` a los orígenes del cliente.
-- Supabase: `https://platemaroc.com/**` en Redirect URLs y `https://platemaroc.com` como Site URL.
+- Google Cloud: añadir `https://tablemaroc.com` a los orígenes del cliente.
+- Supabase: `https://tablemaroc.com/**` en Redirect URLs y `https://tablemaroc.com` como Site URL.
 - Publicar la app en Google Auth Platform (de pruebas a producción), con la política de privacidad ya publicada: si no, solo entran los usuarios de prueba.
 
 ## Ya decidido

@@ -1,7 +1,7 @@
 # Orden: ideas para hacer crecer el proyecto
 
 ## Objetivo
-Proponer ideas realistas para que Platemaroc gane contenido, tráfico y comunidad.
+Proponer ideas realistas para que Tablemaroc gane contenido, tráfico y comunidad.
 
 ## Antes de empezar
 - Lee `reglas-generales.md`.

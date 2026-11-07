@@ -1,6 +1,6 @@
 {
   "ci": {
-    "collect": { "url": ["https://platemaroc.com/es/", "https://platemaroc.com/en/", "https://platemaroc.com/fr/"], "numberOfRuns": 3, "settings": { "preset": "mobile" } },
+    "collect": { "url": ["https://tablemaroc.com/es/", "https://tablemaroc.com/en/", "https://tablemaroc.com/fr/"], "numberOfRuns": 3, "settings": { "preset": "mobile" } },
     "assert": {
       "assertions": {
         "largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],

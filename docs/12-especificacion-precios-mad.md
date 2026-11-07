@@ -1,11 +1,11 @@
 # Especificación de precios (solo MAD)
 
-**Decisión técnica del 29-10-2026** (paquete `platemaroc-ajustes-tecnicos-2026-10-29`). Sustituye a la
+**Decisión técnica del 29-10-2026** (paquete `tablemaroc-ajustes-tecnicos-2026-10-29`). Sustituye a la
 antigua especificación de moneda dual (MAD/EUR/USD), que queda anulada.
 
 ## 1. Regla
 
-- Platemaroc utiliza **exclusivamente dírhams marroquíes (MAD)** para los precios.
+- Tablemaroc utiliza **exclusivamente dírhams marroquíes (MAD)** para los precios.
 - No existen conversiones a EUR, USD ni a ninguna otra moneda; tampoco tipos de cambio, selectores
   de moneda ni precios aproximados.
 - `menu_items` guarda el importe en una columna `price_mad` (numérico, no negativo, nulo si el precio

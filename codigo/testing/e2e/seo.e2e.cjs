@@ -10,7 +10,7 @@ const { resetFactors, passMfa, syncClock } = require('./mfa-helper.cjs');
 const FRONTEND = path.join(__dirname, '../../frontend');
 const PORT = 3105;
 const BASE = `http://localhost:${PORT}`;
-const ADMIN = 'e2e-admin@platemaroc-e2e.test';
+const ADMIN = 'e2e-admin@tablemaroc-e2e.test';
 
 function readEnv(file) {
   if (!fs.existsSync(file)) return {};
@@ -94,8 +94,8 @@ async function waitFor(url, ms = 120_000) { for (const end = Date.now() + ms; Da
 
     const es = await html(`/es/restaurantes/${ok.slug}`);
     assert.match(meta(es, 'robots') ?? '', /^index/);
-    assert.equal(canonical(es), `https://platemaroc.com/es/restaurantes/${ok.slug}`);
-    const expected = [['en', `https://platemaroc.com/en/restaurants/${ok.slug}`], ['es', `https://platemaroc.com/es/restaurantes/${ok.slug}`]];
+    assert.equal(canonical(es), `https://tablemaroc.com/es/restaurantes/${ok.slug}`);
+    const expected = [['en', `https://tablemaroc.com/en/restaurants/${ok.slug}`], ['es', `https://tablemaroc.com/es/restaurantes/${ok.slug}`]];
     assert.deepEqual(hreflang(es), expected, 'hreflang incluye la propia página');
     assert.deepEqual(hreflang(await html(`/en/restaurants/${ok.slug}`)), expected, 'hreflang recíproco');
     assert.equal((await fetch(`${BASE}/fr/restaurants/${ok.slug}`)).status, 404);
@@ -123,7 +123,7 @@ async function waitFor(url, ms = 120_000) { for (const end = Date.now() + ms; Da
     await page.waitForSelector('[role=status]:has-text("textos evaluados")', { timeout: 60_000 });
     const menuHtml = await html(`/es/restaurantes/${ok.slug}/menu`);
     assert.match(meta(menuHtml, 'robots') ?? '', /^index/);
-    assert.equal(canonical(menuHtml), `https://platemaroc.com/es/restaurantes/${ok.slug}/menu`);
+    assert.equal(canonical(menuHtml), `https://tablemaroc.com/es/restaurantes/${ok.slug}/menu`);
     assert.ok((await html('/sitemap.xml')).includes(`/es/restaurantes/${ok.slug}/menu</loc>`));
     assert.match(meta(await html(`/en/restaurants/${ok.slug}`), 'robots') ?? '', /^index/);
     console.log('menú: indexable y en el sitemap cuando su ficha lo es y tiene texto suficiente');
@@ -133,13 +133,13 @@ async function waitFor(url, ms = 120_000) { for (const end = Date.now() + ms; Da
     assert.deepEqual(hreflang(bad), []);
     assert.equal(jsonLd(bad).length, 0, 'sin datos estructurados si no es apta');
     const sm = await html('/sitemap.xml');
-    assert.ok(sm.includes(`<loc>https://platemaroc.com/es/restaurantes/${ok.slug}</loc>`) && sm.includes('hreflang="en"') && sm.includes('<loc>https://platemaroc.com/fr</loc>'));
+    assert.ok(sm.includes(`<loc>https://tablemaroc.com/es/restaurantes/${ok.slug}</loc>`) && sm.includes('hreflang="en"') && sm.includes('<loc>https://tablemaroc.com/fr</loc>'));
     for (const p of [noPhoto, dupA, dupB, old]) assert.ok(!sm.includes(p.slug), `${p.slug} no debe estar en el sitemap`);
     console.log('ficha no apta: noindex, sin hreflang ni JSON-LD, y fuera del sitemap');
 
     const robots = await html('/robots.txt');
     assert.match(robots, /Disallow: \/admin/);
-    assert.match(robots, /Sitemap: https:\/\/platemaroc\.com\/sitemap\.xml/);
+    assert.match(robots, /Sitemap: https:\/\/tablemaroc\.com\/sitemap\.xml/);
     assert.doesNotMatch(robots, /Disallow: \/\n/);
     assert.match(meta(await html('/es'), 'robots') ?? '', /^index/);
     assert.match(meta(await html('/'), 'robots') ?? '', /^noindex/);

@@ -1,4 +1,4 @@
-# Orden: formas de monetizar Platemaroc
+# Orden: formas de monetizar Tablemaroc
 
 ## Objetivo
 Generar un catálogo amplio de formas de ingreso y un plan priorizado, sin dañar la confianza del lector ni el rendimiento móvil.
