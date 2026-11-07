@@ -66,14 +66,14 @@ FASE 1. Propón el sistema visual de Tablemaroc y aplícalo a la portada:
 
 1. Sistema visual: paleta (con modo claro y, si lo ves, oscuro), tipografía, escala de espaciado, radios, sombras,
    logo (wordmark «Tablemaroc» y símbolo) e icono de app (192, 512 y versión maskable). Personalidad: auténtica pero
-   sobria, de confianza, editorial; que evoque Marruecos sin tópicos (sin arcos, camellos, lámparas ni zellige de cliché).
+   sobria, de confianza, editorial; que evoque Marruecos sin tópicos (sin camellos, lámparas ni zellige de cliché).
    El diseño antiguo (arena y terracota, Fraunces y Manrope, logo de estrella) está descartado: propón algo nuevo.
 2. Componentes base: botones (principal, secundario, de icono), chips de filtro, tarjeta de local (foto, nombre, tipo,
    ciudad, ●●○○, estrellas y nº de reseñas, «Abierto ahora»), tarjeta de plato y de guía, pestañas, plegable, campo de
    texto, estrellas, insignias de datos rápidos (vegetariano, tarjeta, terraza, idiomas ES·EN·FR), avisos (información,
    cerrado temporalmente, Ramadán, sin conexión, «Hay una versión nueva · Actualizar»).
-3. Esqueleto: cabecera (logo, buscador, selector de idioma ES/EN/FR, acceso), pie de página como navegación secundaria
-   (ciudades, guías, legales; sin «Política de cookies») y barra inferior del móvil
+3. Esqueleto: cabecera (logo, selector de idioma ES/EN/FR, acceso; menú ☰ en el móvil), sin pie de página
+   (decisión del titular, 07-11-2026) y barra inferior del móvil
    (Inicio, Cuenta; sin Buscar ni Explorar: se busca desde el buscador de la Home).
 4. Home en móvil y ordenador, siguiendo el boceto.
 

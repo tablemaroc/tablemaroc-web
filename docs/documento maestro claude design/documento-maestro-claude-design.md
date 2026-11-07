@@ -168,6 +168,19 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
   en `docs/18-textos/04-interfaz.md` quedan como marcador `[AVISO: …]`.
 - Iconos de email y llave dibujados en línea (sin emojis); «Continuar con Google» sin logo, como en el boceto.
 
+### 4.10 Decisiones del 07-11-2026 (para programar la Home)
+
+- **Mejores restaurantes:** los elige el titular. Cada restaurante lleva la marca «Sale en Mejores restaurantes» (con su
+  orden); salen todos los marcados. Hasta que el panel esté diseñado, el titular dice cuáles y Claude Code los marca.
+- **Logo:** se usa el del diseño (arco). Se quita «sin arcos» del doc 17.
+- **Letra Literata:** alojada en tablemaroc.com (woff2 propio), sin conexión con Google.
+- **JavaScript:** se acepta en todo lo necesario (menú ☰, idioma, «Volver arriba», ubicación…).
+- **Contacto del administrador:** lo rellena el titular **desde el panel**; en el diseño queda el marcador. El panel
+  necesita ese campo (Ajustes).
+- **Sin pie de página** (decisión del titular, 07-11-2026, sustituye a «diseñarlo antes de subir la Home»): la
+  navegación va en el menú ☰ (móvil) y en la cabecera (ordenador).
+- **Restaurantes de una ciudad:** se programa junto con la Home.
+
 ## Bloque 5 · Pantallas en el lienzo
 
 | Pantalla | Móvil | Ordenador | Con Play |
@@ -190,7 +203,7 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 | Respondí en inglés, también en frases cortas mientras trabajaba («Found it…», «Document the error…»). | Todo en español, incluidos los avisos breves entre pasos (regla 7). |
 | Inventé datos de ejemplo: «Café Clock», «Comer en Fez», nota 4,6 con 128 reseñas, 85 MAD, horarios, tajines y las ciudades Marrakech, Fez y Chefchaouen como únicas. | Solo marcadores entre corchetes (regla 2). Corregido en todas las mesas. |
 | Añadí cosas no pedidas: la opción «Donde estoy ahora» y el caso «sin permiso de ubicación». | Preguntar antes (reglas 1 y 3). El caso de ubicación se quedó porque el titular lo aprobó. |
-| Propuse un logo de arco, aunque el doc 17 pide «sin arcos». | Leer todos los documentos antes de diseñar. Sigue pendiente (Bloque 7). |
+| Propuse un logo de arco, aunque el doc 17 pide «sin arcos». | Leer todos los documentos antes de diseñar. El titular aprobó el arco el 07-11-2026 (Bloque 4.10). |
 | Un fallo en el código generado dejó 11 pantallas con un aviso rojo. | Revisar la sintaxis antes de publicar (Bloque 3). |
 | Dibujé el menú ☰ y el botón de idioma sin que funcionaran en las pantallas nuevas. | Todo botón dibujado debe funcionar (Bloque 3). |
 | Creé pantallas sin enlazarlas desde la Home. | Enlazar al crear (Bloque 3). |
@@ -203,16 +216,10 @@ Este documento guía el flujo de trabajo del diseño de la web, en bloques. Si a
 
 ## Bloque 7 · Pendiente de decisión del titular
 
-- **Datos de contacto del administrador** (hoy, marcador).
-- **Logo:** el actual es un arco; el doc 17 pide «sin arcos».
-- **Fuente:** en el lienzo Literata se carga de Google; el doc 17 pide nada externo (en la web real, woff2 propio).
 - **Traducción** de los textos al cambiar de idioma.
-- **Pie de página** (doc 17) sin diseñar.
 - **Doc 01, §19:** sigue diciendo «las listas largas se cortan con Ver más o paginación»; choca con el scroll aprobado.
 - **Docs 16 y 17:** la fila de la Home y las fases aún describen parte de la Home anterior.
-- **Menú ☰, ubicación, botón de idioma y «Volver arriba»** usan JavaScript; el encargo pide casi sin JavaScript.
 - **Ciudades del Sáhara Occidental** (El Aaiún, Dajla), fuera de la lista.
-- **Mejores restaurantes:** cuántos y cómo se eligen.
 - **Acceso del panel:** textos de los avisos que faltan (email no válido, código caducado, huella o cara cancelada y
   demasiados intentos con el código de la app). *(El encargo de login y los docs 16 y 17 ya dicen «una sola pantalla de
   acceso», 06-11-2026.)*

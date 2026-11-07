@@ -195,7 +195,8 @@ Estos mínimos son criterios internos. No se debe rellenar artificialmente un te
 - Guía: al menos 3 relaciones útiles.
 - Ciudad: al menos 1 relación saliente útil.
 
-La navegación secundaria (pie de página, migas de pan, «cerca de aquí», listados por ciudad y tipo) es la vía
+La navegación secundaria (menú ☰ y cabecera, migas de pan, «cerca de aquí», listados por ciudad; sin pie de página
+desde el 07-11-2026) es la vía
 principal para cumplir estos mínimos.
 
 Si una entidad falla el Quality Gate, permanece almacenada y publicada si procede, pero no indexable. Nunca se borra por fallarlo.
@@ -583,8 +584,9 @@ No hay pedidos a domicilio (no forman parte del producto).
   (paleta arena y terracota, Fraunces y Manrope, logo de estrella), las plantillas actuales, la cabecera, el pie de página y sus enlaces.
 - El nuevo diseño se encarga a Claude Design y debe cumplir este documento: público europeo, es/en/fr, solo MAD, sin barrios,
   sin ingresos, login sin contraseña (Google, email con código y passkey), mapa sin coste y botón «Cómo llegar».
-- El pie de página y los enlaces se rediseñan como navegación secundaria útil para el SEO (§4.4): ciudades y guías,
-  enlaces legales, sin «Política de cookies» si no se usan cookies no imprescindibles.
+- **Sin pie de página** (decisión del titular, 07-11-2026): la navegación secundaria útil para el SEO (§4.4) va en el
+  menú ☰ (móvil) y en la cabecera (ordenador): ciudades, guías y legales, sin «Política de cookies» si no se usan cookies
+  no imprescindibles.
 - **Una sola pantalla por plantilla, en móvil y en ordenador** (decisión del titular, 01-11-2026): cada plantilla muestra lo esencial sin scroll largo.
   En ordenador se aprovecha el ancho (columnas) para que quepa en una pantalla.
   Lo demás va en pestañas o secciones plegables (el contenido sigue en la página y Google lo lee). Las listas largas se cortan con
@@ -623,9 +625,9 @@ Total: **29 piezas de diseño** (58 pantallas: móvil y ordenador), contando la 
 | 11 | Error y estados | 404, 500, sin conexión, mantenimiento |
 | 12 | Reserva | Formulario de reserva, solicitud enviada y reserva confirmada (§18 bis) |
 
-### Esqueleto de la web: 3 piezas
+### Esqueleto de la web: 2 piezas
 
-Cabecera, pie de página (navegación secundaria) y barra inferior del móvil (solo **Inicio** y **Cuenta**, sin Buscar ni
+Cabecera (con menú ☰ en el móvil) y barra inferior del móvil; sin pie de página (decisión del titular, 07-11-2026). Barra inferior (solo **Inicio** y **Cuenta**, sin Buscar ni
 Explorar: decisión del titular, 06-11-2026).
 
 ### Panel: 12 plantillas
@@ -694,6 +696,7 @@ Barra lateral y cabecera del panel.
 - Decisión del titular: email transaccional con Brevo, plan gratuito (§18 ter).
 - Decisión del titular (06-11-2026): las pantallas de la web se diseñan con Claude Design por fases (estilo primero, que aprueba el titular); prompts en docs/17-prompt-claude-design.md y encargo actualizado en docs/16 (§19).
 - Decisión del titular (06-11-2026): orden de Claude Design: primero la Home (fase 1) y el panel (fase 2, en dos partes) para subirlos a internet; después el resto de la web (fases 3, 4 y 5). Las pantallas se programan con lo que exporte Claude Design (§19).
+- Decisión del titular (07-11-2026): «Mejores restaurantes» de la Home los elige el titular (marca por restaurante); logo con arco aprobado; letra Literata alojada en tablemaroc.com; JavaScript donde haga falta (§19). Actualizado el mismo día: **sin pie de página**; los datos de contacto del administrador los rellena el titular desde el panel.
 - Decisión del titular (06-11-2026): la copia externa se guarda en su PC con el botón «Crear copia» del panel; completa, cifrada y sustituyendo a la anterior (§9, §20).
 - Web publicada en Cloudflare en tablemaroc.com (dominio comprado en Cloudflare), **sin indexar** hasta que el titular decida abrirla. D1 y R2 con jurisdicción UE (§18 ter).
 
